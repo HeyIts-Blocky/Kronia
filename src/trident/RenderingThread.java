@@ -6,10 +6,17 @@ import java.util.ConcurrentModificationException;
 import blib.util.*;
 import java.awt.*;
 import blib.game.*;
+import javax.swing.*;
 public class RenderingThread extends Thread {
 
     public BufferedImage lastFrame = null;
     private long elapsedTime, previousStartTime = -1;
+
+    private ImageIcon consoleBg = new ImageIcon("data/images/trident/consolebg.png");
+
+    public RenderingThread(){
+        BTools.resizeImgIcon(consoleBg, Trident.getFrameWidth(), 483);
+    }
     
     public void run(){
         while(true){
@@ -96,7 +103,30 @@ public class RenderingThread extends Thread {
                     g.fillRect(0, 0, 700, 500);
                 }
 
-                
+                if(Trident.consoleOpen){
+                    // bg
+                    consoleBg.paintIcon(null, g, 0, -252);
+                    g.setColor(new Color(0f, 0f, 0f, 0.7f));
+                    g.fillRect(0, 0, Trident.getFrameWidth(), Trident.getFrameHeight() / 2);
+
+                    // text
+                    g.setColor(Color.white);
+                    g.setFont(new Font("Arial", Font.PLAIN, 10));
+                    for(int i = 0; i < Trident.consoleLines.size(); i++){
+                        int index = BTools.flip(i, Trident.consoleLines.size() - 1);
+                        TextBox.draw(Trident.consoleLines.get(index), g, 5, Trident.getFrameHeight() / 2 - 25 - (i * 10));
+                    }
+
+                    // borders
+                    g.setColor(new Color(32, 12, 121));
+                    g.drawRect(0, 0, Trident.getFrameWidth() - 1, Trident.getFrameHeight() / 2);
+                    g.drawLine(0, Trident.getFrameHeight() / 2 - 10, Trident.getFrameWidth(), Trident.getFrameHeight() / 2 - 10);
+
+                    // text entry box
+                    g.setColor(Color.white);
+                    g.setFont(new Font("Arial", Font.PLAIN, 10));
+                    TextBox.draw("> " + Trident.consoleType + "_", g, 3, Trident.getFrameHeight() / 2 - 5);
+                }
 
                 lastFrame = newFrame;
             }catch(Exception e){

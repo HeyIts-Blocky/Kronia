@@ -109,169 +109,33 @@ public class MainPanel extends JPanel {
             }
             if(!inIntro){
                 if(key == 192 && Trident.consoleEnabled){
-                    // dev console
-                    String command = JOptionPane.showInputDialog(null, "Enter Console Command", "Dev Console", JOptionPane.QUESTION_MESSAGE);
-                    if(command != null && command.length() > 0){
-                        ArrayList<String> cmdParts = new ArrayList<String>();
-                        Scanner scanner = new Scanner(command);
-                        while(scanner.hasNext()){
-                            cmdParts.add(scanner.next());
+                    Trident.consoleOpen = !Trident.consoleOpen;
+                    Trident.consoleType = "";
+                }
+                if(Trident.consoleOpen){
+                    if(key >= KeyEvent.VK_A && key <= KeyEvent.VK_Z){
+                        char c = KeyEvent.getKeyText(key).charAt(0);
+                        if(!km.getKeyDown(KeyEvent.VK_SHIFT)){
+                            c = Character.toLowerCase(c);
                         }
-                        scanner.close();
+                        Trident.consoleType += c;
+                    }
+                    if(key >= KeyEvent.VK_0 && key <= KeyEvent.VK_9){
+                        char c = KeyEvent.getKeyText(key).charAt(0);
+                        Trident.consoleType += c;
+                    }
+                    if(key == KeyEvent.VK_SPACE){
+                        Trident.consoleType += " ";
+                    }
+                    if(key == KeyEvent.VK_BACK_SPACE){
+                        if(Trident.consoleType.length() > 0) Trident.consoleType = Trident.consoleType.substring(0, Trident.consoleType.length() - 1);
+                    }
 
-                        if(cmdParts.size() == 0) return;
-                        try{
-                        switch(cmdParts.get(0)){
-                        case "drawCollision":
-                            if(cmdParts.size() == 1){
-                                JOptionPane.showMessageDialog(null, "drawCollision is " + Trident.drawCollision, "Dev Console", JOptionPane.INFORMATION_MESSAGE);
-                                break;
-                            }
-                            if(cmdParts.get(1).equals("1") || cmdParts.get(1).equals("true")){
-                                Trident.drawCollision = true;
-                            }
-                            if(cmdParts.get(1).equals("0") || cmdParts.get(1).equals("false")){
-                                Trident.drawCollision = false;
-                            }
-                            break;
-                        case "engineDraw":
-                            if(cmdParts.size() == 1){
-                                JOptionPane.showMessageDialog(null, "engineDraw is " + Trident.engineDraw, "Dev Console", JOptionPane.INFORMATION_MESSAGE);
-                                break;
-                            }
-                            if(cmdParts.get(1).equals("1") || cmdParts.get(1).equals("true")){
-                                Trident.engineDraw = true;
-                            }
-                            if(cmdParts.get(1).equals("0") || cmdParts.get(1).equals("false")){
-                                Trident.engineDraw = false;
-                            }
-                            break;
-                        case "drawPos":
-                            if(cmdParts.size() == 1){
-                                JOptionPane.showMessageDialog(null, "drawPos is " + Trident.drawPos, "Dev Console", JOptionPane.INFORMATION_MESSAGE);
-                                break;
-                            }
-                            if(cmdParts.get(1).equals("1") || cmdParts.get(1).equals("true")){
-                                Trident.drawPos = true;
-                            }
-                            if(cmdParts.get(1).equals("0") || cmdParts.get(1).equals("false")){
-                                Trident.drawPos = false;
-                            }
-                            break;
-                        case "noclip":
-                            if(cmdParts.size() == 1){
-                                JOptionPane.showMessageDialog(null, "noclip is " + Trident.noclip, "Dev Console", JOptionPane.INFORMATION_MESSAGE);
-                                break;
-                            }
-                            if(cmdParts.get(1).equals("1") || cmdParts.get(1).equals("true")){
-                                Trident.noclip = true;
-                            }
-                            if(cmdParts.get(1).equals("0") || cmdParts.get(1).equals("false")){
-                                Trident.noclip = false;
-                            }
-                            break;
-                        case "tp":
-                            int x = Integer.parseInt(cmdParts.get(1));
-                            int y = Integer.parseInt(cmdParts.get(2));
-                            Trident.setPlrPos(new Position(x, y));
-                            break;
-                        case "loadMap":
-                            String map = "";
-                            for(int i = 1; i < cmdParts.size(); i++){
-                                map += cmdParts.get(i);
-                                if(i != cmdParts.size() - 1) map += " ";
-                            }
-                            Trident.loadScene(map);
-                            break;
-                        case "drawFrames":
-                            if(cmdParts.size() == 1){
-                                JOptionPane.showMessageDialog(null, "drawFrames is " + Trident.drawFrames, "Dev Console", JOptionPane.INFORMATION_MESSAGE);
-                                break;
-                            }
-                            if(cmdParts.get(1).equals("1") || cmdParts.get(1).equals("true")){
-                                Trident.drawFrames = true;
-                            }
-                            if(cmdParts.get(1).equals("0") || cmdParts.get(1).equals("false")){
-                                Trident.drawFrames = false;
-                            }
-                            break;
-                        case "debugColor":
-                            int r, g, b;
-                            float alpha = -1;
-                            r = Integer.parseInt(cmdParts.get(1));
-                            g = Integer.parseInt(cmdParts.get(2));
-                            b = Integer.parseInt(cmdParts.get(3));
-                            if(cmdParts.size() == 5){
-                                alpha = Float.parseFloat(cmdParts.get(4));
-                            }
-                            if(alpha != -1){
-                                Trident.debugColor = new Color(r / 255f, g / 255f, b / 255f, alpha);
-                            }else{
-                                Trident.debugColor = new Color(r, g, b);
-                            }
-                            break;
-                        case "enableBloom":
-                            if(cmdParts.size() == 1){
-                                JOptionPane.showMessageDialog(null, "enableBloom is " + Trident.enableBloom, "Dev Console", JOptionPane.INFORMATION_MESSAGE);
-                                break;
-                            }
-                            if(cmdParts.get(1).equals("1") || cmdParts.get(1).equals("true")){
-                                Trident.enableBloom = true;
-                            }
-                            if(cmdParts.get(1).equals("0") || cmdParts.get(1).equals("false")){
-                                Trident.enableBloom = false;
-                            }
-                            break;
-                        case "enableExposure":
-                            if(cmdParts.size() == 1){
-                                JOptionPane.showMessageDialog(null, "enableExposure is " + Trident.enableExposure, "Dev Console", JOptionPane.INFORMATION_MESSAGE);
-                                break;
-                            }
-                            if(cmdParts.get(1).equals("1") || cmdParts.get(1).equals("true")){
-                                Trident.enableExposure = true;
-                            }
-                            if(cmdParts.get(1).equals("0") || cmdParts.get(1).equals("false")){
-                                Trident.enableExposure = false;
-                            }
-                            break;
-                        case "setBloom":
-                            double amount = Double.parseDouble(cmdParts.get(1));
-                            Trident.setBloom(amount);
-                            break;
-                        case "setExposure":
-                            double expo = Double.parseDouble(cmdParts.get(1));
-                            Trident.setExposure(expo);
-                            break;
-                        case "setLightBlur":
-                            int blurLevel = Integer.parseInt(cmdParts.get(1)); 
-                            Trident.setLightBlur(blurLevel);
-                            break;
-                        default:
-                            int cmd = Update.command(cmdParts);
-                            if(cmd != 0){
-                                JOptionPane.showMessageDialog(null, "Unknown command: " + cmdParts.get(0), "Dev Console", JOptionPane.INFORMATION_MESSAGE);
-                            }
-                            break;
-                        }
-                    }catch(Exception e){
-                        int sel = JOptionPane.showConfirmDialog(null, "Something went wrong while running your command. Save error log?", "Dev Console", JOptionPane.YES_NO_OPTION);
-                        if(sel == 0){
-                            try{
-                                File file = new File("errorLog.txt");
-                                file.createNewFile();
-                                PrintWriter writer = new PrintWriter(file);
-                                e.printStackTrace(writer);
-                                writer.close();
-                            }catch(Exception ex){
-                                JOptionPane.showMessageDialog(null, "Somehow, something also went wrong while saving the error logs. Printing into the default console...", "Dev Console", JOptionPane.INFORMATION_MESSAGE);
-                                System.out.println(" *********  What went wrong while printing:");
-                                ex.printStackTrace();
-                                System.out.println(" *********  What went wrong with the command:");
-                                e.printStackTrace();
-                            }
-                        }
+                    if(key == KeyEvent.VK_ENTER){
+                        Trident.runCommand(Trident.consoleType);
+                        Trident.consoleType = "";
                     }
-                    }
+                    return;
                 }
                 Inputs.keyPressed(key);
             }
@@ -298,49 +162,56 @@ public class MainPanel extends JPanel {
                 repaint();
                 return;
             }
-            Trident.mousePos = frameManager.getMousePos(panel, km.getMousePos());
-            Trident.mouseDelta = km.getMouseDelta();
-            Trident.mouseWorldPos = Trident.player.camera.mouseToPos(Trident.mousePos);
 
-            Trident.camShake.update(server.getElapsedTime());
+            if(!hasFocus()) km.reset();
 
-            if(!Trident.noclip) Trident.player.updateWithCollision(server.getElapsedTime(), Trident.currentScene.getCollision());
-            else Trident.player.update(server.getElapsedTime());
+            if(!Trident.consoleOpen){
+                Trident.mousePos = frameManager.getMousePos(panel, km.getMousePos());
+                Trident.mouseDelta = km.getMouseDelta();
+                Trident.mouseWorldPos = Trident.player.camera.mouseToPos(Trident.mousePos);
 
-            for(int i = 0; i < Trident.getEntities().size(); i++){
-                TridEntity e = Trident.getEntities().get(i);
-                e.update(server.getElapsedTime());
-                if(e instanceof Trigger){
-                    Trigger trig = (Trigger)e;
-                    if(trig.containsPos(Trident.player.getPos())){
-                        Update.trigger(trig.id);
+                Trident.camShake.update(server.getElapsedTime());
+
+                if(!Trident.noclip) Trident.player.updateWithCollision(server.getElapsedTime(), Trident.currentScene.getCollision());
+                else Trident.player.update(server.getElapsedTime());
+
+                for(int i = 0; i < Trident.getEntities().size(); i++){
+                    TridEntity e = Trident.getEntities().get(i);
+                    e.update(server.getElapsedTime());
+                    if(e instanceof Trigger){
+                        Trigger trig = (Trigger)e;
+                        if(trig.containsPos(Trident.player.getPos())){
+                            Update.trigger(trig.id);
+                        }
                     }
                 }
+
+                if(Trident.reset){
+                    km.reset();
+                    Trident.reset = false;
+                }
+                for(int i = 0; i < 255; i++){
+                    Trident.keys[i] = km.getKeyDown(i);
+                }
+                Trident.m1 = km.getMouseDown(1);
+                Trident.m2 = km.getMouseDown(2);
+                Trident.m3 = km.getMouseDown(3);
+                Trident.m4 = km.getMouseDown(4);
+                Trident.m5 = km.getMouseDown(5);
+
+                if(Trident.newSprite != null){
+                    Trident.player = new Player(Trident.player.getPos(), km, 0.2, panel, Trident.newSprite, 16, 16);
+                    Trident.newSprite = null;
+                    Trident.player.resizeImages(32, 32);
+                    Trident.player.camera.setDimension = new Dimension(frameManager.WIDTH, frameManager.HEIGHT);
+                    Trident.camShake = new CamShake(Trident.player.camera);
+                    Trident.player.shortCollision = true;
+                }
+
+                Update.update(server.getElapsedTime());
             }
 
-            if(Trident.reset){
-                km.reset();
-                Trident.reset = false;
-            }
-            for(int i = 0; i < 255; i++){
-                Trident.keys[i] = km.getKeyDown(i);
-            }
-            Trident.m1 = km.getMouseDown(1);
-            Trident.m2 = km.getMouseDown(2);
-            Trident.m3 = km.getMouseDown(3);
-            Trident.m4 = km.getMouseDown(4);
-            Trident.m5 = km.getMouseDown(5);
-
-            if(Trident.newSprite != null){
-                Trident.player = new Player(Trident.player.getPos(), km, 0.2, panel, Trident.newSprite, 16, 16);
-                Trident.newSprite = null;
-                Trident.player.resizeImages(32, 32);
-                Trident.player.camera.setDimension = new Dimension(frameManager.WIDTH, frameManager.HEIGHT);
-                Trident.camShake = new CamShake(Trident.player.camera);
-                Trident.player.shortCollision = true;
-            }
-
-            Update.update(server.getElapsedTime());
+            
 
             try {Trident.getEntities().sort((o1, o2) -> o2.compareSort(o1));} catch(Exception e){}
         }

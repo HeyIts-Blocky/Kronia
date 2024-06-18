@@ -369,10 +369,10 @@ public class Update {
     public static int command(ArrayList<String> cmdParts){ // cmdParts.get(0) is the command, while the rest are arguments for the command.
         switch(cmdParts.get(0)){
         case "helloWorld":
-            System.out.println("Hello, World!");
+            Trident.printConsole("Hello, World!");
             return 0;
         case "ping":
-            System.out.println("pong");
+            Trident.printConsole("pong");
             return 0;
         case "newWorld":
             WorldManager.newWorld(cmdParts.get(1));
@@ -383,7 +383,7 @@ public class Update {
         case "saveWorld":
             WorldManager.saveWorld();
             return 0;
-        case "clear":
+        case "clearInv":
             GameData.clearInventory();
             return 0;
         case "give":
@@ -404,9 +404,23 @@ public class Update {
             GameData.time = Long.parseLong(cmdParts.get(1));
             return 0;
         case "song":
-            JOptionPane.showMessageDialog(null, "The current song is called \"" + MusicManager.lastName + "\"", "Kronia", JOptionPane.INFORMATION_MESSAGE);
+            Trident.printConsole("The current song is called \"" + MusicManager.lastName + "\"");
             return 0;
         }
         return 1; // return 1 if command is not recognized
     }
+    public static String[] commands = { // Fill this with the format for all custom commands
+        "helloWorld",
+        "ping",
+        "newWorld",
+        "loadWorld <worldName>",
+        "saveWorld",
+        "clearInv",
+        "give <id> <amount>",
+        "fillMeWithWood",
+        "damage <amount>",
+        "setHealth <health>",
+        "setTime <time>",
+        "song",
+    };
 }

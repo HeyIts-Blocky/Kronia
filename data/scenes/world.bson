@@ -1,0 +1,40 @@
+string name world
+string dir south
+int light 255
+{ bgColor
+int 255
+int 255
+int 255
+}
+{ entities
+string bg
+double 5000.0
+double 5000.0
+boolean true
+int 10000
+int 10000
+string minimap
+double -172.0
+double -74.5
+boolean false
+string plrstart
+double 132.0
+double 94.5
+boolean false
+string hotbar
+double -122.0
+double -73.0
+boolean false
+string itemrend
+double -149.0
+double -3.0
+boolean false
+string previewrend
+double -75.0
+double -2.0
+boolean false
+string plrrend
+double -211.0
+double 6.0
+boolean false
+}

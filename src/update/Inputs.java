@@ -9,7 +9,7 @@ import ent.*;
 public class Inputs {
     
     public static void keyPressed(int key){
-        if(Trident.getCurrentScene().name.equals("title") && GameData.setKeybind){
+        if((Trident.getCurrentScene().name.equals("title") || GameData.settingsOpen) && GameData.setKeybind){
             GameData.setKeybind = false;
             Settings.keybinds[GameData.keybindSel] = key;
             TitleScreen.updateButtonText();
@@ -99,6 +99,7 @@ public class Inputs {
                     if(slot == 40){
                         if(Recipe.getRecipes().size() == 0) return;
                         if(GameData.cursorItem == null || (GameData.cursorItem.id == Recipe.getRecipes().get(GameData.selCraft).output.id && GameData.cursorItem.amount + Recipe.getRecipes().get(GameData.selCraft).output.amount < 999)){
+                            int initialSize = Recipe.getRecipes().size();
                             Recipe recipe = Recipe.getRecipes().get(GameData.selCraft);
                             Item item = recipe.craft();
                             if(item != null){
@@ -109,6 +110,17 @@ public class Inputs {
                                 while(recipe.canCraft() && GameData.cursorItem.amount + recipe.output.amount < 999){
                                     item = recipe.craft();
                                     GameData.cursorItem.amount += item.amount;
+                                }
+                            }
+
+                            if(Recipe.getRecipes().size() != initialSize){
+                                // recipes have moved, check if the old recipe is still there
+                                for(int i = 0; i < Recipe.getRecipes().size(); i++){
+                                    if(Recipe.getRecipes().get(i).equals(recipe)){
+                                        // found the recipe
+                                        GameData.selCraft = i;
+                                        break;
+                                    }
                                 }
                             }
                         }
@@ -135,6 +147,14 @@ public class Inputs {
                     }
                     if(slot == 44){
                         GameData.selCraft++;
+                        return;
+                    }
+                    if(slot == 45){
+                        GameData.settingsOpen = true;
+                        TitleScreen menu = new TitleScreen(new Position());
+                        menu.inGameMenu = true;
+                        menu.screen = 3;
+                        Trident.spawnEntity(menu);
                         return;
                     }
                     if(GameData.cursorItem == null){
@@ -333,7 +353,7 @@ public class Inputs {
                 }
             }
         }
-        if(Trident.getCurrentScene().name.equals("title")){
+        if(Trident.getCurrentScene().name.equals("title") || GameData.settingsOpen){
             for(int i = 0; i < Trident.getEntities().size(); i++){
                 TridEntity e = Trident.getEntities().get(i);
                 if(e instanceof TitleScreen){

@@ -19,6 +19,7 @@ public class GameData {
     public static Item cursorItem = null;
     public static boolean minimapEnabled = true;
     public static int selCraft = 0;
+    public static boolean settingsOpen = false;
 
     public static int health = 100, maxHealth = 100;
     public static long hurtTime = 0;
@@ -26,6 +27,8 @@ public class GameData {
     public static int hunger = 100, maxHunger = 100;
     public static long hungerTimer = 0, hungerTime = 10000;
     public static double hungerSpeed = 0;
+
+    public static long craftTimer = 0, craftTime = 50;
 
     public static long time = 0, maxTime = 600000;
     private static double maxDarkness = 0.9;

@@ -2,7 +2,7 @@ int volume 74
 double sfx 0.9928571428571429
 double music 0.9928571428571429
 boolean richText false
-boolean camSmooth true
+boolean camSmooth false
 boolean aimHelp false
 int assistR 255
 int assistG 255

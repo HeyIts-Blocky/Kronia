@@ -496,6 +496,7 @@ public class TitleScreen extends TridEntity {
             testerPos += testerSpeed * elapsedTime;
             colorTime += (elapsedTime / 1000.0) * 2;
         }
+        if(inGameMenu) position = Trident.getPlrPos();
     }
 
     public void mousePressed(int mb, Point mousePos){
@@ -579,6 +580,10 @@ public class TitleScreen extends TridEntity {
                 Settings.saveSettings();
                 MusicManager.stopSong();
                 MusicManager.songTime = 1000;
+                if(inGameMenu){
+                    GameData.settingsOpen = false;
+                    Trident.destroy(this);
+                }
                 break;
             case 4: 
                 Settings.richText = !Settings.richText;

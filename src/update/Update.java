@@ -11,6 +11,7 @@ import ent.game.*;
 import javax.swing.*;
 import java.awt.*;
 import ent.game.boss.*;
+import java.awt.event.*;
 public class Update {
 
     public static void setup(){
@@ -254,6 +255,53 @@ public class Update {
                 }
 
                 GameData.openCrate = crate;
+
+                // check right click (craft fast)
+                if(Trident.getMouseDown(3)){
+                    GameData.craftTimer -= elapsedTime;
+                    if(GameData.craftTimer <= 0){
+                        GameData.craftTimer = GameData.craftTime;
+
+                        // check mouse is in crafting slot, do crafting logic
+                        int slot = -1;
+                        for(int i = 0; i < GameData.invBoxes.size(); i++){
+                            Rectangle r = GameData.invBoxes.get(i);
+                            if(r.contains(Trident.mousePos)){
+                                slot = i;
+                                break;
+                            }
+                        }
+                        if(slot == 40){
+                            if(Recipe.getRecipes().size() == 0) return;
+                            if(GameData.cursorItem == null || (GameData.cursorItem.id == Recipe.getRecipes().get(GameData.selCraft).output.id && GameData.cursorItem.amount + Recipe.getRecipes().get(GameData.selCraft).output.amount < 999)){
+                                int initialSize = Recipe.getRecipes().size();
+                                Recipe recipe = Recipe.getRecipes().get(GameData.selCraft);
+                                Item item = recipe.craft();
+                                if(item != null){
+                                    if(GameData.cursorItem == null) GameData.cursorItem = item;
+                                    else GameData.cursorItem.amount += item.amount;
+                                }
+                                if(Trident.getKeyDown(KeyEvent.VK_SHIFT)){
+                                    while(recipe.canCraft() && GameData.cursorItem.amount + recipe.output.amount < 999){
+                                        item = recipe.craft();
+                                        GameData.cursorItem.amount += item.amount;
+                                    }
+                                }
+
+                                if(Recipe.getRecipes().size() != initialSize){
+                                    // recipes have moved, check if the old recipe is still there
+                                    for(int i = 0; i < Recipe.getRecipes().size(); i++){
+                                        if(Recipe.getRecipes().get(i).equals(recipe)){
+                                            // found the recipe
+                                            GameData.selCraft = i;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
             if(GameData.hurtTime > 0) GameData.hurtTime -= elapsedTime;
@@ -338,6 +386,7 @@ public class Update {
             WorldManager.checkWorld(elapsedTime);
         }
         if(Trident.getCurrentScene().name.equals("title")){
+            GameData.settingsOpen = false;
             Trident.setPlrSpeed(0);
             Trident.getPlr().smoothType = Player.NOSMOOTH;
         }else{

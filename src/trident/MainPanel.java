@@ -6,12 +6,9 @@ import blib.game.*;
 import blib.util.*;
 
 import java.awt.event.*;
-import java.io.File;
-import java.io.PrintWriter;
 
 import blib.input.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import blib.anim.*;
 

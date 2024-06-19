@@ -79,6 +79,7 @@ public class Hotbar extends TridEntity {
         GameData.invBoxes.add(new Rectangle(604, 304, 48, 48));
         GameData.invBoxes.add(new Rectangle(636, 84 - 52, 32, 32));
         GameData.invBoxes.add(new Rectangle(636, 84 + 52, 32, 32));
+        GameData.invBoxes.add(new Rectangle(604, 304 - 52, 48, 48));
     }
     // Registry constructor, used only for adding to the registry
     public Hotbar(){
@@ -91,6 +92,7 @@ public class Hotbar extends TridEntity {
 
     // Render while in game
     public void render(Graphics g, JPanel panel, int x, int y){
+        if(GameData.settingsOpen) return;
         if(GameData.spectate){
             g.setColor(Color.red);
             g.setFont(new Font(GameData.getFont(), Font.PLAIN, 50));

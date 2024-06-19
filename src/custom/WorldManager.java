@@ -1,7 +1,6 @@
 package custom;
 
 import java.io.*;
-import javax.swing.*;
 import trident.*;
 import ent.*;
 import blib.util.*;

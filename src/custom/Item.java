@@ -184,7 +184,7 @@ public class Item {
         {}, // 6
         {GameObject.FURNACE}, // 7
         {1, 250, 0, Effect.FOODPOISON}, // 8
-        {10, 250, 5}, // 9
+        {15, 250, 5}, // 9
         {Effect.POISON}, // 10
         {GameObject.LOGWALL}, // 11
         {GameObject.TORCH}, // 12
@@ -220,7 +220,7 @@ public class Item {
         {A_ARROW, 250, 50, 4}, // 42
         {}, // 43
         {GameObject.CAMPFIRE}, // 44
-        {5, 250, 2}, // 45
+        {7, 250, 2}, // 45
         {GameObject.CRATE}, // 46
     };
     public static String[] names = {

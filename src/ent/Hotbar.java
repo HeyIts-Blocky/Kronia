@@ -33,16 +33,52 @@ public class Hotbar extends TridEntity {
         BTools.resizeImgIcon(selImg, 32, 8);
 
         // set up masks
-        ImageIcon i = new ImageIcon("data/images/masks/healthMask.png");
+        ImageIcon img = new ImageIcon("data/images/masks/healthMask.png");
         healthMask = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
         Graphics g = healthMask.getGraphics();
-        g.drawImage(i.getImage(), 0, 0, 32, 32, null);
-        i = new ImageIcon("data/images/masks/hungerMask.png");
+        g.drawImage(img.getImage(), 0, 0, 32, 32, null);
+        img = new ImageIcon("data/images/masks/hungerMask.png");
         hungerMask = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
         g = hungerMask.getGraphics();
-        g.drawImage(i.getImage(), 0, 0, 32, 32, null);
+        g.drawImage(img.getImage(), 0, 0, 32, 32, null);
 
         Effect.resizeImgs();
+
+        // set up slot rects
+
+        GameData.invBoxes = new ArrayList<Rectangle>();
+        GameData.crateBoxes = new ArrayList<Rectangle>();
+
+        for(int i = 0; i < 10; i++){ // hotbar
+            GameData.invBoxes.add(new Rectangle(20 + (i * 52), 412, 32, 32));
+            GameData.crateBoxes.add(new Rectangle(20 + (i * 52), 412, 32, 32));
+        }
+        // crate
+        for(int i = 0; i < 10; i++){
+            GameData.crateBoxes.add(new Rectangle(20 + ((i) * 52), 184, 32, 32));
+        }
+        for(int i = 10; i < 20; i++){
+            GameData.crateBoxes.add(new Rectangle(20 + ((i - 10) * 52), 129, 32, 32));
+        }
+        for(int i = 20; i < 30; i++){
+            GameData.crateBoxes.add(new Rectangle(20 + ((i - 20) * 52), 81, 32, 32));
+        }
+        // inventory
+        for(int i = 10; i < 20; i++){
+            GameData.invBoxes.add(new Rectangle(20 + ((i - 10) * 52), 340, 32, 32));
+        }
+        for(int i = 20; i < 30; i++){
+            GameData.invBoxes.add(new Rectangle(20 + ((i - 20) * 52), 289, 32, 32));
+        }
+        for(int i = 30; i < 40; i++){
+            GameData.invBoxes.add(new Rectangle(20 + ((i - 30) * 52), 237, 32, 32));
+        }
+        // other buttons
+        GameData.invBoxes.add(new Rectangle(636, 84, 32, 32));
+        GameData.invBoxes.add(new Rectangle(552, 304, 48, 48));
+        GameData.invBoxes.add(new Rectangle(604, 304, 48, 48));
+        GameData.invBoxes.add(new Rectangle(636, 84 - 52, 32, 32));
+        GameData.invBoxes.add(new Rectangle(636, 84 + 52, 32, 32));
     }
     // Registry constructor, used only for adding to the registry
     public Hotbar(){
@@ -74,9 +110,6 @@ public class Hotbar extends TridEntity {
             }
         }
 
-        boolean initBoxes = false;
-        boolean initCrateBoxes = false;
-
         for(int i = 0; i < 10; i++){
             Item it = GameData.inventory[i];
             if(it.id != Item.NOTHING){
@@ -90,16 +123,6 @@ public class Hotbar extends TridEntity {
             if(i == GameData.selHotbar){
                 g.setColor(Color.black);
                 selImg.paintIcon(panel, g, 20 + (i * 52), 412 + 40);
-            }
-            if((GameData.invBoxes == null && GameData.invOpen) || initBoxes){
-                initBoxes = true;
-                if(GameData.invBoxes == null) GameData.invBoxes = new ArrayList<Rectangle>();
-                GameData.invBoxes.add(new Rectangle(20 + (i * 52), 412, 32, 32));
-            }
-            if((GameData.crateBoxes == null && GameData.openCrate != null) || initCrateBoxes){
-                initCrateBoxes = true;
-                if(GameData.crateBoxes == null) GameData.crateBoxes = new ArrayList<Rectangle>();
-                GameData.crateBoxes.add(new Rectangle(20 + (i * 52), 412, 32, 32));
             }
         }
 
@@ -115,9 +138,6 @@ public class Hotbar extends TridEntity {
                         g.setFont(new Font(GameData.getFont(), Font.ITALIC, 15));
                         TextBox.draw(it.amount + "", g, 20 + ((i) * 52) + 35, 184 + 32, TextBox.RIGHT);
                     }
-                    if(initCrateBoxes){
-                        GameData.crateBoxes.add(new Rectangle(20 + ((i) * 52), 184, 32, 32));
-                    }
                 }
                 for(int i = 10; i < 20; i++){
                     Item it = GameData.openCrate.getSlot(i);
@@ -129,9 +149,6 @@ public class Hotbar extends TridEntity {
                         g.setFont(new Font(GameData.getFont(), Font.ITALIC, 15));
                         TextBox.draw(it.amount + "", g, 20 + ((i - 10) * 52) + 35, 129 + 32, TextBox.RIGHT);
                     }
-                    if(initCrateBoxes){
-                        GameData.crateBoxes.add(new Rectangle(20 + ((i - 10) * 52), 129, 32, 32));
-                    }
                 }
                 for(int i = 20; i < 30; i++){
                     Item it = GameData.openCrate.getSlot(i);
@@ -142,9 +159,6 @@ public class Hotbar extends TridEntity {
                         g.setColor(Color.white);
                         g.setFont(new Font(GameData.getFont(), Font.ITALIC, 15));
                         TextBox.draw(it.amount + "", g, 20 + ((i - 20) * 52) + 35, 81 + 32, TextBox.RIGHT);
-                    }
-                    if(initCrateBoxes){
-                        GameData.crateBoxes.add(new Rectangle(20 + ((i - 20) * 52), 81, 32, 32));
                     }
                 }
             }
@@ -159,9 +173,6 @@ public class Hotbar extends TridEntity {
                     g.setFont(new Font(GameData.getFont(), Font.ITALIC, 15));
                     TextBox.draw(it.amount + "", g, 20 + ((i - 10) * 52) + 35, 340 + 32, TextBox.RIGHT);
                 }
-                if(initBoxes){
-                    GameData.invBoxes.add(new Rectangle(20 + ((i - 10) * 52), 340, 32, 32));
-                }
             }
             for(int i = 20; i < 30; i++){
                 Item it = GameData.inventory[i];
@@ -172,9 +183,6 @@ public class Hotbar extends TridEntity {
                     g.setColor(Color.white);
                     g.setFont(new Font(GameData.getFont(), Font.ITALIC, 15));
                     TextBox.draw(it.amount + "", g, 20 + ((i - 20) * 52) + 35, 289 + 32, TextBox.RIGHT);
-                }
-                if(initBoxes){
-                    GameData.invBoxes.add(new Rectangle(20 + ((i - 20) * 52), 289, 32, 32));
                 }
             }
             for(int i = 30; i < 40; i++){
@@ -187,16 +195,6 @@ public class Hotbar extends TridEntity {
                     g.setFont(new Font(GameData.getFont(), Font.ITALIC, 15));
                     TextBox.draw(it.amount + "", g, 20 + ((i - 30) * 52) + 35, 237 + 32, TextBox.RIGHT);
                 }
-                if(initBoxes){
-                    GameData.invBoxes.add(new Rectangle(20 + ((i - 30) * 52), 237, 32, 32));
-                }
-            }
-            if(initBoxes){
-                GameData.invBoxes.add(new Rectangle(636, 84, 32, 32));
-                GameData.invBoxes.add(new Rectangle(552, 304, 48, 48));
-                GameData.invBoxes.add(new Rectangle(604, 304, 48, 48));
-                GameData.invBoxes.add(new Rectangle(636, 84 - 52, 32, 32));
-                GameData.invBoxes.add(new Rectangle(636, 84 + 52, 32, 32));
             }
 
             ArrayList<Recipe> recipes = Recipe.getRecipes();

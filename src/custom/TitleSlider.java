@@ -46,7 +46,7 @@ public class TitleSlider extends TitleButton{
         double percent = (double)volDiff / diff;
         if(type == SFX) percent = -Settings.sfxVolume + 1;
         if(type == MUSIC) percent = -MusicManager.volume + 1;
-        notch.paintIcon(null, g, (rect.x + rect.width) - (int)((rect.width) * percent) - 5, rect.y); 
+        notch.paintIcon(null, g, (rect.x + rect.width) - (int)((rect.width) * percent) - 5, rect.y - 2); 
         g.setFont(font);
         TextBox.draw(text, g, rect.x, rect.y - 10);
     }

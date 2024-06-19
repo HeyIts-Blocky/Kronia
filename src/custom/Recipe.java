@@ -91,7 +91,7 @@ public class Recipe {
         new Recipe(new Item[]{new Item(Item.WOOD, 10)}, new Item(Item.W_PICK), GameObject.WORKBENCH),
         new Recipe(new Item[]{new Item(Item.WOOD, 10)}, new Item(Item.W_AXE), GameObject.WORKBENCH),
         new Recipe(new Item[]{new Item(Item.STONE, 20)}, new Item(Item.FURNACE), GameObject.WORKBENCH),
-        new Recipe(new Item[]{new Item(Item.WOOD, 2)}, new Item(Item.COAL), GameObject.FURNACE),
+        new Recipe(new Item[]{new Item(Item.WOOD, 10)}, new Item(Item.COAL), GameObject.FURNACE),
         new Recipe(new Item[]{new Item(Item.RAWMEAT), new Item(Item.COAL)}, new Item(Item.COOKEDMEAT), GameObject.FURNACE),
         new Recipe(new Item[]{new Item(Item.WOOD, 10)}, new Item(Item.LOGWALL), GameObject.WORKBENCH),
         new Recipe(new Item[]{new Item(Item.WOOD), new Item(Item.JELLY)}, new Item(Item.TORCH)),

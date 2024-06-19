@@ -73,7 +73,7 @@ public class Scene {
                     break;
                 }
             }
-            if(!foundEnt) System.out.println("ERROR: no entity type '" + objName + "' found");
+            if(!foundEnt) Trident.printConsole("ERROR: no entity type '" + objName + "' found");
         }
 
         // Check for plrstart

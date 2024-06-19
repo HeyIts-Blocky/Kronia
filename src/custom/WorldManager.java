@@ -16,6 +16,8 @@ public class WorldManager {
     private static long spawnTimer = 0, spawnTime = 60000;
     private static long enemyTimer = 0, enemyTime = 30000;
 
+    public static int enemyCap = 3;
+
     public static String worldName = "";
 
     public static void checkWorld(long elapsedTime){
@@ -26,7 +28,7 @@ public class WorldManager {
             spawnTimer = spawnTime;
         }
         if(enemyTimer < enemyTime) enemyTimer += elapsedTime;
-        if(enemyTimer >= enemyTime && numEnemies() < 5){
+        if(enemyTimer >= enemyTime && numEnemies() < 3){
             enemyTimer = 0;
             // spawn an enemy
             int ang = BTools.randInt(0, 360);
@@ -204,9 +206,9 @@ public class WorldManager {
             writer.println("}");
             writer.close();
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Something went wrong while saving world!", "Error", JOptionPane.ERROR_MESSAGE);
+            Trident.printConsole("Something went wrong while saving world!");
             e.printStackTrace();
-            System.exit(1);
+            Trident.loadScene("title");
         }
     }
 
@@ -280,13 +282,13 @@ public class WorldManager {
                     GameData.effects.add(new Effect(id, time, maxTime, coolTimer, cooldown));
                 }
             }catch(Exception e){
-                System.out.println("Error loading effects. Likely an old save.");
+                Trident.printConsole("Error loading effects. Likely an old save.");
                 e.printStackTrace();
             }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Something went wrong while loading world!", "Error", JOptionPane.ERROR_MESSAGE);
+            Trident.printConsole("Something went wrong while loading world!");
             e.printStackTrace();
-            System.exit(1);
+            Trident.loadScene("title");
         }
     }
 

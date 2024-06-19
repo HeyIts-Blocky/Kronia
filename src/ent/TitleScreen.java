@@ -204,7 +204,7 @@ public class TitleScreen extends TridEntity {
                 TitleButton.CENTER
             ),
             new TitleButton(
-                new Rectangle(684 / 2, 285 + 35, 200, 30),
+                new Rectangle(684 / 2, 285 + 35, 220, 30),
                 Color.white,
                 Color.gray,
                 Color.black,
@@ -377,7 +377,7 @@ public class TitleScreen extends TridEntity {
         }
     }
 
-    int screen = 0;
+    public int screen = 0;
     int worldSel = 0;
     ImageIcon title = new ImageIcon("data/images/title.png");
     ImageIcon thankyou = new ImageIcon("data/images/thankyou.gif");
@@ -388,10 +388,13 @@ public class TitleScreen extends TridEntity {
         "cg508",
         "ALYK",
         "Wizard King",
+        "Superisity",
     };
     double testerPos = 0;
     double testerSpeed = 0.05;
     double colorTime = 0;
+
+    public boolean inGameMenu = false;
 
     // Constructor, runs when the entity is created
     public TitleScreen(Position pos){
@@ -470,7 +473,7 @@ public class TitleScreen extends TridEntity {
 
             g.setColor(Color.white);
             g.setFont(new Font(GameData.getFont(), Font.PLAIN, 30));
-            TextBox.draw("Programming, Art, Design\n   Blocky\n\nMusic\n   Sona AI\n\nEpic Gamer\n   You\n\nBuilt with Trident Engine", g, 20, 100);
+            TextBox.draw("Programming, Art, Design\n   Blocky\n\nMusic\n   Sona AI\n   Blocky\n\nEpic Gamer\n   You\n\nBuilt with Trident Engine", g, 20, 100);
         }
         for(TitleButton b: buttons[screen]){
             b.render(g);

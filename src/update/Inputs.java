@@ -318,6 +318,19 @@ public class Inputs {
                         }
                     }
                 }
+            }else{
+                int slot = -1;
+                for(int i = 0; i < GameData.invBoxes.size(); i++){
+                    Rectangle r = GameData.invBoxes.get(i);
+                    if(r.contains(mousePos)){
+                        slot = i;
+                        break;
+                    }
+                }
+                if(slot >= 0 && slot <= 9){
+                    GameData.selHotbar = slot;
+                    
+                }
             }
         }
         if(Trident.getCurrentScene().name.equals("title")){

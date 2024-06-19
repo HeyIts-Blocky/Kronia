@@ -6,17 +6,20 @@ import javax.swing.*;
 import java.awt.*;
 public class TutorialBlock extends TridEntity {
 
+    public int id;
+
     // Constructor, runs when the entity is created
-    public TutorialBlock(Position pos, Dimension d){
+    public TutorialBlock(Position pos, Dimension d, int id){
         super(pos, d);
+        this.id = id;
     }
     // Registry constructor, used only for adding to the registry
     public TutorialBlock(){
-        super("tutblock", true, 0);
+        super("tutblock", true, 1);
     }
     // Custom constructor, used by the engine when building a scene
     public TridEntity construct(Position pos, Dimension collision, int[] data){
-        return new TutorialBlock(pos, collision);
+        return new TutorialBlock(pos, collision, data[0]);
     }
 
     // Render while in game

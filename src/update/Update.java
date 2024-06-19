@@ -102,7 +102,7 @@ public class Update {
                     TridEntity e = Trident.getEntities().get(i);
                     if(e instanceof GameObject){
                         GameObject go = (GameObject)e;
-                        if(go.weakness != Item.T_NULL && (go.weakness == GameData.getSelItem().getType() || go.weakness == Item.T_SWORD)){
+                        if(go.weakness != Item.T_NULL && (go.weakness == GameData.getSelItem().getType() || (go.weakness == Item.T_SWORD && (GameData.getSelItem().getType() == Item.T_PICK || GameData.getSelItem().getType() == Item.T_AXE)))){
                             double dir = BTools.getAngle(Trident.getPlrPos(), e.position);
                             double angDist = Math.abs(BTools.angleDiffRad(GameData.atkDir, dir));
                             if(angDist < Math.toRadians(45) && BTools.getDistance(Trident.getPlrPos(), e.position) < 64){
@@ -116,103 +116,114 @@ public class Update {
                 }
             }
             if(!GameData.spectate && Trident.getMouseDown(1) && GameData.atkTimer >= GameData.atkTime + 50 && GameData.inventory[GameData.selHotbar].id != Item.NOTHING && !GameData.invOpen){
-                GameData.atkTimer = 0;
-                GameData.atkDir = BTools.getAngle(Trident.getPlrPos(), Trident.mouseWorldPos);
-                GameData.attacked = false;
-                Settings.playSound("data/sound/attack.wav");
-
-                GameData.hungerSpeed += 0.05;
-
-                // Can be used?
-                if(GameData.getSelItem().getType() == Item.T_PLACEABLE && BTools.getDistance(Trident.getPlrPos(), Trident.mouseWorldPos) < 128){
-                    GameObject obj = GameObject.placeObj(Trident.mouseWorldPos, GameData.getSelItem().getData()[0], new int[]{(GameData.rotateItem ? 1 : 0)});
-                    if(!obj.getCollision().intersects(Trident.getPlr().getCollision())){
-                        for(Rectangle r: Trident.getCollision()){
-                            if(r.intersects(obj.getCollision())) return;
-                        }
-                        GameData.getSelItem().amount--;
-                        Trident.spawnEntity(obj);
+                int hotbarSlot = -1;
+                for(int i = 0; i < GameData.invBoxes.size(); i++){
+                    Rectangle r = GameData.invBoxes.get(i);
+                    if(r.contains(Trident.mousePos)){
+                        hotbarSlot = i;
+                        break;
                     }
-                    GameData.hungerSpeed += 0.05;
                 }
-                if(GameData.getSelItem().getType() == Item.T_CONSUMABLE && GameData.hunger < GameData.maxHunger){
-                    if(!(Trident.getCurrentScene().name.equals("tutorial") && GameData.getSelItem().id == Item.RAWMEAT)){
-                        GameData.getSelItem().amount--;
-                        int[] data = GameData.getSelItem().getData();
-                        GameData.hunger += data[0];
-                        if(data.length >= 3){
-                            GameData.health += data[2];
-                        }
-                        if(data.length >= 4){
-                            if(data[3] != Effect.NONE){
-                                if(data.length >= 5) GameData.addEffect(new Effect(data[3], data[4] * 100));
-                                else GameData.addEffect(new Effect(data[3]));
+                if(!(hotbarSlot >= 0 && hotbarSlot <= 9)){
+                    GameData.atkTimer = 0;
+                    GameData.atkDir = BTools.getAngle(Trident.getPlrPos(), Trident.mouseWorldPos);
+                    GameData.attacked = false;
+                    Settings.playSound("data/sound/attack.wav");
+        
+                    GameData.hungerSpeed += 0.05;
+        
+                    // Can be used?
+                    if(GameData.getSelItem().getType() == Item.T_PLACEABLE && BTools.getDistance(Trident.getPlrPos(), Trident.mouseWorldPos) < 128){
+                        GameObject obj = GameObject.placeObj(Trident.mouseWorldPos, GameData.getSelItem().getData()[0], new int[]{(GameData.rotateItem ? 1 : 0)});
+                        if(!obj.getCollision().intersects(Trident.getPlr().getCollision())){
+                            for(Rectangle r: Trident.getCollision()){
+                                if(r.intersects(obj.getCollision())) return;
                             }
-                            
+                            GameData.getSelItem().amount--;
+                            Trident.spawnEntity(obj);
                         }
-                        if(GameData.hunger >= GameData.maxHunger){
-                            GameData.hunger = GameData.maxHunger;
-                        }
-                        GameData.hungerSpeed = 0;
-
-                        if(Trident.getCurrentScene().name.equals("tutorial")){
-                            for(int i = 0; i < Trident.getEntities().size(); i++){
-                                TridEntity e = Trident.getEntities().get(i);
-                                if(e instanceof TutorialBlock){
-                                    Trident.destroy(e);
-                                    break;
+                        GameData.hungerSpeed += 0.05;
+                    }
+                    if(GameData.getSelItem().getType() == Item.T_CONSUMABLE && GameData.hunger < GameData.maxHunger){
+                        if(!(Trident.getCurrentScene().name.equals("tutorial") && GameData.getSelItem().id == Item.RAWMEAT)){
+                            GameData.getSelItem().amount--;
+                            int[] data = GameData.getSelItem().getData();
+                            GameData.hunger += data[0];
+                            if(data.length >= 3){
+                                GameData.health += data[2];
+                            }
+                            if(data.length >= 4){
+                                if(data[3] != Effect.NONE){
+                                    if(data.length >= 5) GameData.addEffect(new Effect(data[3], data[4] * 100));
+                                    else GameData.addEffect(new Effect(data[3]));
+                                }
+                                
+                            }
+                            if(GameData.hunger >= GameData.maxHunger){
+                                GameData.hunger = GameData.maxHunger;
+                            }
+                            GameData.hungerSpeed = 0;
+        
+                            if(Trident.getCurrentScene().name.equals("tutorial")){
+                                for(int i = 0; i < Trident.getEntities().size(); i++){
+                                    TridEntity e = Trident.getEntities().get(i);
+                                    if(e instanceof TutorialBlock && ((TutorialBlock)e).id == 0){
+                                        Trident.destroy(e);
+                                        break;
+                                    }
                                 }
                             }
                         }
+                        
+                    }
+                    if(GameData.getSelItem().getType() == Item.T_BOSS_SPAWN && !Boss.hasBoss()){
+                        GameData.getSelItem().amount--;
+                        int ang = BTools.randInt(0, 360);
+                        double dir = Math.toRadians(ang);
+                        Position pos = BTools.angleToVector(dir);
+                        pos.x *= 800;
+                        pos.y *= 800;
+                        pos.x += Trident.getPlrPos().x;
+                        pos.y += Trident.getPlrPos().y;
+                        Trident.spawnEntity(GameObject.placeObj(pos, GameData.getSelItem().getData()[0], null));
+                        Settings.playSound("data/sound/bossSpawn.wav");
+                        if(Settings.camShake) Trident.shakeCam(1);
+                    }
+                    if(GameData.getSelItem().getType() == Item.T_RANGED){
+                        int ammoType = GameData.getSelItem().getData()[0];
+                        int slot = -1;
+                        for(int i = 0; i < GameData.inventory.length; i++){
+                            Item item = GameData.inventory[i];
+                            if(item.getType() == Item.T_AMMO && item.getData()[0] == ammoType){
+                                // found it!
+                                slot = i;
+                                break;
+                            }
+                        }
+                        if(slot != -1){
+                            GameData.inventory[slot].amount--;
+                            Item item = GameData.inventory[slot];
+                            int ang = (int)(Math.toDegrees(GameData.atkDir) * 10);
+                            Trident.spawnEntity(new Projectile(Trident.getPlrPos(), new int[]{ang, item.id, item.getData()[2], item.getData()[3]}));
+                        }
+                    }
+                    if(GameData.getSelItem().getType() == Item.T_TRIGGER){
+                        trigger(GameData.getSelItem().getData()[0]);
+                    }
+                    if(GameData.getSelItem().getType() == Item.T_EFFECT){
+                        GameData.getSelItem().amount--;
+                        int id = GameData.getSelItem().getData()[0];
+                        long length = -1;
+                        if(GameData.getSelItem().getData().length >= 3){
+                            length = GameData.getSelItem().getData()[2] * 100;
+                        }
+                        if(length == -1) GameData.addEffect(new Effect(id));
+                        else GameData.addEffect(new Effect(id, length));
                     }
                     
                 }
-                if(GameData.getSelItem().getType() == Item.T_BOSS_SPAWN && !Boss.hasBoss()){
-                    GameData.getSelItem().amount--;
-                    int ang = BTools.randInt(0, 360);
-                    double dir = Math.toRadians(ang);
-                    Position pos = BTools.angleToVector(dir);
-                    pos.x *= 800;
-                    pos.y *= 800;
-                    pos.x += Trident.getPlrPos().x;
-                    pos.y += Trident.getPlrPos().y;
-                    Trident.spawnEntity(GameObject.placeObj(pos, GameData.getSelItem().getData()[0], null));
-                    Settings.playSound("data/sound/bossSpawn.wav");
-                    if(Settings.camShake) Trident.shakeCam(1);
-                }
-                if(GameData.getSelItem().getType() == Item.T_RANGED){
-                    int ammoType = GameData.getSelItem().getData()[0];
-                    int slot = -1;
-                    for(int i = 0; i < GameData.inventory.length; i++){
-                        Item item = GameData.inventory[i];
-                        if(item.getType() == Item.T_AMMO && item.getData()[0] == ammoType){
-                            // found it!
-                            slot = i;
-                            break;
-                        }
-                    }
-                    if(slot != -1){
-                        GameData.inventory[slot].amount--;
-                        Item item = GameData.inventory[slot];
-                        int ang = (int)(Math.toDegrees(GameData.atkDir) * 10);
-                        Trident.spawnEntity(new Projectile(Trident.getPlrPos(), new int[]{ang, item.id, item.getData()[2], item.getData()[3]}));
-                    }
-                }
-                if(GameData.getSelItem().getType() == Item.T_TRIGGER){
-                    trigger(GameData.getSelItem().getData()[0]);
-                }
-                if(GameData.getSelItem().getType() == Item.T_EFFECT){
-                    GameData.getSelItem().amount--;
-                    int id = GameData.getSelItem().getData()[0];
-                    long length = -1;
-                    if(GameData.getSelItem().getData().length >= 3){
-                        length = GameData.getSelItem().getData()[2] * 100;
-                    }
-                    if(length == -1) GameData.addEffect(new Effect(id));
-                    else GameData.addEffect(new Effect(id, length));
-                }
             }
-
+            
             GameData.selCraft = BTools.clamp(GameData.selCraft, 0, Recipe.getRecipes().size() - 1);
             GameData.checkInventory();
 
@@ -303,7 +314,13 @@ public class Update {
             }
 
             if(Trident.getCurrentScene().name.equals("tutorial") && GameData.tutorialTriggers[3] && WorldManager.numEnemies() == 0){
-                Trident.loadScene("title");
+                for(int i = 0; i < Trident.getEntities().size(); i++){
+                    TridEntity e = Trident.getEntities().get(i);
+                    if(e instanceof TutorialBlock && ((TutorialBlock)e).id == 1){
+                        Trident.destroy(e);
+                        break;
+                    }
+                }
             }
 
             GameData.hungerTimer += (long)(elapsedTime * GameData.hungerSpeed);
@@ -358,6 +375,7 @@ public class Update {
 
             GameData.tutorialTriggers[3] = true;
         }
+        if(id == -5) Trident.loadScene("title");
 
 
         // items
@@ -391,6 +409,10 @@ public class Update {
             GameData.clearInventory();
             return 0;
         case "give":
+            if(Integer.parseInt(cmdParts.get(1)) >= Item.names.length || Integer.parseInt(cmdParts.get(1)) < 1){
+                Trident.printConsole("Item ID " + Integer.parseInt(cmdParts.get(1)) + " is out of bounds!");
+                return 0;
+            }
             GameData.addItem(new Item(Integer.parseInt(cmdParts.get(1)), Integer.parseInt(cmdParts.get(2))));
             return 0;
         case "fillMeWithWood":

@@ -33,7 +33,7 @@ public class TridEntity extends Entity {
         this.numData = numData;
     }
     public TridEntity construct(Position pos, Dimension collision, int[] data){
-        System.out.println("Error: tried to create an empty entity");
+        Trident.printConsole("Error: tried to create an empty entity");
         return null;
     }
 

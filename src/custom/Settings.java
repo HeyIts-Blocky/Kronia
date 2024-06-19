@@ -13,7 +13,7 @@ public class Settings {
     public static boolean richText = false; // true = font is arial, false = font is whatever i changed it to i forgor
     public static boolean camSmooth = true;
     public static boolean aimHelp = false;
-    public static Color assistColor = Color.magenta;
+    public static Color assistColor = Color.white;
     public static boolean camShake = true;
 
     public static int[] keybinds = {
@@ -55,9 +55,12 @@ public class Settings {
             writer.println("int keymap " + keybinds[MAP]);
             writer.println("int keydrop " + keybinds[DROP]);
             writer.println("int keyrotate " + keybinds[ROTATE]);
-            writer.println("boolean camShake" + camShake);
+            writer.println("boolean camShake " + camShake);
             writer.close();
-        }catch(Exception e){}
+        }catch(Exception e){
+            Trident.printConsole("ERROR: Problem saving settings!");
+            e.printStackTrace();
+        }
     }
 
     public static void loadSettings(){
@@ -103,7 +106,10 @@ public class Settings {
             obj = BSonParser.getObject("camShake", objects);
             camShake = obj.getBoolean();
             applyKeybinds();
-        }catch(Exception e){}
+        }catch(Exception e){
+            Trident.printConsole("ERROR: Problem loading settings!");
+            e.printStackTrace();
+        }
     }
 
     public static void applyKeybinds(){ // apply keybinds to player

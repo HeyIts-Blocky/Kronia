@@ -127,6 +127,12 @@ public class MainPanel extends JPanel {
                     if(key == KeyEvent.VK_SPACE){
                         Trident.consoleType += " ";
                     }
+                    if(key == KeyEvent.VK_MINUS){
+                        Trident.consoleType += "-";
+                    }
+                    if(key == KeyEvent.VK_PERIOD){
+                        Trident.consoleType += ".";
+                    }
                     if(key == KeyEvent.VK_BACK_SPACE){
                         if(Trident.consoleType.length() > 0) Trident.consoleType = Trident.consoleType.substring(0, Trident.consoleType.length() - 1);
                     }

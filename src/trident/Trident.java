@@ -25,6 +25,8 @@ public class Trident {
     public static boolean drawFrames = false;
     public static boolean consoleEnabled = true;
     public static boolean consoleOpen = false;
+    public static boolean consoleError = false;
+    public static String lastCommand = "";
     
     // Public Variables
     public static Point mousePos;
@@ -79,8 +81,7 @@ public class Trident {
                 loadedScenes.add(new Scene(f));
             }
         }catch(Exception e){
-            printConsole("Error setting up scenes.");
-            e.printStackTrace();
+            printException("Error setting up scenes", e);
         }
         
     }
@@ -105,7 +106,7 @@ public class Trident {
         }
         printConsole("***********************************************************************************");
         printConsole("Error loading scene: No scene with name '" + name + "' found.");
-        printConsole("***********************************************************************************");
+        printError("***********************************************************************************");
     }
     public static void addCustomEntity(TridEntity e){ // Add a cutsom entity to the registry
         entRegistry.add(e);
@@ -233,6 +234,7 @@ public class Trident {
 
     public static void runCommand(String command){
         if(command != null && command.length() > 0){
+            lastCommand = command;
             printConsole(" > " + command);
 
             ArrayList<String> cmdParts = new ArrayList<String>();
@@ -415,6 +417,13 @@ public class Trident {
             case "openItch":
                 BTools.openWebsite("https://blockmanblue.itch.io/");
                 break;
+            case "errorTest":
+                consoleOpen = false;
+                printError("Error test");
+                break;
+            case "roll":
+                printConsole("You got " + BTools.randInt(0, 101) + " points");
+                break;
             default:
                 int cmd = Update.command(cmdParts);
                 if(cmd != 0){
@@ -424,14 +433,22 @@ public class Trident {
             }
             }catch(Exception e){
                 printConsole("Something went wrong while running your command.");
-                printConsole("(Error log will be printed in default console)");
-                e.printStackTrace();
+                printException("", e);
             }
         }
     }
     public static void printConsole(String text){
         consoleLines.add(text);
         if(consoleLines.size() > 30) consoleLines.remove(0);
+    }
+    public static void printError(String text){
+        consoleError = true;
+        printConsole(text);
+    }
+    public static void printException(String text, Exception e){
+        consoleError = true;
+        printConsole(text);
+        printConsole("Error type: " + e.getClass().getName());
     }
     private static String[] cmds = {
         "credits",
@@ -451,6 +468,8 @@ public class Trident {
         "clear",
         "help [page]",
         "customHelp [page]",
+        "errorTest",
+        "roll",
     };
 
     public static void printHelp(int page){

@@ -177,7 +177,7 @@ public class Update {
                         }
                         
                     }
-                    if(GameData.getSelItem().getType() == Item.T_BOSS_SPAWN && !Boss.hasBoss()){
+                    if(GameData.getSelItem().getType() == Item.T_BOSS_SPAWN && !Boss.hasBoss() && Boss.canSpawn(GameData.getSelItem().getData()[0])){
                         GameData.getSelItem().amount--;
                         int ang = BTools.randInt(0, 360);
                         double dir = Math.toRadians(ang);

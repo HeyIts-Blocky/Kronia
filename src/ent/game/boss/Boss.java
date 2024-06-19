@@ -8,6 +8,14 @@ import custom.*;
 import trident.*;
 public class Boss extends GameObject {
 
+    public static boolean canSpawn(int id){
+        if(id == GameObject.APEXSLIME){
+            if(Background.bg == Background.SURFACE) return true;
+        }
+
+        return false;
+    }
+
     public static int[] cantDamage = {
         GameObject.SLIME,
         GameObject.BABYSLIME,

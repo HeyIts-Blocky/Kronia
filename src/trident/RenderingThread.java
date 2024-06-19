@@ -13,6 +13,7 @@ public class RenderingThread extends Thread {
     private long elapsedTime, previousStartTime = -1;
 
     private ImageIcon consoleBg = new ImageIcon("data/images/trident/consolebg.png");
+    private long errorFlashTime = 0;
 
     public RenderingThread(){
         BTools.resizeImgIcon(consoleBg, Trident.getFrameWidth(), 483);
@@ -68,7 +69,7 @@ public class RenderingThread extends Thread {
                 if(Trident.drawPos){
                     g.setColor(Trident.debugColor);
                     g.setFont(new Font("Arial", Font.ITALIC, 10));
-                    TextBox.draw(Trident.player.getPos().toStringSimple(), g, 10, 30);
+                    TextBox.draw(Trident.player.getPos().toStringSimple(), g, 10, 20);
                 }
                 if(Trident.drawFrames){
                     g.setColor(Trident.debugColor);
@@ -126,6 +127,12 @@ public class RenderingThread extends Thread {
                     g.setColor(Color.white);
                     g.setFont(new Font("Arial", Font.PLAIN, 10));
                     TextBox.draw("> " + Trident.consoleType + "_", g, 3, Trident.getFrameHeight() / 2 - 5);
+                }
+                if(Trident.consoleError){
+                    errorFlashTime += elapsedTime;
+                    g.setColor(new Color(1f, (float)(Math.min(1, Math.sin(errorFlashTime / 500.0) / 2 + 0.5)), (float)(Math.min(1, Math.sin(errorFlashTime / 500.0) / 2 + 0.5))));
+                    g.setFont(new Font("Arial", Font.BOLD, 20));
+                    TextBox.draw("ERROR\nOpen console with [~](tilde)", g, Trident.getFrameWidth() / 2, 10, TextBox.CENTER);
                 }
 
                 lastFrame = newFrame;

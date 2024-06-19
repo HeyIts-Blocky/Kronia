@@ -15,6 +15,7 @@ public class Settings {
     public static boolean aimHelp = false;
     public static Color assistColor = Color.white;
     public static boolean camShake = true;
+    public static boolean dmgInd = true;
 
     public static int[] keybinds = {
         KeyEvent.VK_TAB, // inventory
@@ -56,14 +57,18 @@ public class Settings {
             writer.println("int keydrop " + keybinds[DROP]);
             writer.println("int keyrotate " + keybinds[ROTATE]);
             writer.println("boolean camShake " + camShake);
+            writer.println("boolean dmgInd " + dmgInd);
             writer.close();
         }catch(Exception e){
-            Trident.printConsole("ERROR: Problem saving settings!");
-            e.printStackTrace();
+            Trident.printException("Problem while saving settings!", e);
         }
     }
 
     public static void loadSettings(){
+        if(!(new File("data/settings.bson")).exists()){
+            saveSettings();
+            return;
+        }
         try{
             ArrayList<BSonObject> objects = BSonParser.readFile("data/settings.bson");
             BSonObject obj = BSonParser.getObject("volume", objects);
@@ -105,10 +110,11 @@ public class Settings {
             keybinds[ROTATE] = obj.getInt();
             obj = BSonParser.getObject("camShake", objects);
             camShake = obj.getBoolean();
+            obj = BSonParser.getObject("dmgInd", objects);
+            dmgInd = obj.getBoolean();
             applyKeybinds();
         }catch(Exception e){
-            Trident.printConsole("ERROR: Problem loading settings!");
-            e.printStackTrace();
+            Trident.printException("Problem while loading settings!", e);
         }
     }
 

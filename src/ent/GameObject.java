@@ -75,13 +75,14 @@ public class GameObject extends TridEntity {
 
     public final void damage(int amount){
         Settings.playSound("data/sound/hit.wav");
-        if(amount < defense) return;
-        health -= amount - defense;
-        tookDamage(amount - defense);
+        health -= Math.max(amount - defense, 0);
+        tookDamage(Math.max(amount - defense, 0));
         if(health <= 0){
             Trident.destroy(this);
             dropItems();
         }
+
+        if(Settings.dmgInd) Trident.spawnEntity(new DamageIndicator(new Position(position.x + (BTools.randInt(0, 32) - 16), position.y + (BTools.randInt(0, 32) - 16)), Math.max(amount - defense, 0)));
     }
     public void tookDamage(int amount){}
     public void dropItems(){}

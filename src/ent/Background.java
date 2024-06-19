@@ -84,7 +84,7 @@ public class Background extends TridEntity {
             TridEntity e = Trident.getEntities().get(i);
             if(e instanceof GameObject){
                 if(e.HASCOLLISION && e.getCollision().intersects(Trident.getPlr().getCollision())){
-                    ((GameObject)e).damage(((GameObject)e).health);
+                    Trident.destroy(e);
                 }
             }
             

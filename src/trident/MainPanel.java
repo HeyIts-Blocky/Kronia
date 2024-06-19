@@ -71,6 +71,7 @@ public class MainPanel extends JPanel {
             BTools.resizeImgIcon(Trident.splash, 160, 160);
         }
 
+        Trident.consoleError = false;
         rendThread.start();
 
         server = new Server(new ServerListener(), this);
@@ -108,6 +109,7 @@ public class MainPanel extends JPanel {
                 if(key == 192 && Trident.consoleEnabled){
                     Trident.consoleOpen = !Trident.consoleOpen;
                     Trident.consoleType = "";
+                    Trident.consoleError = false;
                 }
                 if(Trident.consoleOpen){
                     if(key >= KeyEvent.VK_A && key <= KeyEvent.VK_Z){
@@ -132,6 +134,9 @@ public class MainPanel extends JPanel {
                     }
                     if(key == KeyEvent.VK_BACK_SPACE){
                         if(Trident.consoleType.length() > 0) Trident.consoleType = Trident.consoleType.substring(0, Trident.consoleType.length() - 1);
+                    }
+                    if(key == KeyEvent.VK_UP){
+                        Trident.consoleType = Trident.lastCommand;
                     }
 
                     if(key == KeyEvent.VK_ENTER){

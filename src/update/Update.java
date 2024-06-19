@@ -106,7 +106,7 @@ public class Update {
                         if(go.weakness != Item.T_NULL && (go.weakness == GameData.getSelItem().getType() || (go.weakness == Item.T_SWORD && (GameData.getSelItem().getType() == Item.T_PICK || GameData.getSelItem().getType() == Item.T_AXE)))){
                             double dir = BTools.getAngle(Trident.getPlrPos(), e.position);
                             double angDist = Math.abs(BTools.angleDiffRad(GameData.atkDir, dir));
-                            if(angDist < Math.toRadians(45) && BTools.getDistance(Trident.getPlrPos(), e.position) < 64){
+                            if((angDist < Math.toRadians(90) && BTools.getDistance(Trident.getPlrPos(), e.position) < 64) || BTools.getDistance(Trident.getPlrPos(), e.position) < 16){
                                 int dmg = GameData.getSelItem().getData()[0];
                                 if(go.weakness == Item.T_SWORD && GameData.getSelItem().getType() != Item.T_SWORD) dmg /= 2;
                                 go.damage(dmg);

@@ -223,7 +223,7 @@ public class Item {
         {5, 250, 2}, // 45
         {GameObject.CRATE}, // 46
     };
-    private static String[] names = {
+    public static String[] names = {
         "", // 0
         "Wood", // 1
         "Workbench", // 2

@@ -428,6 +428,16 @@ public class TitleScreen extends TridEntity {
             }
             
         }
+        if(screen == 3){
+            g.setColor(Color.black);
+            g.setFont(new Font(GameData.getFont(), Font.PLAIN, 13));
+            TextBox.draw("Music volume updates after \nyou leave the settings screen", g, 12, 320);
+            TextBox.draw("Music volume updates after \nyou leave the settings screen", g, 8, 320);
+            TextBox.draw("Music volume updates after \nyou leave the settings screen", g, 10, 321);
+            TextBox.draw("Music volume updates after \nyou leave the settings screen", g, 10, 319);
+            g.setColor(Color.white);
+            TextBox.draw("Music volume updates after \nyou leave the settings screen", g, 10, 320);
+        }
         if(screen == 5){
             g.setColor(new Color(0f, 0f, 0f, 0.5f));
             g.fillRect(0, 0, Trident.getFrameWidth(), Trident.getFrameHeight());

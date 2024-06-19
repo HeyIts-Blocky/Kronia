@@ -50,6 +50,10 @@ public class Update {
 
         Settings.loadSettings();
         TitleScreen.updateButtonText();
+
+        Trident.runCommand("credits");
+        Trident.printConsole("Type 'help' to get a list of commands,");
+        Trident.printConsole("or type 'customHelp' for a list of game-specific commands.");
     }
 
     public static void sceneStart(String scene){
@@ -403,6 +407,38 @@ public class Update {
         case "setTime":
             GameData.time = Long.parseLong(cmdParts.get(1));
             return 0;
+        case "itemList":
+            int p = 1;
+            if(cmdParts.size() > 1) p = Integer.parseInt(cmdParts.get(1));
+            printItems(p);
+            return 0;
+        case "searchItem":
+            if(cmdParts.size() > 1){
+                String search = cmdParts.get(1).toUpperCase();
+                ArrayList<Integer> results = new ArrayList<Integer>();
+                for(int i = 0; i < Item.names.length; i++){
+                    if(results.size() >= 10) break;
+                    String s = Item.names[i];
+                    if(s.toUpperCase().contains(search)){
+                        results.add(i);
+                    }
+                }
+
+                Trident.printConsole("Search results for: \"" + cmdParts.get(1) + "\"");
+                Trident.printConsole(" --- ");
+                Trident.printConsole("");
+
+                if(results.size() == 0){
+                    Trident.printConsole(" -- NO RESULTS --");
+                }else{
+                    for(int i: results){
+                        Trident.printConsole("} " + Item.names[i] + " - " + i);
+                    }
+                }
+                
+                Trident.printConsole("");
+            }
+            return 0;
         case "song":
             Trident.printConsole("The current song is called \"" + MusicManager.lastName + "\"");
             return 0;
@@ -422,5 +458,24 @@ public class Update {
         "setHealth <health>",
         "setTime <time>",
         "song",
+        "itemList [page]",
+        "searchItem <name>",
     };
+
+    public static void printItems(int page){
+        int startIndex = (page - 1) * 10;
+        if(startIndex > Item.names.length - 1){
+            Trident.printConsole("page beyond bounds: " + page);
+            Trident.printConsole("number of pages: " + (Item.names.length / 10 + ((Item.names.length % 10 != 0) ? 1 : 0)));
+            return;
+        }
+        
+        Trident.printConsole("-- ITEMS --");
+        Trident.printConsole("Page " + page + " of " + (Item.names.length / 10 + ((Item.names.length % 10 != 0) ? 1 : 0)));
+        Trident.printConsole("");
+        for(int i = startIndex; (i < Item.names.length && i < startIndex + 10); i++){
+            Trident.printConsole("} " + Item.names[i] + " - " + i);
+        }
+        Trident.printConsole("");
+    }
 }

@@ -402,6 +402,19 @@ public class Trident {
                 if(cmdParts.size() > 1) p = Integer.parseInt(cmdParts.get(1));
                 printCustomHelp(p);
                 break;
+            case "credits":
+                runCommand("clear");
+                printConsole("Trident Engine built in Java by Blocky");
+                printConsole("---");
+                printConsole("Github: @HeyIts-Blocky");
+                printConsole("Insta: @heyits_blocky");
+                printConsole("Itch.io: blockmanblue.itch.io  <TYPE 'openItch' TO GO TO SITE>");
+                printConsole("---");
+                printConsole("");
+                break;
+            case "openItch":
+                BTools.openWebsite("https://blockmanblue.itch.io/");
+                break;
             default:
                 int cmd = Update.command(cmdParts);
                 if(cmd != 0){
@@ -421,6 +434,7 @@ public class Trident {
         if(consoleLines.size() > 30) consoleLines.remove(0);
     }
     private static String[] cmds = {
+        "credits",
         "drawCollision [0/1, false/true]",
         "engineDraw [0/1, false/true]",
         "drawPos [0/1, false/true]",

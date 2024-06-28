@@ -92,7 +92,7 @@ public class Hotbar extends TridEntity {
 
     // Render while in game
     public void render(Graphics g, JPanel panel, int x, int y){
-        if(GameData.settingsOpen) return;
+        if(GameData.settingsOpen || !GameData.drawHud) return;
         if(GameData.spectate){
             g.setColor(Color.red);
             g.setFont(new Font(GameData.getFont(), Font.PLAIN, 50));
@@ -119,8 +119,9 @@ public class Hotbar extends TridEntity {
             }
             if(it.amount != 1 && it.id != Item.NOTHING){
                 g.setColor(Color.white);
+                TextBox.outlineColor = Color.black;
                 g.setFont(new Font(GameData.getFont(), Font.ITALIC, 15));
-                TextBox.draw(it.amount + "", g, 20 + (i * 52) + 35, 412 + 32, TextBox.RIGHT);
+                TextBox.draw(it.amount + "", g, 20 + (i * 52) + 35, 412 + 32, TextBox.RIGHT, TextBox.NOMAXWIDTH, 1);
             }
             if(i == GameData.selHotbar){
                 g.setColor(Color.black);
@@ -137,8 +138,9 @@ public class Hotbar extends TridEntity {
                     }
                     if(it.amount != 1 && it.id != Item.NOTHING){
                         g.setColor(Color.white);
+                        TextBox.outlineColor = Color.black;
                         g.setFont(new Font(GameData.getFont(), Font.ITALIC, 15));
-                        TextBox.draw(it.amount + "", g, 20 + ((i) * 52) + 35, 184 + 32, TextBox.RIGHT);
+                        TextBox.draw(it.amount + "", g, 20 + ((i) * 52) + 35, 184 + 32, TextBox.RIGHT, TextBox.NOMAXWIDTH, 1);
                     }
                 }
                 for(int i = 10; i < 20; i++){
@@ -148,8 +150,9 @@ public class Hotbar extends TridEntity {
                     }
                     if(it.amount != 1 && it.id != Item.NOTHING){
                         g.setColor(Color.white);
+                        TextBox.outlineColor = Color.black;
                         g.setFont(new Font(GameData.getFont(), Font.ITALIC, 15));
-                        TextBox.draw(it.amount + "", g, 20 + ((i - 10) * 52) + 35, 129 + 32, TextBox.RIGHT);
+                        TextBox.draw(it.amount + "", g, 20 + ((i - 10) * 52) + 35, 129 + 32, TextBox.RIGHT, TextBox.NOMAXWIDTH, 1);
                     }
                 }
                 for(int i = 20; i < 30; i++){
@@ -159,8 +162,9 @@ public class Hotbar extends TridEntity {
                     }
                     if(it.amount != 1 && it.id != Item.NOTHING){
                         g.setColor(Color.white);
+                        TextBox.outlineColor = Color.black;
                         g.setFont(new Font(GameData.getFont(), Font.ITALIC, 15));
-                        TextBox.draw(it.amount + "", g, 20 + ((i - 20) * 52) + 35, 81 + 32, TextBox.RIGHT);
+                        TextBox.draw(it.amount + "", g, 20 + ((i - 20) * 52) + 35, 81 + 32, TextBox.RIGHT, TextBox.NOMAXWIDTH, 1);
                     }
                 }
             }
@@ -172,8 +176,9 @@ public class Hotbar extends TridEntity {
                 }
                 if(it.amount != 1 && it.id != Item.NOTHING){
                     g.setColor(Color.white);
+                    TextBox.outlineColor = Color.black;
                     g.setFont(new Font(GameData.getFont(), Font.ITALIC, 15));
-                    TextBox.draw(it.amount + "", g, 20 + ((i - 10) * 52) + 35, 340 + 32, TextBox.RIGHT);
+                    TextBox.draw(it.amount + "", g, 20 + ((i - 10) * 52) + 35, 340 + 32, TextBox.RIGHT, TextBox.NOMAXWIDTH, 1);
                 }
             }
             for(int i = 20; i < 30; i++){
@@ -183,8 +188,9 @@ public class Hotbar extends TridEntity {
                 }
                 if(it.amount != 1 && it.id != Item.NOTHING){
                     g.setColor(Color.white);
+                    TextBox.outlineColor = Color.black;
                     g.setFont(new Font(GameData.getFont(), Font.ITALIC, 15));
-                    TextBox.draw(it.amount + "", g, 20 + ((i - 20) * 52) + 35, 289 + 32, TextBox.RIGHT);
+                    TextBox.draw(it.amount + "", g, 20 + ((i - 20) * 52) + 35, 289 + 32, TextBox.RIGHT, TextBox.NOMAXWIDTH, 1);
                 }
             }
             for(int i = 30; i < 40; i++){
@@ -194,8 +200,9 @@ public class Hotbar extends TridEntity {
                 }
                 if(it.amount != 1 && it.id != Item.NOTHING){
                     g.setColor(Color.white);
+                    TextBox.outlineColor = Color.black;
                     g.setFont(new Font(GameData.getFont(), Font.ITALIC, 15));
-                    TextBox.draw(it.amount + "", g, 20 + ((i - 30) * 52) + 35, 237 + 32, TextBox.RIGHT);
+                    TextBox.draw(it.amount + "", g, 20 + ((i - 30) * 52) + 35, 237 + 32, TextBox.RIGHT, TextBox.NOMAXWIDTH, 1);
                 }
             }
 
@@ -207,8 +214,9 @@ public class Hotbar extends TridEntity {
                 recipes.get(GameData.selCraft).output.getImg().paintIcon(panel, g, 636, 84);
                 if(recipes.get(GameData.selCraft).output.amount > 1){
                     g.setColor(Color.white);
+                    TextBox.outlineColor = Color.black;
                     g.setFont(new Font(GameData.getFont(), Font.ITALIC, 15));
-                    TextBox.draw(recipes.get(GameData.selCraft).output.amount + "", g, 636 + 32, 84 + 32, TextBox.RIGHT);
+                    TextBox.draw(recipes.get(GameData.selCraft).output.amount + "", g, 636 + 32, 84 + 32, TextBox.RIGHT, TextBox.NOMAXWIDTH, 1);
                 }
                 Image[] imgs = new Image[recipes.get(GameData.selCraft).ingredients.length];
                 for(int i = 0; i < imgs.length; i++){
@@ -218,8 +226,9 @@ public class Hotbar extends TridEntity {
                     g.drawImage(imgs[i], 609 - (i * 18), 91, 16, 16, null);
                     if(recipes.get(GameData.selCraft).ingredients[i].amount > 1){
                         g.setColor(Color.white);
+                        TextBox.outlineColor = Color.black;
                         g.setFont(new Font(GameData.getFont(), Font.ITALIC, 7));
-                        TextBox.draw(recipes.get(GameData.selCraft).ingredients[i].amount + "", g, 609 - (i * 18) + 16, 91 + 16, TextBox.RIGHT);
+                        TextBox.draw(recipes.get(GameData.selCraft).ingredients[i].amount + "", g, 609 - (i * 18) + 16, 91 + 16, TextBox.RIGHT, TextBox.NOMAXWIDTH, 1);
                     }
                 }
                 if(GameData.selCraft < recipes.size() - 1){
@@ -235,8 +244,9 @@ public class Hotbar extends TridEntity {
                 Item.getImg(GameData.cursorItem.id).paintIcon(panel, g, Trident.mousePos.x + offset.x, Trident.mousePos.y + offset.y);
                 if(GameData.cursorItem.amount != 1){
                     g.setColor(Color.white);
+                    TextBox.outlineColor = Color.black;
                     g.setFont(new Font(GameData.getFont(), Font.ITALIC, 15));
-                    TextBox.draw(GameData.cursorItem.amount + "", g, Trident.mousePos.x + 35 + offset.x, Trident.mousePos.y + 32 + offset.y, TextBox.RIGHT);
+                    TextBox.draw(GameData.cursorItem.amount + "", g, Trident.mousePos.x + 35 + offset.x, Trident.mousePos.y + 32 + offset.y, TextBox.RIGHT, TextBox.NOMAXWIDTH, 1);
                 }
                 
             }
@@ -264,6 +274,10 @@ public class Hotbar extends TridEntity {
                 }else if(slot == 42){
                     // save & exit
                     label = "Save & Exit";
+                    desc = "---------";
+                }else if(slot == 45){
+                    // settings
+                    label = "Settings";
                     desc = "---------";
                 }else if(slot < 40){
                     // inventory

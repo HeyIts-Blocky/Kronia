@@ -8,17 +8,21 @@ import trident.Trident;
 import ent.*;
 public class MusicManager {
 
+    private static Song[] titleSongs = {
+        new Song("data/music/abre.wav", "Abre - Blocky"),
+        new Song("data/music/blades.wav", "Blades - Blocky"),
+    };
     private static Song[] songs = {
-        new Song("data/music/A World is Discovered.wav", "A World is Discovered - Suno AI"),
-        new Song("data/music/A World Lies Dormant.wav", "A World Lies Dormant - Suno AI"),
-        new Song("data/music/A World Waits Undiscovered.wav", "A World Waits Undiscovered - Suno AI"),
-        new Song("data/music/Rats on Mars.wav", "Rats on Mars - Suno AI"),
+        new Song("data/music/slimes lament.wav", "Slime's Lament - Blocky"),
+        new Song("data/music/poaceae.wav", "Poaceae - Blocky"),
+        new Song("data/music/puerta.wav", "Puerta - Blocky"),
     };
     private static Song[] caveSongs = {
         new Song("data/music/cavesong1.wav", "Caves and Crystals - Blocky"),
+        new Song("data/music/duet in the depths.wav", "Duet in the Depths - Blocky"),
     };
     private static Song[] bossSongs = {
-        new Song("data/music/Every Warrior has a Start.wav", "Every Warrior has a Start - Suno AI"), // Apex Slime
+        new Song("data/music/slimes court.wav", "Slime's Court - Blocky"), // Apex Slime
     };
 
     public static double volume = 1;
@@ -42,9 +46,10 @@ public class MusicManager {
                     lastName = bossSongs[bossMusic].name;
                 }else{
                     if(Trident.getCurrentScene().name.equals("title")){
-                        int songGroup = BTools.randInt(0, 2);
+                        int songGroup = BTools.randInt(0, 3);
                         Song[] songArr = songs;
                         if(songGroup == 1) songArr = caveSongs;
+                        if(songGroup == 2) songArr = titleSongs;
 
                         int selSong = BTools.randInt(0, songArr.length);
                         currentSong = songArr[selSong].play();

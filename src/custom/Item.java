@@ -73,7 +73,7 @@ public class Item {
     public static final int NOTHING = 0, WOOD = 1, WORKBENCH = 2, W_SWORD = 3, W_PICK = 4, W_AXE = 5, STONE = 6, FURNACE = 7, RAWMEAT = 8, COOKEDMEAT = 9, JELLY = 10, LOGWALL = 11, TORCH = 12, COAL = 13, SCP999 = 14, S_SWORD = 15, S_PICK = 16, S_AXE = 17;
     public static final int APEXSPAWN = 18, HARDJELLY = 19, BOW = 20, ARROW = 21, J_SWORD = 22, J_PICK = 23, J_AXE = 24, J_SHOVEL = 25, EMERGENCYPOGO = 26, STONELADDER = 27, IRONORE = 28, IRONINGOT = 29;
     public static final int I_SWORD = 30, I_PICK = 31, I_AXE = 32, COPPERORE = 33, COPPERINGOT = 34, C_SWORD = 35, C_PICK = 36, C_AXE = 37, ANVIL = 38, PEBBLE = 39, I_ARROW = 40, J_ARROW = 41;
-    public static final int HJ_ARROW = 42, TUTWOOD = 43, CAMPFIRE = 44, HOTDOG = 45, CRATE = 46;
+    public static final int HJ_ARROW = 42, TUTWOOD = 43, CAMPFIRE = 44, HOTDOG = 45, CRATE = 46, FLASK = 47, STR_FLASK = 48, HP_FLASK = 49, REGEN_FLASK = 50, GLOW_FLASK = 51;
     /*****/
 
     private static ImageIcon[] imgs = {
@@ -124,6 +124,11 @@ public class Item {
         new ImageIcon("data/images/items/campfire.png"), // 44
         new ImageIcon("data/images/items/hotdog.png"), // 45
         new ImageIcon("data/images/items/crate.png"), // 46
+        new ImageIcon("data/images/items/slimeFlask.png"), // 47
+        new ImageIcon("data/images/items/strengthFlask.png"), // 48
+        new ImageIcon("data/images/items/healthFlask.png"), // 49
+        new ImageIcon("data/images/items/regenFlask.png"), // 50
+        new ImageIcon("data/images/items/glowFlask.png"), // 51
     };
     private static int[] types = {
         T_NULL, // 0
@@ -173,6 +178,11 @@ public class Item {
         T_PLACEABLE, // 44
         T_CONSUMABLE, // 45
         T_PLACEABLE, // 46
+        T_NULL, // 47
+        T_EFFECT, // 48
+        T_TRIGGER, // 49
+        T_EFFECT, // 50
+        T_EFFECT, // 51
     };
     private static int[][] data = { // atk, def, stuff like that
         {}, // 0
@@ -222,6 +232,11 @@ public class Item {
         {GameObject.CAMPFIRE}, // 44
         {7, 250, 2}, // 45
         {GameObject.CRATE}, // 46
+        {}, // 47
+        {Effect.STRENGTH, 250, 750}, // 48
+        {3}, // 49
+        {Effect.REGEN, 250, 50}, // 50
+        {Effect.GLOW, 250, 750}, // 51
     };
     public static String[] names = {
         "", // 0
@@ -271,6 +286,11 @@ public class Item {
         "Campfire Set", // 44
         "Hotdog", // 45
         "Crate", // 46
+        "Empty Flask", // 47
+        "Flask of Strength", // 48
+        "Flask of Healing", // 49
+        "Flask of Regeneration", // 50
+        "Flask of Illumination", // 51
     };
     private static String[] descriptions = {
         "", // 0
@@ -298,9 +318,9 @@ public class Item {
         "Now you can slay your enemies quick, and leave them feeling goopy.", // 22
         "It can cut through stone easily, but there's probably better underground.", // 23
         "You're getting goop all over my wood.", // 24
-        "It's so solid, it could probably dig through stone.", // 25
+        "Lifetime pass to the underground! You're on your own to get back, though.", // 25
         "You can bounce to the surface, but a shovel isn't really meant to do that...", // 26
-        "Lets you climb to the surface. Not very sturdy, though.", // 27
+        "Lets you climb to the surface from the mines.", // 27
         "Only useful once refined.", // 28
         "Cold, hard steel", // 29
         "A sharp, heavy blade. It's reliable.", // 30
@@ -320,5 +340,10 @@ public class Item {
         "Cooking on the go", // 44
         "its got that cow in 'em", // 45
         "You can put your stuff in here for safe keeping", // 46
+        "It's not big, but you can do some simple alchemy with this", // 47
+        "Your blade feels particularly sharp for a short while", // 48
+        "Instantly heal some of your health", // 49
+        "Regenerate your health for a short time", // 50
+        "Cause your skin to glow, lighting up the surrounding area", // 51
     };
 }

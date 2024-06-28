@@ -168,56 +168,65 @@ public class TitleScreen extends TridEntity {
             new TitleSlider(new Point(10, 240), "SFX Volume", TitleSlider.SFX),
             new TitleSlider(new Point(10, 280), "Music Volume", TitleSlider.MUSIC),
             new TitleButton(
-                new Rectangle(684 / 2, 150 + 25, 210, 30),
+                new Rectangle(684 - 5, 30, 290, 25),
                 Color.white,
                 Color.gray,
                 Color.black,
-                new Font(GameData.getFont(), Font.PLAIN, 25),
+                new Font(GameData.getFont(), Font.PLAIN, 20),
                 "Rich Text: ---",
-                TitleButton.CENTER
+                TitleButton.RIGHT
             ),
             new TitleButton(
-                new Rectangle(684 / 2, 150 + 65, 300, 30),
+                new Rectangle(684 - 5, 60, 290, 25),
                 Color.white,
                 Color.gray,
                 Color.black,
-                new Font(GameData.getFont(), Font.PLAIN, 25),
+                new Font(GameData.getFont(), Font.PLAIN, 20),
                 "Cam Smoothing: ---",
-                TitleButton.CENTER
+                TitleButton.RIGHT
             ),
             new TitleButton(
-                new Rectangle(684 / 2, 250, 200, 30),
+                new Rectangle(684 - 5, 90, 290, 25),
                 Color.white,
                 Color.gray,
                 Color.black,
-                new Font(GameData.getFont(), Font.PLAIN, 25),
+                new Font(GameData.getFont(), Font.PLAIN, 20),
                 "Aim Help: ---",
-                TitleButton.CENTER
+                TitleButton.RIGHT
             ),
             new TitleButton(
-                new Rectangle(684 / 2, 285, 200, 30),
+                new Rectangle(684 - 5, 120, 290, 25),
                 Color.white,
                 Color.gray,
                 Color.black,
-                new Font(GameData.getFont(), Font.PLAIN, 25),
+                new Font(GameData.getFont(), Font.PLAIN, 20),
                 "Assist Color",
-                TitleButton.CENTER
+                TitleButton.RIGHT
             ),
             new TitleButton(
-                new Rectangle(684 / 2, 285 + 35, 220, 30),
+                new Rectangle(684 - 5, 150, 290, 25),
                 Color.white,
                 Color.gray,
                 Color.black,
-                new Font(GameData.getFont(), Font.PLAIN, 25),
+                new Font(GameData.getFont(), Font.PLAIN, 20),
                 "Cam Shake: ---",
-                TitleButton.CENTER
+                TitleButton.RIGHT
             ),
             new TitleButton(
-                new Rectangle(684 / 2, 285 + 70, 200, 30),
+                new Rectangle(684 - 5, 180, 290, 25),
                 Color.white,
                 Color.gray,
                 Color.black,
-                new Font(GameData.getFont(), Font.PLAIN, 25),
+                new Font(GameData.getFont(), Font.PLAIN, 20),
+                "Damage Indicator: ---",
+                TitleButton.RIGHT
+            ),
+            new TitleButton(
+                new Rectangle(684 / 2, Trident.getFrameHeight() - 30, 150, 25),
+                Color.white,
+                Color.gray,
+                Color.black,
+                new Font(GameData.getFont(), Font.PLAIN, 20),
                 "Keybinds",
                 TitleButton.CENTER
             ),
@@ -316,6 +325,44 @@ public class TitleScreen extends TridEntity {
                 TitleButton.LEFT
             ),
         },
+        { // 6
+            new TitleButton(
+                new Rectangle(10, 10, 100, 30),
+                Color.white,
+                Color.gray,
+                Color.black,
+                new Font(GameData.getFont(), Font.PLAIN, 25),
+                "Cancel",
+                TitleButton.LEFT
+            ),
+            new TitleButton(
+                new Rectangle(684 / 2, 405, 300, 50),
+                Color.white,
+                Color.gray,
+                Color.black,
+                new Font(GameData.getFont(), Font.PLAIN, 40),
+                "Create World",
+                TitleButton.CENTER
+            ),
+            new TitleButton(
+                new Rectangle(684 / 2 - 45, 210, 45, 45),
+                Color.white,
+                Color.gray,
+                Color.black,
+                new Font(GameData.getFont(), Font.PLAIN, 40),
+                "-",
+                TitleButton.CENTER
+            ),
+            new TitleButton(
+                new Rectangle(684 / 2 + 45, 210, 45, 45),
+                Color.white,
+                Color.gray,
+                Color.black,
+                new Font(GameData.getFont(), Font.PLAIN, 40),
+                "+",
+                TitleButton.CENTER
+            ),
+        },
     };
 
     public static void updateButtonFont(){
@@ -333,6 +380,7 @@ public class TitleScreen extends TridEntity {
         buttons[3][6].text = "Aim Help: " + Settings.aimHelp;
         buttons[3][7].color = Settings.assistColor;
         buttons[3][8].text = "Cam Shake: " + Settings.camShake;
+        buttons[3][9].text = "Damage Indicators: " + Settings.dmgInd;
 
         // keybinds
         buttons[4][1].text = "Open Inventory: " + KeyEvent.getKeyText(Settings.keybinds[Settings.INVENTORY]);
@@ -396,6 +444,9 @@ public class TitleScreen extends TridEntity {
 
     public boolean inGameMenu = false;
 
+    public static String worldName = "";
+    public static int worldDiff = WorldManager.defaultDiff;
+
     // Constructor, runs when the entity is created
     public TitleScreen(Position pos){
         super(pos);
@@ -432,14 +483,10 @@ public class TitleScreen extends TridEntity {
             
         }
         if(screen == 3){
-            g.setColor(Color.black);
-            g.setFont(new Font(GameData.getFont(), Font.PLAIN, 13));
-            TextBox.draw("Music volume updates after \nyou leave the settings screen", g, 12, 320);
-            TextBox.draw("Music volume updates after \nyou leave the settings screen", g, 8, 320);
-            TextBox.draw("Music volume updates after \nyou leave the settings screen", g, 10, 321);
-            TextBox.draw("Music volume updates after \nyou leave the settings screen", g, 10, 319);
             g.setColor(Color.white);
-            TextBox.draw("Music volume updates after \nyou leave the settings screen", g, 10, 320);
+            TextBox.outlineColor = Color.black;
+            g.setFont(new Font(GameData.getFont(), Font.PLAIN, 13));
+            TextBox.draw("Music volume updates after \nyou leave the settings screen", g, 10, 320, TextBox.LEFT, TextBox.NOMAXWIDTH, 2);
         }
         if(screen == 5){
             g.setColor(new Color(0f, 0f, 0f, 0.5f));
@@ -473,7 +520,57 @@ public class TitleScreen extends TridEntity {
 
             g.setColor(Color.white);
             g.setFont(new Font(GameData.getFont(), Font.PLAIN, 30));
-            TextBox.draw("Programming, Art, Design\n   Blocky\n\nMusic\n   Sona AI\n   Blocky\n\nEpic Gamer\n   You\n\nBuilt with Trident Engine", g, 20, 100);
+            TextBox.draw("Programming, Art, Design\n   Blocky\n\nMusic\n   Blocky\n\nEpic Gamer\n   You\n\nBuilt with Trident Engine", g, 20, 100);
+        }
+        if(screen == 6){
+            g.setColor(Color.white);
+            g.setFont(new Font(GameData.getFont(), Font.PLAIN, 40));
+            TextBox.draw("World Name:\n" + worldName + "_", g, Trident.getFrameWidth() / 2, 50, TextBox.CENTER);
+
+            TextBox.draw("Difficulty:", g, Trident.getFrameWidth() / 2, 140, TextBox.CENTER);
+            String diffText = "";
+            switch(worldDiff){
+            case WorldManager.V_EASY:
+                diffText = "Very Easy";
+                break;
+            case WorldManager.EASY:
+                diffText = "Easy";
+                break;
+            case WorldManager.NORMAL:
+                diffText = "Normal";
+                break;
+            case WorldManager.HARD:
+                diffText = "Hard";
+                g.setColor(Color.red);
+                break;
+            case WorldManager.V_HARD:
+                diffText = "Very Hard";
+                g.setColor(new Color(0.5f, 0f, 0f));
+                TextBox.outlineColor = Color.red;
+                break;
+            }
+            TextBox.draw(diffText, g, Trident.getFrameWidth() / 2, 180, TextBox.CENTER, TextBox.NOMAXWIDTH, ((worldDiff == WorldManager.V_HARD) ? 2 : 0));
+
+            String diffDesc = "";
+            switch(worldDiff){
+            case WorldManager.V_EASY:
+                diffDesc = "- 50% entity health\n- Slimes only spawn at night\n- 50% hunger speed\n- Starving deals no damage\n- 50% damage taken\n- 1 enemy cap\n- Enemies move slower";
+                break;
+            case WorldManager.EASY:
+                diffDesc = "- 75% entity health\n- Slimes only spawn at night\n- 50% hunger speed\n- 75% damage taken\n- 2 enemy cap";
+                break;
+            case WorldManager.NORMAL:
+                diffDesc = "- 100% entity health\n- Slimes spawn any time\n- 100% hunger speed\n- 100% damage taken\n- 3 enemy cap";
+                break;
+            case WorldManager.HARD:
+                diffDesc = "- 150% entity health\n- Slimes spawn any time\n- 10 enemy cap\n- 150% hunger speed\n- Enemies move faster\n- 125% damage taken\n- The caves are pitch-black";
+                break;
+            case WorldManager.V_HARD:
+                diffDesc = "- 200% entity health\n- Slimes spawn any time\n- 20 enemy cap\n- 200% hunger speed\n- Enemies move even faster\n- 150% damage taken\n- The caves and night are pitch-black";
+                break;
+            }
+            g.setFont(new Font(GameData.getFont(), Font.PLAIN, 20));
+            TextBox.draw(diffDesc, g, Trident.getFrameWidth() / 2, 270, TextBox.CENTER, TextBox.NOMAXWIDTH, ((worldDiff == WorldManager.V_HARD) ? 2 : 0));
         }
         for(TitleButton b: buttons[screen]){
             b.render(g);
@@ -516,7 +613,9 @@ public class TitleScreen extends TridEntity {
             case 0:
                 screen = 1;
                 if(WorldManager.getWorlds().size() == 0){
-                    makeWorld();
+                    screen = 6;
+                    worldName = "";
+                    worldDiff = WorldManager.defaultDiff;
                 }
                 break;
             case 1:
@@ -552,7 +651,9 @@ public class TitleScreen extends TridEntity {
                 WorldManager.loadWorld(WorldManager.getWorlds().get(worldSel));
                 break;
             case 3:
-                makeWorld();
+                screen = 6;
+                worldName = "";
+                worldDiff = WorldManager.defaultDiff;
                 break;
             case 4:
                 int sel = JOptionPane.showConfirmDialog(null, "You are about to delete the world '" + WorldManager.getWorlds().get(worldSel) + "', are you sure? The world will be deleted forever, and that's a pretty long time!", "Delete World?", JOptionPane.YES_NO_OPTION);
@@ -608,6 +709,10 @@ public class TitleScreen extends TridEntity {
                 updateButtonText();
                 break;
             case 9:
+                Settings.dmgInd = !Settings.dmgInd;
+                updateButtonText();
+                break;
+            case 10:
                 screen = 4;
                 break;
             }
@@ -650,6 +755,26 @@ public class TitleScreen extends TridEntity {
                 screen = 0;
                 break;
             }
+        }else if(screen == 6){
+            switch(button){
+            case 0:
+                screen = 1;
+                if(WorldManager.getWorlds().size() == 0){
+                    screen = 0;
+                }
+                break;
+            case 1:
+                makeWorld();
+                break;
+            case 2:
+                worldDiff--;
+                if(worldDiff < WorldManager.V_EASY) worldDiff = WorldManager.V_EASY;
+                break;
+            case 3:
+                worldDiff++;
+                if(worldDiff > WorldManager.V_HARD) worldDiff = WorldManager.V_HARD;
+                break;
+            }
         }
     }
     private void setKeybind(int keybind){
@@ -658,26 +783,12 @@ public class TitleScreen extends TridEntity {
     }
 
     public void makeWorld(){
-        String input = JOptionPane.showInputDialog(null, "Enter the name for your world", "New World", JOptionPane.QUESTION_MESSAGE);
-        if(input == null || input.length() == 0){
-            screen = 0;
-            return;
-        }
-        char[] ILLEGAL_CHARACTERS = { '/', '\n', '\r', '\t', '\0', '\f', '`', '?', '*', '\\', '<', '>', '|', '\"', ':' };
-        for(int i = 0; i < input.length(); i++){
-            for(int j = 0; j < ILLEGAL_CHARACTERS.length; j++){
-                if(input.charAt(i) == ILLEGAL_CHARACTERS[j]){
-                    JOptionPane.showMessageDialog(null, "The world name '" + input + "' is invalid!", "ERROR", JOptionPane.ERROR_MESSAGE);
-                    screen = 0;
-                    return;
-                }
-            }
-        }
+        if(worldName.length() == 0) return;
         
         Trident.resetKeys();
         Trident.setupScenes(); // make sure any previous sessions are removed
         Trident.loadScene("world");
-        WorldManager.newWorld(input);
+        WorldManager.newWorld(worldName, worldDiff);
         
     }
 }

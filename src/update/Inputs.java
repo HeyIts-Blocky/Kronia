@@ -14,6 +14,31 @@ public class Inputs {
             Settings.keybinds[GameData.keybindSel] = key;
             TitleScreen.updateButtonText();
         }
+        if(Trident.getCurrentScene().name.equals("title")){
+            // world name
+            if(TitleScreen.worldName.length() < 20){
+                if(key >= KeyEvent.VK_A && key <= KeyEvent.VK_Z){
+                    char c = KeyEvent.getKeyText(key).charAt(0);
+                    if(!Trident.getKeyDown(KeyEvent.VK_SHIFT)){
+                        c = Character.toLowerCase(c);
+                    }
+                    TitleScreen.worldName += c;
+                }
+                if(key >= KeyEvent.VK_0 && key <= KeyEvent.VK_9){
+                    char c = KeyEvent.getKeyText(key).charAt(0);
+                    TitleScreen.worldName += c;
+                }
+                if(key == KeyEvent.VK_SPACE){
+                    TitleScreen.worldName += " ";
+                }
+                if(key == KeyEvent.VK_MINUS){
+                    TitleScreen.worldName += "-";
+                }
+            }
+            if(key == KeyEvent.VK_BACK_SPACE){
+                if(TitleScreen.worldName.length() > 0) TitleScreen.worldName = TitleScreen.worldName.substring(0, TitleScreen.worldName.length() - 1);
+            }
+        }
         if(Trident.getCurrentScene().name.equals("world") || (Trident.getCurrentScene().name.equals("tutorial") && GameData.tutorialTriggers[0])){
             if(GameData.spectate) return;
             // in world
@@ -362,6 +387,7 @@ public class Inputs {
                 }
             }
         }
+        
     }
 
     public static void onScroll(int scroll){
@@ -378,5 +404,6 @@ public class Inputs {
             }
             
         }
+        
     }
 }

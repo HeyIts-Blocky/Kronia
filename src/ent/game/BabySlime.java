@@ -52,6 +52,18 @@ public class BabySlime extends GameObject {
         position.y = BTools.clamp(position.y, 10, 10000 - 10);
         img.update(elapsedTime);
         if(moveTime < 1000) img.update(elapsedTime); // speed up if about to move
+
+        // difficulty modifier
+        if(WorldManager.difficulty == WorldManager.V_EASY){
+            elapsedTime *= 0.8;
+        }
+        if(WorldManager.difficulty == WorldManager.HARD){
+            elapsedTime *= 1.3;
+        }
+        if(WorldManager.difficulty == WorldManager.V_HARD){
+            elapsedTime *= 1.5;
+        }
+
         if(targetPos == null){
             // no target
             moveTime -= elapsedTime;

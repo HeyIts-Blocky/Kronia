@@ -18,6 +18,9 @@ public class WorldManager {
     public static int enemyCap = 3;
 
     public static String worldName = "";
+    public static int difficulty = 2;
+    public static final int V_EASY = 0, EASY = 1, NORMAL = 2, HARD = 3, V_HARD = 4;
+    public static int defaultDiff = NORMAL;
 
     public static void checkWorld(long elapsedTime){
         if(Trident.getCurrentScene().name.equals("tutorial")) return;
@@ -26,8 +29,25 @@ public class WorldManager {
             spawnEnt();
             spawnTimer = spawnTime;
         }
+        boolean spawnEnemies = true;
+        if(WorldManager.difficulty <= WorldManager.EASY && GameData.getDarkness() <= 0.5) spawnEnemies = false; 
         if(enemyTimer < enemyTime) enemyTimer += elapsedTime;
-        if(enemyTimer >= enemyTime && numEnemies() < 3){
+        int enemyCap = 3;
+        switch(WorldManager.difficulty){
+        case WorldManager.V_EASY:
+            enemyCap = 1;
+            break;
+        case WorldManager.EASY:
+            enemyCap = 2;
+            break;
+        case WorldManager.HARD:
+            enemyCap = 10;
+            break;
+        case WorldManager.V_HARD:
+            enemyCap = 20;
+            break;
+        }
+        if(enemyTimer >= enemyTime && numEnemies() < enemyCap){
             enemyTimer = 0;
             // spawn an enemy
             int ang = BTools.randInt(0, 360);
@@ -64,6 +84,9 @@ public class WorldManager {
     public static int numEnemies(){
         int[] enemies = {
             GameObject.SLIME,
+            GameObject.CAVESLIME,
+            GameObject.MOLE,
+            GameObject.BABYSLIME,
         };
 
         int num = 0;
@@ -83,9 +106,10 @@ public class WorldManager {
         return num;
     }
     
-    public static void newWorld(String name){
+    public static void newWorld(String name, int diff){
         worldName = name;
         GameData.clearInventory();
+        difficulty = diff;
         for(int i = 0; i < DEFAULT_ENTITIES; i++){
             spawnEnt();
         }
@@ -170,6 +194,7 @@ public class WorldManager {
             writer.println("long hungerTime " + GameData.hungerTime);
             writer.println("long time " + GameData.time);
             writer.println("int dimension " + Background.bg);
+            writer.println("int difficulty " + difficulty);
             writer.println("{ entities");
             for(int i = 0; i < Trident.getEntities().size(); i++){
                 TridEntity e = Trident.getEntities().get(i);
@@ -205,8 +230,7 @@ public class WorldManager {
             writer.println("}");
             writer.close();
         }catch(Exception e){
-            Trident.printConsole("Something went wrong while saving world!");
-            e.printStackTrace();
+            Trident.printException("Something went wrong while saving world!", e);
             Trident.loadScene("title");
         }
     }
@@ -218,6 +242,12 @@ public class WorldManager {
         GameData.clearInventory();
         try{
             ArrayList<BSonObject> objects = BSonParser.readFile("data/worlds/" + worldName + ".bson");
+            try{
+                BSonObject obj = BSonParser.getObject("difficulty", objects);
+                difficulty = obj.getInt();
+            }catch(Exception e){
+                Trident.printExceptionSilent("Error loading difficulty. Likely an old save.", e);
+            }
             BSonObject obj = BSonParser.getObject("entities", objects);
             BSonList asList = (BSonList)obj;
             for(int i = 0; i < asList.list.size(); i++){
@@ -281,12 +311,10 @@ public class WorldManager {
                     GameData.effects.add(new Effect(id, time, maxTime, coolTimer, cooldown));
                 }
             }catch(Exception e){
-                Trident.printConsole("Error loading effects. Likely an old save.");
-                e.printStackTrace();
+                Trident.printExceptionSilent("Error loading effects. Likely an old save.", e);
             }
         }catch(Exception e){
-            Trident.printConsole("Something went wrong while loading world!");
-            e.printStackTrace();
+            Trident.printException("Error while loading world!", e);
             Trident.loadScene("title");
         }
     }

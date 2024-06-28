@@ -79,8 +79,11 @@ public class Update {
                 GameData.rotateItem = false;
             }
 
+            if(WorldManager.difficulty == WorldManager.V_HARD) GameData.maxDarkness = 1;
+            else GameData.maxDarkness = 0.9;
+
             if(Background.bg == Background.SURFACE) Trident.setDefaultLight(BTools.flip((int)(GameData.getDarkness() * 255), 255));
-            if(Background.bg == Background.MINES) Trident.setDefaultLight(25);
+            if(Background.bg == Background.MINES) Trident.setDefaultLight((WorldManager.difficulty >= WorldManager.HARD) ? 0 : 25);
             GameData.time += elapsedTime;
             if(GameData.time > GameData.maxTime || Trident.getCurrentScene().name.equals("tutorial")) GameData.time = 0;
 
@@ -106,9 +109,10 @@ public class Update {
                         if(go.weakness != Item.T_NULL && (go.weakness == GameData.getSelItem().getType() || (go.weakness == Item.T_SWORD && (GameData.getSelItem().getType() == Item.T_PICK || GameData.getSelItem().getType() == Item.T_AXE)))){
                             double dir = BTools.getAngle(Trident.getPlrPos(), e.position);
                             double angDist = Math.abs(BTools.angleDiffRad(GameData.atkDir, dir));
-                            if((angDist < Math.toRadians(90) && BTools.getDistance(Trident.getPlrPos(), e.position) < 64) || BTools.getDistance(Trident.getPlrPos(), e.position) < 16){
+                            if((angDist < Math.toRadians(90) && BTools.getDistance(Trident.getPlrPos(), e.position) < 80) || BTools.getDistance(Trident.getPlrPos(), e.position) < 32){
                                 int dmg = GameData.getSelItem().getData()[0];
                                 if(go.weakness == Item.T_SWORD && GameData.getSelItem().getType() != Item.T_SWORD) dmg /= 2;
+                                if(GameData.hasEffect(Effect.STRENGTH) && go.weakness == Item.T_SWORD) dmg *= 2;
                                 go.damage(dmg);
                             }
                             
@@ -134,93 +138,98 @@ public class Update {
                     GameData.hungerSpeed += 0.05;
         
                     // Can be used?
-                    if(GameData.getSelItem().getType() == Item.T_PLACEABLE && BTools.getDistance(Trident.getPlrPos(), Trident.mouseWorldPos) < 128){
-                        GameObject obj = GameObject.placeObj(Trident.mouseWorldPos, GameData.getSelItem().getData()[0], new int[]{(GameData.rotateItem ? 1 : 0)});
-                        if(!obj.getCollision().intersects(Trident.getPlr().getCollision())){
-                            for(Rectangle r: Trident.getCollision()){
-                                if(r.intersects(obj.getCollision())) return;
-                            }
-                            GameData.getSelItem().amount--;
-                            Trident.spawnEntity(obj);
-                        }
-                        GameData.hungerSpeed += 0.05;
-                    }
-                    if(GameData.getSelItem().getType() == Item.T_CONSUMABLE && GameData.hunger < GameData.maxHunger){
-                        if(!(Trident.getCurrentScene().name.equals("tutorial") && GameData.getSelItem().id == Item.RAWMEAT)){
-                            GameData.getSelItem().amount--;
-                            int[] data = GameData.getSelItem().getData();
-                            GameData.hunger += data[0];
-                            if(data.length >= 3){
-                                GameData.health += data[2];
-                            }
-                            if(data.length >= 4){
-                                if(data[3] != Effect.NONE){
-                                    if(data.length >= 5) GameData.addEffect(new Effect(data[3], data[4] * 100));
-                                    else GameData.addEffect(new Effect(data[3]));
+                    try{
+                        if(GameData.getSelItem().getType() == Item.T_PLACEABLE && BTools.getDistance(Trident.getPlrPos(), Trident.mouseWorldPos) < 128){
+                            GameObject obj = GameObject.placeObj(Trident.mouseWorldPos, GameData.getSelItem().getData()[0], new int[]{(GameData.rotateItem ? 1 : 0)});
+                            if(!obj.getCollision().intersects(Trident.getPlr().getCollision())){
+                                for(Rectangle r: Trident.getCollision()){
+                                    if(r.intersects(obj.getCollision())) return;
                                 }
-                                
+                                GameData.getSelItem().amount--;
+                                Trident.spawnEntity(obj);
                             }
-                            if(GameData.hunger >= GameData.maxHunger){
-                                GameData.hunger = GameData.maxHunger;
-                            }
-                            GameData.hungerSpeed = 0;
-        
-                            if(Trident.getCurrentScene().name.equals("tutorial")){
-                                for(int i = 0; i < Trident.getEntities().size(); i++){
-                                    TridEntity e = Trident.getEntities().get(i);
-                                    if(e instanceof TutorialBlock && ((TutorialBlock)e).id == 0){
-                                        Trident.destroy(e);
-                                        break;
+                            GameData.hungerSpeed += 0.05;
+                        }
+                        if(GameData.getSelItem().getType() == Item.T_CONSUMABLE && GameData.hunger < GameData.maxHunger){
+                            if(!(Trident.getCurrentScene().name.equals("tutorial") && GameData.getSelItem().id == Item.RAWMEAT)){
+                                GameData.getSelItem().amount--;
+                                int[] data = GameData.getSelItem().getData();
+                                GameData.hunger += data[0];
+                                if(data.length >= 3){
+                                    GameData.health += data[2];
+                                }
+                                if(data.length >= 4){
+                                    if(data[3] != Effect.NONE){
+                                        if(data.length >= 5) GameData.addEffect(new Effect(data[3], data[4] * 100));
+                                        else GameData.addEffect(new Effect(data[3]));
+                                    }
+                                    
+                                }
+                                if(GameData.hunger >= GameData.maxHunger){
+                                    GameData.hunger = GameData.maxHunger;
+                                }
+                                GameData.hungerSpeed = 0;
+            
+                                if(Trident.getCurrentScene().name.equals("tutorial")){
+                                    for(int i = 0; i < Trident.getEntities().size(); i++){
+                                        TridEntity e = Trident.getEntities().get(i);
+                                        if(e instanceof TutorialBlock && ((TutorialBlock)e).id == 0){
+                                            Trident.destroy(e);
+                                            break;
+                                        }
                                     }
                                 }
                             }
+                            
                         }
-                        
-                    }
-                    if(GameData.getSelItem().getType() == Item.T_BOSS_SPAWN && !Boss.hasBoss() && Boss.canSpawn(GameData.getSelItem().getData()[0])){
-                        GameData.getSelItem().amount--;
-                        int ang = BTools.randInt(0, 360);
-                        double dir = Math.toRadians(ang);
-                        Position pos = BTools.angleToVector(dir);
-                        pos.x *= 800;
-                        pos.y *= 800;
-                        pos.x += Trident.getPlrPos().x;
-                        pos.y += Trident.getPlrPos().y;
-                        Trident.spawnEntity(GameObject.placeObj(pos, GameData.getSelItem().getData()[0], null));
-                        Settings.playSound("data/sound/bossSpawn.wav");
-                        if(Settings.camShake) Trident.shakeCam(1);
-                    }
-                    if(GameData.getSelItem().getType() == Item.T_RANGED){
-                        int ammoType = GameData.getSelItem().getData()[0];
-                        int slot = -1;
-                        for(int i = 0; i < GameData.inventory.length; i++){
-                            Item item = GameData.inventory[i];
-                            if(item.getType() == Item.T_AMMO && item.getData()[0] == ammoType){
-                                // found it!
-                                slot = i;
-                                break;
+                        if(GameData.getSelItem().getType() == Item.T_BOSS_SPAWN && !Boss.hasBoss() && Boss.canSpawn(GameData.getSelItem().getData()[0])){
+                            GameData.getSelItem().amount--;
+                            int ang = BTools.randInt(0, 360);
+                            double dir = Math.toRadians(ang);
+                            Position pos = BTools.angleToVector(dir);
+                            pos.x *= 800;
+                            pos.y *= 800;
+                            pos.x += Trident.getPlrPos().x;
+                            pos.y += Trident.getPlrPos().y;
+                            Trident.spawnEntity(GameObject.placeObj(pos, GameData.getSelItem().getData()[0], null));
+                            Settings.playSound("data/sound/bossSpawn.wav");
+                            if(Settings.camShake) Trident.shakeCam(1);
+                        }
+                        if(GameData.getSelItem().getType() == Item.T_RANGED){
+                            int ammoType = GameData.getSelItem().getData()[0];
+                            int slot = -1;
+                            for(int i = 0; i < GameData.inventory.length; i++){
+                                Item item = GameData.inventory[i];
+                                if(item.getType() == Item.T_AMMO && item.getData()[0] == ammoType){
+                                    // found it!
+                                    slot = i;
+                                    break;
+                                }
+                            }
+                            if(slot != -1){
+                                GameData.inventory[slot].amount--;
+                                Item item = GameData.inventory[slot];
+                                int ang = (int)(Math.toDegrees(GameData.atkDir) * 10);
+                                Trident.spawnEntity(new Projectile(Trident.getPlrPos(), new int[]{ang, item.id, item.getData()[2], item.getData()[3]}));
                             }
                         }
-                        if(slot != -1){
-                            GameData.inventory[slot].amount--;
-                            Item item = GameData.inventory[slot];
-                            int ang = (int)(Math.toDegrees(GameData.atkDir) * 10);
-                            Trident.spawnEntity(new Projectile(Trident.getPlrPos(), new int[]{ang, item.id, item.getData()[2], item.getData()[3]}));
+                        if(GameData.getSelItem().getType() == Item.T_TRIGGER){
+                            trigger(GameData.getSelItem().getData()[0]);
                         }
-                    }
-                    if(GameData.getSelItem().getType() == Item.T_TRIGGER){
-                        trigger(GameData.getSelItem().getData()[0]);
-                    }
-                    if(GameData.getSelItem().getType() == Item.T_EFFECT){
-                        GameData.getSelItem().amount--;
-                        int id = GameData.getSelItem().getData()[0];
-                        long length = -1;
-                        if(GameData.getSelItem().getData().length >= 3){
-                            length = GameData.getSelItem().getData()[2] * 100;
+                        if(GameData.getSelItem().getType() == Item.T_EFFECT){
+                            GameData.getSelItem().amount--;
+                            int id = GameData.getSelItem().getData()[0];
+                            long length = -1;
+                            if(GameData.getSelItem().getData().length >= 3){
+                                length = GameData.getSelItem().getData()[2] * 100;
+                            }
+                            if(length == -1) GameData.addEffect(new Effect(id));
+                            else GameData.addEffect(new Effect(id, length));
                         }
-                        if(length == -1) GameData.addEffect(new Effect(id));
-                        else GameData.addEffect(new Effect(id, length));
+                    }catch(Exception e){
+                        Trident.printException("Problem while using item!", e);
                     }
+                    
                     
                 }
             }
@@ -371,11 +380,26 @@ public class Update {
                 }
             }
 
-            GameData.hungerTimer += (long)(elapsedTime * GameData.hungerSpeed);
+            double hungerMult = 1;
+            switch(WorldManager.difficulty){
+            case WorldManager.V_EASY:
+                hungerMult = 0.5;
+                break;
+            case WorldManager.EASY:
+                hungerMult = 0.75;
+                break;
+            case WorldManager.HARD:
+                hungerMult = 1.5;
+                break;
+            case WorldManager.V_HARD:
+                hungerMult = 2;
+                break;
+            }
+            GameData.hungerTimer += (long)(elapsedTime * GameData.hungerSpeed * hungerMult);
             if(GameData.hungerTimer >= GameData.hungerTime){
                 GameData.hungerTimer = 0;
                 GameData.hunger--;
-                if(GameData.hunger <= 0){
+                if(GameData.hunger <= 0 && WorldManager.difficulty != WorldManager.V_EASY){
                     GameData.damage(5);
                 }
             }
@@ -435,6 +459,10 @@ public class Update {
             GameData.getSelItem().amount--;
             Background.changeBackground(Background.SURFACE);
         }
+        if(id == 3 && GameData.health < GameData.maxHealth){
+            GameData.getSelItem().amount--;
+            GameData.health = Math.min(GameData.maxHealth, GameData.health + 10);
+        }
     }
 
     public static int command(ArrayList<String> cmdParts){ // cmdParts.get(0) is the command, while the rest are arguments for the command.
@@ -446,7 +474,7 @@ public class Update {
             Trident.printConsole("pong");
             return 0;
         case "newWorld":
-            WorldManager.newWorld(cmdParts.get(1));
+            WorldManager.newWorld(cmdParts.get(1), WorldManager.defaultDiff);
             return 0;
         case "loadWorld":
             WorldManager.loadWorld(cmdParts.get(1));
@@ -513,6 +541,79 @@ public class Update {
         case "song":
             Trident.printConsole("The current song is called \"" + MusicManager.lastName + "\"");
             return 0;
+        case "difficulty":
+            if(cmdParts.size() == 1){
+                String diff = "UNKNOWN";
+                switch(WorldManager.difficulty){
+                case WorldManager.V_EASY:
+                    diff = "veasy";
+                    break;
+                case WorldManager.EASY:
+                    diff = "easy";
+                    break;
+                case WorldManager.NORMAL:
+                    diff = "normal";
+                    break;
+                case WorldManager.HARD:
+                    diff = "hard";
+                    break;
+                case WorldManager.V_HARD:
+                    diff = "vhard";
+                    break;
+                }
+
+                Trident.printConsole("Current difficulty: " + diff);
+            }else{
+                if(cmdParts.get(1).equals("veasy")) WorldManager.difficulty = WorldManager.V_EASY;
+                else if(cmdParts.get(1).equals("easy")) WorldManager.difficulty = WorldManager.EASY;
+                else if(cmdParts.get(1).equals("normal")) WorldManager.difficulty = WorldManager.NORMAL;
+                else if(cmdParts.get(1).equals("hard")) WorldManager.difficulty = WorldManager.HARD;
+                else if(cmdParts.get(1).equals("vhard")) WorldManager.difficulty = WorldManager.V_HARD;
+                else{
+                    Trident.printConsole("Unknown Difficulty: " + cmdParts.get(1));
+                    return 0;
+                }
+                Trident.printConsole("Set difficulty to " + cmdParts.get(1));
+            }
+            return 0;
+        case "defaultDiff":
+            if(cmdParts.size() == 1){
+                String diff = "UNKNOWN";
+                switch(WorldManager.defaultDiff){
+                case WorldManager.V_EASY:
+                    diff = "veasy";
+                    break;
+                case WorldManager.EASY:
+                    diff = "easy";
+                    break;
+                case WorldManager.NORMAL:
+                    diff = "normal";
+                    break;
+                case WorldManager.HARD:
+                    diff = "hard";
+                    break;
+                case WorldManager.V_HARD:
+                    diff = "vhard";
+                    break;
+                }
+
+                Trident.printConsole("Current default difficulty: " + diff);
+            }else{
+                if(cmdParts.get(1).equals("veasy")) WorldManager.defaultDiff = WorldManager.V_EASY;
+                else if(cmdParts.get(1).equals("easy")) WorldManager.defaultDiff = WorldManager.EASY;
+                else if(cmdParts.get(1).equals("normal")) WorldManager.defaultDiff = WorldManager.NORMAL;
+                else if(cmdParts.get(1).equals("hard")) WorldManager.defaultDiff = WorldManager.HARD;
+                else if(cmdParts.get(1).equals("vhard")) WorldManager.defaultDiff = WorldManager.V_HARD;
+                else{
+                    Trident.printConsole("Unknown Difficulty: " + cmdParts.get(1));
+                    return 0;
+                }
+                Trident.printConsole("Set default difficulty to " + cmdParts.get(1));
+            }
+            return 0;
+        case "toggleHud":
+            GameData.drawHud = !GameData.drawHud;
+            return 0;
         }
         return 1; // return 1 if command is not recognized
     }
@@ -531,6 +632,9 @@ public class Update {
         "song",
         "itemList [page]",
         "searchItem <name>",
+        "difficulty [veasy/easy/normal/hard/vhard]",
+        "defaultDiff [veasy/easy/normal/hard/vhard]",
+        "toggleHud",
     };
 
     public static void printItems(int page){

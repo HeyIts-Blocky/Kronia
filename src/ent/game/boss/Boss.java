@@ -64,6 +64,18 @@ public class Boss extends GameObject {
         }
         position.x = BTools.clamp(position.x, 10, 10000 - 10);
         position.y = BTools.clamp(position.y, 10, 10000 - 10);
+
+        // difficulty modifier
+        if(WorldManager.difficulty == WorldManager.V_EASY){
+            elapsedTime *= 0.8;
+        }
+        if(WorldManager.difficulty == WorldManager.HARD){
+            elapsedTime *= 1.3;
+        }
+        if(WorldManager.difficulty == WorldManager.V_HARD){
+            elapsedTime *= 1.5;
+        }
+
         if(targetPos == null){
             // no target
             moveTime -= elapsedTime;
@@ -93,7 +105,25 @@ public class Boss extends GameObject {
                         GameObject go = (GameObject)e;
                         if(i == go.id) canDamage = false;
                     }
-                    if(canDamage) ((GameObject)e).damage(damage);
+                    if(canDamage){
+                        GameObject dmgObj = (GameObject)e;
+                        double dmgMult = 1;
+                        switch(WorldManager.difficulty){
+                        case WorldManager.V_EASY:
+                            dmgMult = 0.5;
+                            break;
+                        case WorldManager.EASY:
+                            dmgMult = 0.75;
+                            break;
+                        case WorldManager.HARD:
+                            dmgMult = 1.5;
+                            break;
+                        case WorldManager.V_HARD:
+                            dmgMult = 2;
+                            break;
+                        }
+                        dmgObj.damage((int)(damage * dmgMult));
+                    }
                 }
             }
 

@@ -450,6 +450,10 @@ public class Trident {
         printConsole(text);
         printConsole("Error type: " + e.getClass().getName());
     }
+    public static void printExceptionSilent(String text, Exception e){
+        printConsole(text);
+        printConsole("Error type: " + e.getClass().getName());
+    }
     private static String[] cmds = {
         "credits",
         "drawCollision [0/1, false/true]",

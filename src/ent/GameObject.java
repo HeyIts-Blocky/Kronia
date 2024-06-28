@@ -17,6 +17,22 @@ public class GameObject extends TridEntity {
     // Constructor, runs when the entity is created
     public GameObject(Position pos, int hp, int id, Dimension coll){
         super(pos, coll);
+        double hpMult = 1;
+        switch(WorldManager.difficulty){
+        case WorldManager.V_EASY:
+            hpMult = 0.5;
+            break;
+        case WorldManager.EASY:
+            hpMult = 0.75;
+            break;
+        case WorldManager.HARD:
+            hpMult = 1.5;
+            break;
+        case WorldManager.V_HARD:
+            hpMult = 2;
+            break;
+        }
+        hp = (int)(hp * hpMult);
         maxHealth = hp;
         health = hp;
         this.id = id;
@@ -24,6 +40,22 @@ public class GameObject extends TridEntity {
     }
     public GameObject(Position pos, int hp, int id, int maxHP, Dimension coll){
         super(pos, coll);
+        double hpMult = 1;
+        switch(WorldManager.difficulty){
+        case WorldManager.V_EASY:
+            hpMult = 0.5;
+            break;
+        case WorldManager.EASY:
+            hpMult = 0.75;
+            break;
+        case WorldManager.HARD:
+            hpMult = 1.5;
+            break;
+        case WorldManager.V_HARD:
+            hpMult = 2;
+            break;
+        }
+        maxHP *= hpMult;
         maxHealth = maxHP;
         health = hp;
         this.id = id;
@@ -31,6 +63,22 @@ public class GameObject extends TridEntity {
     }
     public GameObject(Position pos, int hp, int id, int[] dat, Dimension coll){
         super(pos, coll);
+        double hpMult = 1;
+        switch(WorldManager.difficulty){
+        case WorldManager.V_EASY:
+            hpMult = 0.5;
+            break;
+        case WorldManager.EASY:
+            hpMult = 0.75;
+            break;
+        case WorldManager.HARD:
+            hpMult = 1.5;
+            break;
+        case WorldManager.V_HARD:
+            hpMult = 2;
+            break;
+        }
+        hp *= hpMult;
         maxHealth = hp;
         health = hp;
         this.id = id;
@@ -38,6 +86,22 @@ public class GameObject extends TridEntity {
     }
     public GameObject(Position pos, int hp, int id, int maxHP, int[] dat, Dimension coll){
         super(pos, coll);
+        double hpMult = 1;
+        switch(WorldManager.difficulty){
+        case WorldManager.V_EASY:
+            hpMult = 0.5;
+            break;
+        case WorldManager.EASY:
+            hpMult = 0.75;
+            break;
+        case WorldManager.HARD:
+            hpMult = 1.5;
+            break;
+        case WorldManager.V_HARD:
+            hpMult = 2;
+            break;
+        }
+        maxHP *= hpMult;
         maxHealth = maxHP;
         health = hp;
         this.id = id;

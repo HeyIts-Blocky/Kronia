@@ -1,8 +1,10 @@
 package ent.game.boss;
 
 import blib.util.*;
+import custom.Achievement;
 import custom.Item;
 import custom.Settings;
+import custom.WorldManager;
 import ent.*;
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +23,6 @@ public class ApexSlime extends Boss{
         minMoveTime = 1500;
         maxMoveTime = 3000;
         range = 200;
-
         projectileHit = new Rectangle(-64, -92, 128, 100);
     }
 
@@ -31,12 +32,18 @@ public class ApexSlime extends Boss{
     }
 
     public void tookDamage(int amount){
+        super.tookDamage(amount);
         int chance = BTools.randInt(0, 4);
         if(chance == 0){
             Position pos = position.copy();
             pos.x += BTools.randInt(0, 300) - 150;
             pos.y += BTools.randInt(0, 300) - 150;
             Trident.spawnEntity(new BabySlime(pos));
+        }
+
+        if(health <= 0){
+            Achievement.get(Achievement.APEXSLIME);
+            if(WorldManager.difficulty == WorldManager.V_HARD) Achievement.get(Achievement.APEXVHARD);
         }
     }
 

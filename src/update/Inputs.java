@@ -153,6 +153,7 @@ public class Inputs {
                     }
                     if(slot == 41){
                         WorldManager.saveWorld();
+                        HUD.addNotif("Game saved.", HUD.NOTIF_SAVE);
                         Trident.resetKeys();
                         GameData.invOpen = false;
                         return;

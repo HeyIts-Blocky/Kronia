@@ -64,6 +64,8 @@ public class MusicManager {
                             currentSong = caveSongs[selSong].play();
                             lastName = caveSongs[selSong].name;
                         }
+
+                        HUD.addNotif(lastName, HUD.NOTIF_MUSIC);
                     }
                     
                 }

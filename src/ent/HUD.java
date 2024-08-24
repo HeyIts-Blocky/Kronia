@@ -25,6 +25,15 @@ public class HUD extends TridEntity {
     private static String notifText = "";
     private static Animator notifAnim;
     private static Position notifPos = new Position();
+    private static ImageIcon[] notifImgs = {
+            new ImageIcon("data/images/notif/save.png"),
+            new ImageIcon("data/images/notif/autosave.png"),
+            new ImageIcon("data/images/notif/exc mark.png"),
+            new ImageIcon("data/images/notif/hint.png"),
+            new ImageIcon("data/images/notif/music.png"),
+            new ImageIcon("data/images/notif/trophy.png"),
+    };
+    private static ArrayList<Notif> notifs = new ArrayList<Notif>();
 
     // Constructor, runs when the entity is created
     public HUD(Position pos){
@@ -45,10 +54,15 @@ public class HUD extends TridEntity {
             anims.add(new Animation("data/animations/notifHidden"));
 
             notifAnim = new Animator(notifPos, anims);
+            notifAnim.play("notifHidden");
         }catch(Exception e){
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error loading notif animation", "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(1);
+        }
+
+        for(ImageIcon i: notifImgs){
+            BTools.resizeImgIcon(i, 16, 16);
         }
 
         // set up masks
@@ -434,11 +448,28 @@ public class HUD extends TridEntity {
                 TextBox.draw("Welcome to Kronia!\n\nYou have been given an axe.\nClick to chop trees when the axe is selected.\nPress [TAB] to open the inventory to craft a pickaxe\nwhen close to the crafting table.\nScroll with the scroll wheel to select items", g, Trident.getFrameWidth() / 2, 10, TextBox.CENTER);
             }
         }
+
+        g.setFont(new Font(GameData.getFont(), Font.PLAIN, 16));
+        int txtWidth = g.getFontMetrics().stringWidth(notifText);
+        g.setColor(new Color(0f, 0f, 0f, (float)Math.max(notifPos.x / 2, 0)));
+        g.fillRect(Trident.getFrameWidth() - txtWidth - ((notifType == NOTIF_BLANK) ? 0 : 20), 0, txtWidth + 30, 20);
+        g.setColor(Color.white);
+        TextBox.draw(notifText, g, Trident.getFrameWidth() - ((notifType == NOTIF_BLANK) ? 0 : 20), -12 + (int)notifPos.y, TextBox.RIGHT);
+        if(notifType != NOTIF_BLANK){
+            notifImgs[notifType - 1].paintIcon(panel, g, Trident.getFrameWidth() - 16, -20 + (int)notifPos.y);
+        }
     }
 
     // Runs every tick while the game is running
     public void update(long elapsedTime){
-        
+        notifAnim.update(elapsedTime);
+
+        if(!notifAnim.isPlaying() && notifs.size() > 0){
+            notifAnim.play("notif");
+            notifText = notifs.get(0).text;
+            notifType = notifs.get(0).type;
+            notifs.remove(0);
+        }
     }
 
     // Runs at the beginning of the scene
@@ -465,7 +496,22 @@ public class HUD extends TridEntity {
 
 
     public static final int NOTIF_BLANK = 0, NOTIF_SAVE = 1, NOTIF_AUTOSAVE = 2, NOTIF_EXCMK = 3, NOTIF_QSTMK = 4, NOTIF_MUSIC = 5, NOTIF_TRPHY = 6;
-    public static void setNotif(String text, int type){
+    public static void addNotif(String text, int type){
+        if(type > 6) type = NOTIF_BLANK;
+        notifs.add(new Notif(text, type));
+    }
+    public static void clearNotif(){
+        notifAnim.play("notifHidden");
+        notifs = new ArrayList<Notif>();
+    }
 
+    private static class Notif {
+        public String text;
+        public int type;
+
+        public Notif(String t, int ty){
+            text = t;
+            type = ty;
+        }
     }
 }

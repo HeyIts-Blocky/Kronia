@@ -45,6 +45,8 @@ public class Update {
         GameData.inventory[9] = new Item(Item.WOOD, 999);
 
         Item.resizeImgs();
+        Achievement.resizeIcons();
+        Achievement.load();
 
         Trident.splash = new ImageIcon("data/images/intro.gif");
         Trident.drawPlayer = false;
@@ -152,6 +154,9 @@ public class Update {
                         }
                         if(GameData.getSelItem().getType() == Item.T_CONSUMABLE && GameData.hunger < GameData.maxHunger){
                             if(!(Trident.getCurrentScene().name.equals("tutorial") && GameData.getSelItem().id == Item.RAWMEAT)){
+                                if(GameData.getSelItem().id == Item.RAWMEAT){
+                                    Achievement.get(Achievement.RAWMEAT);
+                                }
                                 GameData.getSelItem().amount--;
                                 int[] data = GameData.getSelItem().getData();
                                 GameData.hunger += data[0];
@@ -467,153 +472,158 @@ public class Update {
 
     public static int command(ArrayList<String> cmdParts){ // cmdParts.get(0) is the command, while the rest are arguments for the command.
         switch(cmdParts.get(0)){
-        case "helloWorld":
-            Trident.printConsole("Hello, World!");
-            return 0;
-        case "ping":
-            Trident.printConsole("pong");
-            return 0;
-        case "newWorld":
-            WorldManager.newWorld(cmdParts.get(1), WorldManager.defaultDiff);
-            return 0;
-        case "loadWorld":
-            WorldManager.loadWorld(cmdParts.get(1));
-            return 0;
-        case "saveWorld":
-            WorldManager.saveWorld();
-            return 0;
-        case "clearInv":
-            GameData.clearInventory();
-            return 0;
-        case "give":
-            if(Integer.parseInt(cmdParts.get(1)) >= Item.names.length || Integer.parseInt(cmdParts.get(1)) < 1){
-                Trident.printConsole("Item ID " + Integer.parseInt(cmdParts.get(1)) + " is out of bounds!");
+            case "helloWorld":
+                Trident.printConsole("Hello, World!");
                 return 0;
-            }
-            GameData.addItem(new Item(Integer.parseInt(cmdParts.get(1)), Integer.parseInt(cmdParts.get(2))));
-            return 0;
-        case "fillMeWithWood":
-            while(GameData.canAdd(new Item(Item.WOOD, 999))){
-                GameData.addItem(new Item(Item.WOOD, 999));
-            }
-            return 0;
-        case "damage":
-            GameData.damage(Integer.parseInt(cmdParts.get(1)));
-            return 0;
-        case "setHealth":
-            GameData.health = Integer.parseInt(cmdParts.get(1));
-            return 0;
-        case "setTime":
-            GameData.time = Long.parseLong(cmdParts.get(1));
-            return 0;
-        case "itemList":
-            int p = 1;
-            if(cmdParts.size() > 1) p = Integer.parseInt(cmdParts.get(1));
-            printItems(p);
-            return 0;
-        case "searchItem":
-            if(cmdParts.size() > 1){
-                String search = cmdParts.get(1).toUpperCase();
-                ArrayList<Integer> results = new ArrayList<Integer>();
-                for(int i = 0; i < Item.names.length; i++){
-                    if(results.size() >= 10) break;
-                    String s = Item.names[i];
-                    if(s.toUpperCase().contains(search)){
-                        results.add(i);
-                    }
+            case "ping":
+                Trident.printConsole("pong");
+                return 0;
+            case "newWorld":
+                WorldManager.newWorld(cmdParts.get(1), WorldManager.defaultDiff);
+                return 0;
+            case "loadWorld":
+                WorldManager.loadWorld(cmdParts.get(1));
+                return 0;
+            case "saveWorld":
+                WorldManager.saveWorld();
+                return 0;
+            case "clearInv":
+                GameData.clearInventory();
+                return 0;
+            case "give":
+                if(Integer.parseInt(cmdParts.get(1)) >= Item.names.length || Integer.parseInt(cmdParts.get(1)) < 1){
+                    Trident.printConsole("Item ID " + Integer.parseInt(cmdParts.get(1)) + " is out of bounds!");
+                    return 0;
                 }
+                GameData.addItem(new Item(Integer.parseInt(cmdParts.get(1)), Integer.parseInt(cmdParts.get(2))));
+                return 0;
+            case "fillMeWithWood":
+                while(GameData.canAdd(new Item(Item.WOOD, 999))){
+                    GameData.addItem(new Item(Item.WOOD, 999));
+                }
+                return 0;
+            case "damage":
+                GameData.damage(Integer.parseInt(cmdParts.get(1)));
+                return 0;
+            case "setHealth":
+                GameData.health = Integer.parseInt(cmdParts.get(1));
+                return 0;
+            case "setTime":
+                GameData.time = Long.parseLong(cmdParts.get(1));
+                return 0;
+            case "itemList":
+                int p = 1;
+                if(cmdParts.size() > 1) p = Integer.parseInt(cmdParts.get(1));
+                printItems(p);
+                return 0;
+            case "searchItem":
+                if(cmdParts.size() > 1){
+                    String search = cmdParts.get(1).toUpperCase();
+                    ArrayList<Integer> results = new ArrayList<Integer>();
+                    for(int i = 0; i < Item.names.length; i++){
+                        if(results.size() >= 10) break;
+                        String s = Item.names[i];
+                        if(s.toUpperCase().contains(search)){
+                            results.add(i);
+                        }
+                    }
 
-                Trident.printConsole("Search results for: \"" + cmdParts.get(1) + "\"");
-                Trident.printConsole(" --- ");
-                Trident.printConsole("");
+                    Trident.printConsole("Search results for: \"" + cmdParts.get(1) + "\"");
+                    Trident.printConsole(" --- ");
+                    Trident.printConsole("");
 
-                if(results.size() == 0){
-                    Trident.printConsole(" -- NO RESULTS --");
+                    if(results.size() == 0){
+                        Trident.printConsole(" -- NO RESULTS --");
+                    }else{
+                        for(int i: results){
+                            Trident.printConsole("} " + Item.names[i] + " - " + i);
+                        }
+                    }
+
+                    Trident.printConsole("");
+                }
+                return 0;
+            case "song":
+                Trident.printConsole("The current song is called \"" + MusicManager.lastName + "\"");
+                return 0;
+            case "difficulty":
+                if(cmdParts.size() == 1){
+                    String diff = "UNKNOWN";
+                    switch(WorldManager.difficulty){
+                    case WorldManager.V_EASY:
+                        diff = "veasy";
+                        break;
+                    case WorldManager.EASY:
+                        diff = "easy";
+                        break;
+                    case WorldManager.NORMAL:
+                        diff = "normal";
+                        break;
+                    case WorldManager.HARD:
+                        diff = "hard";
+                        break;
+                    case WorldManager.V_HARD:
+                        diff = "vhard";
+                        break;
+                    }
+
+                    Trident.printConsole("Current difficulty: " + diff);
                 }else{
-                    for(int i: results){
-                        Trident.printConsole("} " + Item.names[i] + " - " + i);
+                    if(cmdParts.get(1).equals("veasy")) WorldManager.difficulty = WorldManager.V_EASY;
+                    else if(cmdParts.get(1).equals("easy")) WorldManager.difficulty = WorldManager.EASY;
+                    else if(cmdParts.get(1).equals("normal")) WorldManager.difficulty = WorldManager.NORMAL;
+                    else if(cmdParts.get(1).equals("hard")) WorldManager.difficulty = WorldManager.HARD;
+                    else if(cmdParts.get(1).equals("vhard")) WorldManager.difficulty = WorldManager.V_HARD;
+                    else{
+                        Trident.printConsole("Unknown Difficulty: " + cmdParts.get(1));
+                        return 0;
                     }
+                    Trident.printConsole("Set difficulty to " + cmdParts.get(1));
                 }
-                
-                Trident.printConsole("");
-            }
-            return 0;
-        case "song":
-            Trident.printConsole("The current song is called \"" + MusicManager.lastName + "\"");
-            return 0;
-        case "difficulty":
-            if(cmdParts.size() == 1){
-                String diff = "UNKNOWN";
-                switch(WorldManager.difficulty){
-                case WorldManager.V_EASY:
-                    diff = "veasy";
-                    break;
-                case WorldManager.EASY:
-                    diff = "easy";
-                    break;
-                case WorldManager.NORMAL:
-                    diff = "normal";
-                    break;
-                case WorldManager.HARD:
-                    diff = "hard";
-                    break;
-                case WorldManager.V_HARD:
-                    diff = "vhard";
-                    break;
-                }
+                return 0;
+            case "defaultDiff":
+                if(cmdParts.size() == 1){
+                    String diff = "UNKNOWN";
+                    switch(WorldManager.defaultDiff){
+                    case WorldManager.V_EASY:
+                        diff = "veasy";
+                        break;
+                    case WorldManager.EASY:
+                        diff = "easy";
+                        break;
+                    case WorldManager.NORMAL:
+                        diff = "normal";
+                        break;
+                    case WorldManager.HARD:
+                        diff = "hard";
+                        break;
+                    case WorldManager.V_HARD:
+                        diff = "vhard";
+                        break;
+                    }
 
-                Trident.printConsole("Current difficulty: " + diff);
-            }else{
-                if(cmdParts.get(1).equals("veasy")) WorldManager.difficulty = WorldManager.V_EASY;
-                else if(cmdParts.get(1).equals("easy")) WorldManager.difficulty = WorldManager.EASY;
-                else if(cmdParts.get(1).equals("normal")) WorldManager.difficulty = WorldManager.NORMAL;
-                else if(cmdParts.get(1).equals("hard")) WorldManager.difficulty = WorldManager.HARD;
-                else if(cmdParts.get(1).equals("vhard")) WorldManager.difficulty = WorldManager.V_HARD;
-                else{
-                    Trident.printConsole("Unknown Difficulty: " + cmdParts.get(1));
-                    return 0;
+                    Trident.printConsole("Current default difficulty: " + diff);
+                }else{
+                    if(cmdParts.get(1).equals("veasy")) WorldManager.defaultDiff = WorldManager.V_EASY;
+                    else if(cmdParts.get(1).equals("easy")) WorldManager.defaultDiff = WorldManager.EASY;
+                    else if(cmdParts.get(1).equals("normal")) WorldManager.defaultDiff = WorldManager.NORMAL;
+                    else if(cmdParts.get(1).equals("hard")) WorldManager.defaultDiff = WorldManager.HARD;
+                    else if(cmdParts.get(1).equals("vhard")) WorldManager.defaultDiff = WorldManager.V_HARD;
+                    else{
+                        Trident.printConsole("Unknown Difficulty: " + cmdParts.get(1));
+                        return 0;
+                    }
+                    Trident.printConsole("Set default difficulty to " + cmdParts.get(1));
                 }
-                Trident.printConsole("Set difficulty to " + cmdParts.get(1));
-            }
-            return 0;
-        case "defaultDiff":
-            if(cmdParts.size() == 1){
-                String diff = "UNKNOWN";
-                switch(WorldManager.defaultDiff){
-                case WorldManager.V_EASY:
-                    diff = "veasy";
-                    break;
-                case WorldManager.EASY:
-                    diff = "easy";
-                    break;
-                case WorldManager.NORMAL:
-                    diff = "normal";
-                    break;
-                case WorldManager.HARD:
-                    diff = "hard";
-                    break;
-                case WorldManager.V_HARD:
-                    diff = "vhard";
-                    break;
-                }
-
-                Trident.printConsole("Current default difficulty: " + diff);
-            }else{
-                if(cmdParts.get(1).equals("veasy")) WorldManager.defaultDiff = WorldManager.V_EASY;
-                else if(cmdParts.get(1).equals("easy")) WorldManager.defaultDiff = WorldManager.EASY;
-                else if(cmdParts.get(1).equals("normal")) WorldManager.defaultDiff = WorldManager.NORMAL;
-                else if(cmdParts.get(1).equals("hard")) WorldManager.defaultDiff = WorldManager.HARD;
-                else if(cmdParts.get(1).equals("vhard")) WorldManager.defaultDiff = WorldManager.V_HARD;
-                else{
-                    Trident.printConsole("Unknown Difficulty: " + cmdParts.get(1));
-                    return 0;
-                }
-                Trident.printConsole("Set default difficulty to " + cmdParts.get(1));
-            }
-            return 0;
-        case "toggleHud":
-            GameData.drawHud = !GameData.drawHud;
-            return 0;
+                return 0;
+            case "toggleHud":
+                GameData.drawHud = !GameData.drawHud;
+                return 0;
+            case "notifTest":
+                int type = Integer.parseInt(cmdParts.get(1));
+                HUD.addNotif("Test notification", type);
+                Trident.consoleOpen = false;
+                return 0;
         }
         return 1; // return 1 if command is not recognized
     }
@@ -635,6 +645,7 @@ public class Update {
         "difficulty [veasy/easy/normal/hard/vhard]",
         "defaultDiff [veasy/easy/normal/hard/vhard]",
         "toggleHud",
+        "notifTest <notifType>",
     };
 
     public static void printItems(int page){

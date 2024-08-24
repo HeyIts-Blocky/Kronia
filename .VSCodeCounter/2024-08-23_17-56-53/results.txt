@@ -1,0 +1,187 @@
+Date : 2024-08-23 17:56:53
+Directory : c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia
+Total : 131 files,  10334 codes, 278 comments, 894 blanks, all 11506 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Java     |        124 |     10,155 |        278 |        894 |     11,327 |
+| XML      |          7 |        179 |          0 |          0 |        179 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                                 | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                    |        131 |     10,334 |        278 |        894 |     11,506 |
+| . (Files)                                                                                                                            |          1 |         12 |          0 |          0 |         12 |
+| .idea                                                                                                                                |          6 |        167 |          0 |          0 |        167 |
+| .idea (Files)                                                                                                                        |          4 |        144 |          0 |          0 |        144 |
+| .idea\artifacts                                                                                                                      |          1 |         13 |          0 |          0 |         13 |
+| .idea\libraries                                                                                                                      |          1 |         10 |          0 |          0 |         10 |
+| out                                                                                                                                  |         64 |      3,246 |         29 |         16 |      3,291 |
+| out\production                                                                                                                       |         64 |      3,246 |         29 |         16 |      3,291 |
+| out\production\Kronia                                                                                                                |         64 |      3,246 |         29 |         16 |      3,291 |
+| out\production\Kronia\VERSION                                                                                                        |          1 |          6 |          0 |          0 |          6 |
+| out\production\Kronia\custom                                                                                                         |         10 |        597 |          0 |          2 |        599 |
+| out\production\Kronia\ent                                                                                                            |         36 |      1,582 |         28 |          9 |      1,619 |
+| out\production\Kronia\ent (Files)                                                                                                    |         12 |        769 |          0 |          9 |        778 |
+| out\production\Kronia\ent\game                                                                                                       |         24 |        813 |         28 |          0 |        841 |
+| out\production\Kronia\ent\game (Files)                                                                                               |         22 |        737 |         11 |          0 |        748 |
+| out\production\Kronia\ent\game\boss                                                                                                  |          2 |         76 |         17 |          0 |         93 |
+| out\production\Kronia\trident                                                                                                        |         15 |        711 |          1 |          0 |        712 |
+| out\production\Kronia\trident (Files)                                                                                                |          9 |        558 |          1 |          0 |        559 |
+| out\production\Kronia\trident\ent                                                                                                    |          6 |        153 |          0 |          0 |        153 |
+| out\production\Kronia\update                                                                                                         |          2 |        350 |          0 |          5 |        355 |
+| src                                                                                                                                  |         60 |      6,909 |        249 |        878 |      8,036 |
+| src\VERSION                                                                                                                          |          1 |          4 |          0 |          4 |          8 |
+| src\custom                                                                                                                           |          9 |      1,450 |         11 |        128 |      1,589 |
+| src\ent                                                                                                                              |         36 |      3,334 |        205 |        503 |      4,042 |
+| src\ent (Files)                                                                                                                      |         12 |      1,826 |         83 |        186 |      2,095 |
+| src\ent\game                                                                                                                         |         24 |      1,508 |        122 |        317 |      1,947 |
+| src\ent\game (Files)                                                                                                                 |         22 |      1,311 |        114 |        284 |      1,709 |
+| src\ent\game\boss                                                                                                                    |          2 |        197 |          8 |         33 |        238 |
+| src\trident                                                                                                                          |         12 |      1,149 |         17 |        164 |      1,330 |
+| src\trident (Files)                                                                                                                  |          6 |        980 |         17 |        120 |      1,117 |
+| src\trident\ent                                                                                                                      |          6 |        169 |          0 |         44 |        213 |
+| src\update                                                                                                                           |          2 |        972 |         16 |         79 |      1,067 |
++--------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                                             | language | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\.idea\artifacts\Kronia_jar.xml                               | XML      |         13 |          0 |          0 |         13 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\.idea\libraries\lib.xml                                      | XML      |         10 |          0 |          0 |         10 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\.idea\misc.xml                                               | XML      |          6 |          0 |          0 |          6 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\.idea\modules.xml                                            | XML      |          8 |          0 |          0 |          8 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\.idea\uiDesigner.xml                                         | XML      |        124 |          0 |          0 |        124 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\.idea\vcs.xml                                                | XML      |          6 |          0 |          0 |          6 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\Kronia.iml                                                   | XML      |         12 |          0 |          0 |         12 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\VERSION\Version.class                  | Java     |          6 |          0 |          0 |          6 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\custom\Effect.class                    | Java     |         27 |          0 |          0 |         27 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\custom\GameData.class                  | Java     |         52 |          0 |          0 |         52 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\custom\Item.class                      | Java     |        111 |          0 |          0 |        111 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\custom\MusicManager$Song.class         | Java     |          9 |          0 |          1 |         10 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\custom\MusicManager.class              | Java     |         30 |          0 |          1 |         31 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\custom\Recipe.class                    | Java     |         71 |          0 |          0 |         71 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\custom\Settings.class                  | Java     |         96 |          0 |          0 |         96 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\custom\TitleButton.class               | Java     |         27 |          0 |          0 |         27 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\custom\TitleSlider.class               | Java     |         24 |          0 |          0 |         24 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\custom\WorldManager.class              | Java     |        150 |          0 |          0 |        150 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\Background.class                   | Java     |         42 |          0 |          0 |         42 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\DamageIndicator.class              | Java     |         22 |          0 |          0 |         22 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\ExampleEntity.class                | Java     |         20 |          0 |          0 |         20 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\GameObject.class                   | Java     |        108 |          0 |          0 |        108 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\GlowEffect.class                   | Java     |         15 |          0 |          0 |         15 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\HUD.class                          | Java     |        212 |          0 |          6 |        218 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\ItemRenderer.class                 | Java     |         45 |          0 |          0 |         45 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\Minimap.class                      | Java     |         39 |          0 |          0 |         39 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\PlayerRenderer.class               | Java     |         27 |          0 |          0 |         27 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\PreviewRenderer.class              | Java     |         36 |          0 |          0 |         36 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\TitleScreen.class                  | Java     |        180 |          0 |          3 |        183 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\TutorialBlock.class                | Java     |         23 |          0 |          0 |         23 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\Anvil.class                   | Java     |         21 |          0 |          0 |         21 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\BabySlime.class               | Java     |         58 |          5 |          0 |         63 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\Campfire.class                | Java     |         28 |          0 |          0 |         28 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\CaveRock.class                | Java     |         28 |          0 |          0 |         28 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\CaveSlime.class               | Java     |         71 |          0 |          0 |         71 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\CoalOre.class                 | Java     |         20 |          0 |          0 |         20 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\CopperOre.class               | Java     |         19 |          0 |          0 |         19 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\Cow.class                     | Java     |         50 |          0 |          0 |         50 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\Crate.class                   | Java     |         40 |          0 |          0 |         40 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\DroppedItem.class             | Java     |         30 |          1 |          0 |         31 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\Furnace.class                 | Java     |         21 |          0 |          0 |         21 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\IronOre.class                 | Java     |         19 |          0 |          0 |         19 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\LogWall.class                 | Java     |         31 |          0 |          0 |         31 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\Mole.class                    | Java     |         45 |          0 |          0 |         45 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\Projectile.class              | Java     |         54 |          0 |          0 |         54 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\Rock.class                    | Java     |         26 |          0 |          0 |         26 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\SCP999.class                  | Java     |         22 |          0 |          0 |         22 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\Slime.class                   | Java     |         66 |          5 |          0 |         71 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\Torch.class                   | Java     |         26 |          0 |          0 |         26 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\Tree.class                    | Java     |         21 |          0 |          0 |         21 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\TutorialTree.class            | Java     |         20 |          0 |          0 |         20 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\Workbench.class               | Java     |         21 |          0 |          0 |         21 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\boss\ApexSlime.class          | Java     |         28 |          0 |          0 |         28 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\ent\game\boss\Boss.class               | Java     |         48 |         17 |          0 |         65 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\trident\Main.class                     | Java     |         21 |          0 |          0 |         21 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\trident\MainPanel$1.class              | Java     |          4 |          0 |          0 |          4 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\trident\MainPanel$InputListener.class  | Java     |         41 |          0 |          0 |         41 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\trident\MainPanel$ServerListener.class | Java     |         55 |          1 |          0 |         56 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\trident\MainPanel.class                | Java     |         59 |          0 |          0 |         59 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\trident\RenderingThread.class          | Java     |        114 |          0 |          0 |        114 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\trident\Scene.class                    | Java     |         53 |          0 |          0 |         53 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\trident\TridEntity.class               | Java     |         36 |          0 |          0 |         36 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\trident\Trident.class                  | Java     |        175 |          0 |          0 |        175 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\trident\ent\BoxColl.class              | Java     |         29 |          0 |          0 |         29 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\trident\ent\BoxNoColl.class            | Java     |         16 |          0 |          0 |         16 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\trident\ent\InvisColl.class            | Java     |         36 |          0 |          0 |         36 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\trident\ent\PlrStart.class             | Java     |         18 |          0 |          0 |         18 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\trident\ent\TridLight.class            | Java     |         13 |          0 |          0 |         13 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\trident\ent\Trigger.class              | Java     |         41 |          0 |          0 |         41 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\update\Inputs.class                    | Java     |         90 |          0 |          0 |         90 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\out\production\Kronia\update\Update.class                    | Java     |        260 |          0 |          5 |        265 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\VERSION\Version.java                                     | Java     |          4 |          0 |          4 |          8 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\custom\Effect.java                                       | Java     |        107 |          1 |         15 |        123 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\custom\GameData.java                                     | Java     |        233 |          2 |         24 |        259 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\custom\Item.java                                         | Java     |        335 |          4 |         11 |        350 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\custom\MusicManager.java                                 | Java     |        101 |          1 |         19 |        121 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\custom\Recipe.java                                       | Java     |        157 |          0 |         17 |        174 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\custom\Settings.java                                     | Java     |        120 |          0 |          8 |        128 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\custom\TitleButton.java                                  | Java     |         36 |          0 |          7 |         43 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\custom\TitleSlider.java                                  | Java     |         46 |          0 |          8 |         54 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\custom\WorldManager.java                                 | Java     |        315 |          3 |         19 |        337 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\Background.java                                      | Java     |         94 |          8 |         27 |        129 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\DamageIndicator.java                                 | Java     |         33 |          4 |          8 |         45 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\ExampleEntity.java                                   | Java     |         22 |          6 |          9 |         37 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\GameObject.java                                      | Java     |        266 |          5 |         20 |        291 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\GlowEffect.java                                      | Java     |         24 |          2 |          6 |         32 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\HUD.java                                             | Java     |        385 |         19 |         43 |        447 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\ItemRenderer.java                                    | Java     |         50 |          6 |          9 |         65 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\Minimap.java                                         | Java     |         71 |          6 |         12 |         89 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\PlayerRenderer.java                                  | Java     |         56 |          8 |          8 |         72 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\PreviewRenderer.java                                 | Java     |         38 |          6 |          7 |         51 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\TitleScreen.java                                     | Java     |        760 |          7 |         28 |        795 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\TutorialBlock.java                                   | Java     |         27 |          6 |          9 |         42 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\Anvil.java                                      | Java     |         32 |          4 |         10 |         46 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\BabySlime.java                                  | Java     |        113 |          8 |         22 |        143 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\Campfire.java                                   | Java     |         41 |          4 |          9 |         54 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\CaveRock.java                                   | Java     |         36 |          4 |         10 |         50 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\CaveSlime.java                                  | Java     |        141 |          8 |         22 |        171 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\CoalOre.java                                    | Java     |         33 |          4 |         10 |         47 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\CopperOre.java                                  | Java     |         35 |          4 |         10 |         49 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\Cow.java                                        | Java     |        102 |          7 |         15 |        124 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\Crate.java                                      | Java     |         56 |          9 |         16 |         81 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\DroppedItem.java                                | Java     |         54 |          5 |         14 |         73 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\Furnace.java                                    | Java     |         33 |          4 |          9 |         46 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\IronOre.java                                    | Java     |         35 |          4 |         10 |         49 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\LogWall.java                                    | Java     |         38 |          4 |         11 |         53 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\Mole.java                                       | Java     |        129 |          9 |         19 |        157 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\Projectile.java                                 | Java     |         89 |          4 |         16 |        109 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\Rock.java                                       | Java     |         36 |          4 |         10 |         50 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\SCP999.java                                     | Java     |         32 |          4 |         10 |         46 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\Slime.java                                      | Java     |        139 |          8 |         22 |        169 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\Torch.java                                      | Java     |         41 |          4 |          9 |         54 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\Tree.java                                       | Java     |         32 |          4 |         10 |         46 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\TutorialTree.java                               | Java     |         32 |          4 |         10 |         46 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\Workbench.java                                  | Java     |         32 |          4 |         10 |         46 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\boss\ApexSlime.java                             | Java     |         57 |          0 |         12 |         69 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\boss\Boss.java                                  | Java     |        140 |          8 |         21 |        169 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\trident\Main.java                                        | Java     |         15 |          2 |          2 |         19 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\trident\MainPanel.java                                   | Java     |        186 |          0 |         42 |        228 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\trident\RenderingThread.java                             | Java     |        115 |          7 |         27 |        149 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\trident\Scene.java                                       | Java     |         95 |          1 |          9 |        105 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\trident\TridEntity.java                                  | Java     |         83 |          1 |         18 |        102 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\trident\Trident.java                                     | Java     |        486 |          6 |         22 |        514 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\trident\ent\BoxColl.java                                 | Java     |         30 |          0 |          8 |         38 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\trident\ent\BoxNoColl.java                               | Java     |         38 |          0 |          8 |         46 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\trident\ent\InvisColl.java                               | Java     |         24 |          0 |          7 |         31 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\trident\ent\PlrStart.java                                | Java     |         21 |          0 |          6 |         27 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\trident\ent\TridLight.java                               | Java     |         22 |          0 |          7 |         29 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\trident\ent\Trigger.java                                 | Java     |         34 |          0 |          8 |         42 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\update\Inputs.java                                       | Java     |        386 |          4 |         20 |        410 |
+| c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\update\Update.java                                       | Java     |        586 |         12 |         59 |        657 |
+| Total                                                                                                                                |          |     10,334 |        278 |        894 |     11,506 |
++--------------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

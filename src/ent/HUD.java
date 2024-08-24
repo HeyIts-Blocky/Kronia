@@ -1,5 +1,6 @@
 package ent;
 
+import blib.anim.*;
 import blib.util.*;
 import trident.*;
 import javax.swing.*;
@@ -7,7 +8,7 @@ import java.awt.*;
 import custom.*;
 import java.util.ArrayList;
 import java.awt.image.*;
-public class Hotbar extends TridEntity {
+public class HUD extends TridEntity {
 
     ImageIcon img = new ImageIcon("data/images/hotbar.png");
     ImageIcon invImg = new ImageIcon("data/images/inventory.png");
@@ -20,8 +21,13 @@ public class Hotbar extends TridEntity {
     ImageIcon selImg = new ImageIcon("data/images/hotbarSel.png");
     public static Rectangle noDropRect = new Rectangle(15, 237, 520, Trident.getFrameHeight());
 
+    private static int notifType = 0;
+    private static String notifText = "";
+    private static Animator notifAnim;
+    private static Position notifPos = new Position();
+
     // Constructor, runs when the entity is created
-    public Hotbar(Position pos){
+    public HUD(Position pos){
         super(pos);
         renderType = TOPPRIORITY;
         alwaysRender = true;
@@ -31,6 +37,19 @@ public class Hotbar extends TridEntity {
         BTools.resizeImgIcon(healthOutline, 32, 32);
         BTools.resizeImgIcon(hungerOutline, 32, 32);
         BTools.resizeImgIcon(selImg, 32, 8);
+
+        // animator
+        try{
+            ArrayList<Animation> anims = new ArrayList<Animation>();
+            anims.add(new Animation("data/animations/notif"));
+            anims.add(new Animation("data/animations/notifHidden"));
+
+            notifAnim = new Animator(notifPos, anims);
+        }catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error loading notif animation", "Error", JOptionPane.ERROR_MESSAGE);
+            System.exit(1);
+        }
 
         // set up masks
         ImageIcon img = new ImageIcon("data/images/masks/healthMask.png");
@@ -82,12 +101,12 @@ public class Hotbar extends TridEntity {
         GameData.invBoxes.add(new Rectangle(604, 304 - 52, 48, 48));
     }
     // Registry constructor, used only for adding to the registry
-    public Hotbar(){
+    public HUD(){
         super("hotbar", false, 0);
     }
     // Custom constructor, used by the engine when building a scene
     public TridEntity construct(Position pos, Dimension collision, int[] data){
-        return new Hotbar(pos);
+        return new HUD(pos);
     }
 
     // Render while in game
@@ -210,8 +229,16 @@ public class Hotbar extends TridEntity {
             if(recipes.size() > 0){
                 if(GameData.selCraft > 0){
                     recipes.get(GameData.selCraft - 1).output.getImg().paintIcon(panel, g, 636, 32);
+                    if(!recipes.get(GameData.selCraft - 1).canCraft()){
+                        g.setColor(new Color(1f, 0f, 0f, 0.5f));
+                        g.fillRect(636, 32, 32, 32);
+                    }
                 }
                 recipes.get(GameData.selCraft).output.getImg().paintIcon(panel, g, 636, 84);
+                if(!recipes.get(GameData.selCraft).canCraft()){
+                    g.setColor(new Color(1f, 0f, 0f, 0.5f));
+                    g.fillRect(636, 84, 32, 32);
+                }
                 if(recipes.get(GameData.selCraft).output.amount > 1){
                     g.setColor(Color.white);
                     TextBox.outlineColor = Color.black;
@@ -233,6 +260,10 @@ public class Hotbar extends TridEntity {
                 }
                 if(GameData.selCraft < recipes.size() - 1){
                     recipes.get(GameData.selCraft + 1).output.getImg().paintIcon(panel, g, 636, 136);
+                    if(!recipes.get(GameData.selCraft + 1).canCraft()){
+                        g.setColor(new Color(1f, 0f, 0f, 0.5f));
+                        g.fillRect(636, 136, 32, 32);
+                    }
                 }
             }
 
@@ -430,5 +461,11 @@ public class Hotbar extends TridEntity {
         }
 
         image.setRGB(0, 0, width, height, imagePixels, 0, width);
+    }
+
+
+    public static final int NOTIF_BLANK = 0, NOTIF_SAVE = 1, NOTIF_AUTOSAVE = 2, NOTIF_EXCMK = 3, NOTIF_QSTMK = 4, NOTIF_MUSIC = 5, NOTIF_TRPHY = 6;
+    public static void setNotif(String text, int type){
+
     }
 }

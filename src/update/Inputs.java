@@ -336,7 +336,7 @@ public class Inputs {
                                 }
                             }
                         }
-                    }else if(GameData.cursorItem != null && !Hotbar.noDropRect.contains(mousePos)){
+                    }else if(GameData.cursorItem != null && !HUD.noDropRect.contains(mousePos)){
                         if(mb == 1){
                             GameObject.drop(GameData.cursorItem, Trident.getPlrPos());
                             GameData.cursorItem = null;
@@ -350,7 +350,7 @@ public class Inputs {
                         }
                     }
 
-                }else if(GameData.cursorItem != null && !Hotbar.noDropRect.contains(mousePos)){
+                }else if(GameData.cursorItem != null && !HUD.noDropRect.contains(mousePos)){
                     if(mb == 1){
                         GameObject.drop(GameData.cursorItem, Trident.getPlrPos());
                         GameData.cursorItem = null;

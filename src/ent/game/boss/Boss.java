@@ -20,6 +20,7 @@ public class Boss extends GameObject {
         GameObject.SLIME,
         GameObject.BABYSLIME,
         GameObject.CAVESLIME,
+        GameObject.DONTSAVE, // mainly for projectiles, hopefully nothing else uses this id that bosses should hit...
     };
     boolean isRight = true;
 

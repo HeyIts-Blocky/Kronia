@@ -21,6 +21,48 @@ public class Recipe {
     }
 
     public boolean canCraft(){
+        try {
+            boolean good = true;
+            if(workstation != -1){
+                good = false;
+                for(int i = 0; i < Trident.getEntities().size(); i++){
+                    TridEntity e = Trident.getEntities().get(i);
+                    if(e instanceof GameObject){
+                        GameObject go = (GameObject)e;
+                        if(go.id == workstation && BTools.getDistance(e.position, Trident.getPlrPos()) < 128){
+                            good = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if(!good) return false;
+
+            boolean[] hasIngredient = new boolean[ingredients.length];
+            for(int i = 0; i < hasIngredient.length; i++) hasIngredient[i] = false;
+            for(int i2 = 0; i2 < GameData.inventory.length; i2++){
+                Item i = GameData.inventory[i2];
+                for(int j = 0; j < ingredients.length; j++){
+                    Item ing = ingredients[j];
+                    if(ing.id == i.id && i.amount >= ing.amount){
+                        hasIngredient[j] = true;
+                    }
+                }
+            }
+
+            for(boolean b: hasIngredient) if(!b) return false;
+
+            return true;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean canSeeRecipe(){
+        if(output.id == Item.SCP999){
+            return canCraft();
+        }
+
         boolean good = true;
         if(workstation != -1){
             good = false;
@@ -37,21 +79,17 @@ public class Recipe {
         }
         if(!good) return false;
 
-        boolean[] hasIngredient = new boolean[ingredients.length];
-        for(int i = 0; i < hasIngredient.length; i++) hasIngredient[i] = false;
         for(int i2 = 0; i2 < GameData.inventory.length; i2++){
             Item i = GameData.inventory[i2];
             for(int j = 0; j < ingredients.length; j++){
                 Item ing = ingredients[j];
-                if(ing.id == i.id && i.amount >= ing.amount){
-                    hasIngredient[j] = true;
+                if(ing.id == i.id && i.amount >= 1){
+                    return true;
                 }
             }
         }
 
-        for(boolean b: hasIngredient) if(!b) return false;
-
-        return true;
+        return false;
     }
 
     public Item craft(){
@@ -78,7 +116,7 @@ public class Recipe {
     public static ArrayList<Recipe> getRecipes(){
         ArrayList<Recipe> list = new ArrayList<Recipe>();
         for(int i = 0; i < recipes.length; i++){
-            if(recipes[i].canCraft()){
+            if(recipes[i].canSeeRecipe()){
                 list.add(recipes[i]);
             }
         }

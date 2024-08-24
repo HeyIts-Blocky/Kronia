@@ -21,6 +21,8 @@ public class ApexSlime extends Boss{
         minMoveTime = 1500;
         maxMoveTime = 3000;
         range = 200;
+
+        projectileHit = new Rectangle(-64, -92, 128, 100);
     }
 
     public void render(Graphics g, JPanel panel, int x, int y){
@@ -45,6 +47,9 @@ public class ApexSlime extends Boss{
     public void update(long elapsedTime){
         super.update(elapsedTime);
         img.update(elapsedTime);
+
+        projectileHit.x = (int)position.x - 64;
+        projectileHit.y = (int)position.y - 92;
 
         if(targetPos != null && !playedSound){
             Settings.playSound("data/sound/apexAttack.wav");

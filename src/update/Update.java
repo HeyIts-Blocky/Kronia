@@ -19,7 +19,7 @@ public class Update {
         Trident.addCustomEntity(new ExampleEntity()); // Use the empty constructor
         Trident.addCustomEntity(new Background());
         Trident.addCustomEntity(new Minimap());
-        Trident.addCustomEntity(new Hotbar());
+        Trident.addCustomEntity(new HUD());
         Trident.addCustomEntity(new ItemRenderer());
         Trident.addCustomEntity(new TitleScreen());
         Trident.addCustomEntity(new PreviewRenderer());
@@ -424,7 +424,7 @@ public class Update {
         // tutorial
         if(id == -1 && !GameData.tutorialTriggers[0]){
             GameData.clearInventory();
-            Trident.spawnEntity(new Hotbar(new Position()));
+            Trident.spawnEntity(new HUD(new Position()));
             Trident.spawnEntity(new PreviewRenderer(new Position()));
             Trident.spawnEntity(new ItemRenderer(new Position()));
 

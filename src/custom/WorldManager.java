@@ -322,6 +322,10 @@ public class WorldManager {
     public static ArrayList<String> getWorlds(){
         ArrayList<String> list = new ArrayList<String>();
         File dir = new File("data/worlds");
+        if(!dir.exists()){
+            dir.mkdir();
+            return list;
+        }
         File[] files = dir.listFiles();
         for(File f: files){
             String name = f.getName();

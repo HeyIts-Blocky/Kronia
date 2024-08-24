@@ -62,15 +62,22 @@ public class Projectile extends GameObject {
 
         for(int j = 0; j < Trident.getEntities().size(); j++){ // damage other entities
             TridEntity e = Trident.getEntities().get(j);
-            if(BTools.getDistance(e.position, position) < 32 && (e instanceof GameObject) && !e.equals(this)){
-                if(thrower != null && e.equals(thrower)) continue;
-                boolean canAttack = false;
-                canAttack = ((GameObject)e).weakness == Item.T_SWORD; 
-                if(canAttack){
-                    ((GameObject)e).damage(data[3]);
-                    Trident.destroy(this);
-                    return;
+            if((e instanceof GameObject) && !e.equals(this)){
+                boolean canHit = false;
+                if(((GameObject)e).projectileHit != null){
+                    if(((GameObject)e).projectileHit.contains(position.toPoint())) canHit = true;
+                }else if(BTools.getDistance(e.position, position) < 32) canHit = true;
+                if(canHit){
+                    if(thrower != null && e.equals(thrower)) continue;
+                    boolean canAttack = false;
+                    canAttack = ((GameObject)e).weakness == Item.T_SWORD;
+                    if(canAttack){
+                        ((GameObject)e).damage(data[3]);
+                        Trident.destroy(this);
+                        return;
+                    }
                 }
+
             }
         }
 

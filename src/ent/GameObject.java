@@ -13,6 +13,7 @@ public class GameObject extends TridEntity {
     public int[] data;
     public int weakness = Item.T_NULL;
     public int defense = 0;
+    public Rectangle projectileHit = null;
 
     // Constructor, runs when the entity is created
     public GameObject(Position pos, int hp, int id, Dimension coll){

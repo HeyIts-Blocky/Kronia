@@ -10,6 +10,8 @@ import java.io.*;
 import VERSION.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
 public class TitleScreen extends TridEntity {
 
     public static TitleButton[][] buttons = {
@@ -51,7 +53,7 @@ public class TitleScreen extends TridEntity {
                 TitleButton.CENTER
             ),
             new TitleButton(
-                new Rectangle(684, 400, 200, 30),
+                new Rectangle(684, 390, 200, 30),
                 Color.white,
                 Color.gray,
                 Color.black,
@@ -67,6 +69,15 @@ public class TitleScreen extends TridEntity {
                 new Font(GameData.getFont(), Font.PLAIN, 25),
                 "Credits",
                 TitleButton.CENTER
+            ),
+            new TitleButton(
+                new Rectangle(0, 390, 175, 30),
+                Color.white,
+                Color.gray,
+                Color.black,
+                new Font(GameData.getFont(), Font.PLAIN, 25),
+                "Achievements",
+                TitleButton.LEFT
             ),
         },
         { // 1
@@ -363,6 +374,17 @@ public class TitleScreen extends TridEntity {
                 TitleButton.CENTER
             ),
         },
+        { // 7
+            new TitleButton(
+                new Rectangle(10, 10, 100, 30),
+                Color.white,
+                Color.gray,
+                Color.black,
+                new Font(GameData.getFont(), Font.PLAIN, 25),
+                "Back",
+                TitleButton.LEFT
+            ),
+        },
     };
 
     public static void updateButtonFont(){
@@ -441,6 +463,8 @@ public class TitleScreen extends TridEntity {
     double testerPos = 0;
     double testerSpeed = 0.05;
     double colorTime = 0;
+
+    int scroll = 0;
 
     public boolean inGameMenu = false;
 
@@ -572,6 +596,32 @@ public class TitleScreen extends TridEntity {
             g.setFont(new Font(GameData.getFont(), Font.PLAIN, 20));
             TextBox.draw(diffDesc, g, Trident.getFrameWidth() / 2, 270, TextBox.CENTER, TextBox.NOMAXWIDTH, ((worldDiff == WorldManager.V_HARD) ? 2 : 0));
         }
+        if(screen == 7){
+            ArrayList<Integer> list = Achievement.getSorted();
+            for(int i = 0; i < list.size(); i++){
+                int a = list.get(i);
+                // draw icon
+                ImageIcon icon = Achievement.getIcon(a);
+                icon.paintIcon(panel, g, 20, 50 - scroll + (74 * i));
+                // title
+                g.setColor(Color.white);
+                if(!Achievement.has(a)) g.setColor(Color.lightGray);
+                g.setFont(new Font(GameData.getFont(), Font.PLAIN, 25));
+                TextBox.draw(Achievement.titles[a], g, 94, 75 - scroll + (74 * i));
+                // desc
+                g.setFont(new Font(GameData.getFont(), Font.ITALIC, 20));
+                TextBox.draw(Achievement.getDesc(a), g, 94, 100 - scroll + (74 * i));
+            }
+
+            g.setColor(Color.black);
+            g.fillRect(Trident.getFrameWidth() / 2 - 150, Trident.getFrameHeight() - 20, 300, 20);
+            g.setColor(Color.green);
+            double percent = (double)Achievement.numUnlocked() / Achievement.num();
+            g.fillRect(Trident.getFrameWidth() / 2 - 150, Trident.getFrameHeight() - 20, (int)(300 * percent), 20);
+            g.setColor(Color.white);
+            g.drawRect(Trident.getFrameWidth() / 2 - 150, Trident.getFrameHeight() - 20, 300, 20);
+            TextBox.draw((int)(percent * 100) + "%", g, Trident.getFrameWidth() / 2 + 150, Trident.getFrameHeight() - 10);
+        }
         for(TitleButton b: buttons[screen]){
             b.render(g);
         }
@@ -605,35 +655,45 @@ public class TitleScreen extends TridEntity {
             }
         }
     }
+    public void mouseScrolled(int s){
+        if(screen == 7){
+            scroll += s * 20;
+            scroll = BTools.clamp(scroll, 0, Math.max(0, -(74 * 5) + (74 * Achievement.num())));
+        }
+    }
 
     public void buttonPressed(int button){
         Settings.playSound("data/sound/button.wav");
         if(screen == 0){
             switch(button){
-            case 0:
-                screen = 1;
-                if(WorldManager.getWorlds().size() == 0){
-                    screen = 6;
-                    worldName = "";
-                    worldDiff = WorldManager.defaultDiff;
-                }
-                break;
-            case 1:
-                Trident.setupScenes();
-                Trident.loadScene("tutorial");
-                break;
-            case 2:
-                screen = 3;
-                break;
-            case 3:
-                System.exit(0);
-                break;
-            case 4:
-                BTools.openWebsite("https://forms.gle/UzAjpGuNGiGEP4up6");
-                break;
-            case 5:
-                screen = 5;
-                break;
+                case 0:
+                    screen = 1;
+                    if(WorldManager.getWorlds().size() == 0){
+                        screen = 6;
+                        worldName = "";
+                        worldDiff = WorldManager.defaultDiff;
+                    }
+                    break;
+                case 1:
+                    Trident.setupScenes();
+                    Trident.loadScene("tutorial");
+                    break;
+                case 2:
+                    screen = 3;
+                    break;
+                case 3:
+                    System.exit(0);
+                    break;
+                case 4:
+                    BTools.openWebsite("https://forms.gle/UzAjpGuNGiGEP4up6");
+                    break;
+                case 5:
+                    screen = 5;
+                    break;
+                case 6:
+                    screen = 7;
+                    scroll = 0;
+                    break;
             }
         }else if(screen == 1){
             switch(button){
@@ -774,6 +834,12 @@ public class TitleScreen extends TridEntity {
                 worldDiff++;
                 if(worldDiff > WorldManager.V_HARD) worldDiff = WorldManager.V_HARD;
                 break;
+            }
+        }else if(screen == 7){
+            switch(button){
+                case 0:
+                    screen = 0;
+                    break;
             }
         }
     }

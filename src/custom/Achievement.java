@@ -12,30 +12,71 @@ import java.util.ArrayList;
 public class Achievement {
 
     public static ImageIcon lockedIcon = new ImageIcon("data/images/achievements/locked.png");
-    private static final String[] titles = {
+    public static final String[] titles = {
             "Getting your feet... wet?", // 0
             "Of course you would.", // 1
             "Fully gooped", // 2
+            "Entrance Exam", // 3
     };
-    private static final String[] descs = {
+    public static final String[] descs = {
             "Slay the Apex Slime.", // 0
             "Get sick by eating raw meat.", // 1
             "Slay the Apex Slime in Very Hard.", // 2
+            "Complete the tutorial.", // 3
     };
-    private static final ImageIcon[] icons = {
+    public static final ImageIcon[] icons = {
             new ImageIcon("data/images/achievements/apexslime.png"), // 0
             new ImageIcon("data/images/achievements/rawmeat.png"), // 1
             new ImageIcon("data/images/achievements/apexvhard.png"), // 2
+            new ImageIcon("data/images/achievements/tutorial.png"), // 3
     };
     private static boolean[] hasAchievement = new boolean[titles.length];
 
-    public static final int APEXSLIME = 0, RAWMEAT = 1, APEXVHARD = 2;
+    public static final int APEXSLIME = 0, RAWMEAT = 1, APEXVHARD = 2, TUTORIAL = 3;
 
     public static void resizeIcons(){
         BTools.resizeImgIcon(lockedIcon, 64, 64);
         for(ImageIcon i: icons){
             BTools.resizeImgIcon(i, 64, 64);
         }
+    }
+
+    public static ArrayList<Integer> getSorted(){
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        for(int i = 0; i < num(); i++){
+            if(has(i)){
+                list.add(i);
+            }
+        }
+        for(int i = 0; i < num(); i++){
+            if(!has(i)){
+                list.add(i);
+            }
+        }
+
+        return list;
+    }
+
+    public static int numUnlocked(){
+        int unlocked = 0;
+        for(boolean b: hasAchievement){
+            if(b) unlocked++;
+        }
+        return unlocked;
+    }
+
+    public static ImageIcon getIcon(int a){
+        if(!has(a)) return lockedIcon;
+        else return icons[a];
+    }
+
+    public static String getDesc(int a){
+        if(!has(a)) return "?????";
+        else return descs[a];
+    }
+
+    public static int num(){
+        return titles.length;
     }
 
     public static boolean has(int a){

@@ -57,6 +57,11 @@ public class Update {
         Trident.runCommand("credits");
         Trident.printConsole("Type 'help' to get a list of commands,");
         Trident.printConsole("or type 'customHelp' for a list of game-specific commands.");
+
+        int chance = BTools.randInt(0, 1000);
+        if(chance == 1){
+            Trident.setWindowTitle("クロニア");
+        }
     }
 
     public static void sceneStart(String scene){
@@ -453,7 +458,10 @@ public class Update {
 
             GameData.tutorialTriggers[3] = true;
         }
-        if(id == -5) Trident.loadScene("title");
+        if(id == -5){
+            Achievement.get(Achievement.TUTORIAL);
+            Trident.loadScene("title");
+        }
 
 
         // items

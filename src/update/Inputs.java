@@ -405,6 +405,14 @@ public class Inputs {
             }
             
         }
-        
+        if(Trident.getCurrentScene().name.equals("title")){
+            for(int i = 0; i < Trident.getEntities().size(); i++){
+                TridEntity e = Trident.getEntities().get(i);
+                if(e instanceof TitleScreen){
+                    TitleScreen t = (TitleScreen)e;
+                    t.mouseScrolled(scroll);
+                }
+            }
+        }
     }
 }

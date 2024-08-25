@@ -147,7 +147,52 @@ public class Update {
                     // Can be used?
                     try{
                         if(GameData.getSelItem().getType() == Item.T_PLACEABLE && BTools.getDistance(Trident.getPlrPos(), Trident.mouseWorldPos) < 128){
-                            GameObject obj = GameObject.placeObj(Trident.mouseWorldPos, GameData.getSelItem().getData()[0], new int[]{(GameData.rotateItem ? 1 : 0)});
+                            Position position = Trident.mouseWorldPos;
+
+                            if(GameData.getSelItem().id == Item.LOGWALL){
+                                // look for snap points
+                                for(int i = 0; i < Trident.getEntities().size(); i++){
+                                    TridEntity e = Trident.getEntities().get(i);
+                                    if(e instanceof LogWall){
+                                        LogWall wall = (LogWall)e;
+                                        if(wall.rotated == GameData.rotateItem){
+                                            if(wall.rotated){
+                                                // check up & down
+                                                double tDist = 999, bDist = 999;
+                                                Position top = new Position(e.position.x, e.position.y - 32);
+                                                Position bottom = new Position(e.position.x, e.position.y + 32);
+                                                if(BTools.getDistance(top, Trident.mouseWorldPos) < 16){
+                                                    tDist = BTools.getDistance(top, Trident.mouseWorldPos);
+                                                }
+                                                if(BTools.getDistance(bottom, Trident.mouseWorldPos) < 16){
+                                                    bDist = BTools.getDistance(bottom, Trident.mouseWorldPos);
+                                                }
+                                                if(Math.min(tDist, bDist) <= 16){
+                                                    if(tDist < bDist) position = top;
+                                                    else position = bottom;
+                                                }
+                                            }else{
+                                                // check left & right
+                                                double lDist = 999, rDist = 999;
+                                                Position left = new Position(e.position.x - 64, e.position.y);
+                                                Position right = new Position(e.position.x + 64, e.position.y);
+                                                if(BTools.getDistance(left, Trident.mouseWorldPos) < 16){
+                                                    lDist = BTools.getDistance(left, Trident.mouseWorldPos);
+                                                }
+                                                if(BTools.getDistance(right, Trident.mouseWorldPos) < 16){
+                                                    rDist = BTools.getDistance(right, Trident.mouseWorldPos);
+                                                }
+                                                if(Math.min(lDist, rDist) <= 16){
+                                                    if(lDist < rDist) position = left;
+                                                    else position = right;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            GameObject obj = GameObject.placeObj(position, GameData.getSelItem().getData()[0], new int[]{(GameData.rotateItem ? 1 : 0)});
                             if(!obj.getCollision().intersects(Trident.getPlr().getCollision())){
                                 for(Rectangle r: Trident.getCollision()){
                                     if(r.intersects(obj.getCollision())) return;

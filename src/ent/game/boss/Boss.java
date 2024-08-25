@@ -152,6 +152,8 @@ public class Boss extends GameObject {
     public void tookDamage(int amount){
         if(health <= 0){
             Settings.playSound("data/sound/bossDeath.wav");
+            Trident.shakeCam(1);
+            Trident.spawnEntity(new BossVFX(position.copy()));
         }
     }
 

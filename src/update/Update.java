@@ -127,7 +127,7 @@ public class Update {
                     }
                 }
             }
-            if(!GameData.spectate && Trident.getMouseDown(1) && GameData.atkTimer >= GameData.atkTime + 50 && GameData.inventory[GameData.selHotbar].id != Item.NOTHING && !GameData.invOpen){
+            if(!MaceBall.maceOut() && !GameData.spectate && Trident.getMouseDown(1) && GameData.atkTimer >= GameData.atkTime + 50 && GameData.inventory[GameData.selHotbar].id != Item.NOTHING && !GameData.invOpen){
                 int hotbarSlot = -1;
                 for(int i = 0; i < GameData.invBoxes.size(); i++){
                     Rectangle r = GameData.invBoxes.get(i);
@@ -280,6 +280,10 @@ public class Update {
                             }
                             if(length == -1) GameData.addEffect(new Effect(id));
                             else GameData.addEffect(new Effect(id, length));
+                        }
+                        if(GameData.getSelItem().getType() == Item.T_MACE){
+                            int ang = (int)(Math.toDegrees(GameData.atkDir) * 10);
+                            Trident.spawnEntity(new MaceBall(Trident.getPlrPos(), new int[]{ang, GameData.getSelItem().getData()[0], GameData.getSelItem().getData()[2], GameData.getSelItem().getData()[3]}));
                         }
                     }catch(Exception e){
                         Trident.printException("Problem while using item!", e);

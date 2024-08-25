@@ -3,6 +3,7 @@ package update;
 import java.awt.*;
 import java.awt.event.*;
 import blib.util.*;
+import ent.game.MaceBall;
 import trident.*;
 import custom.*;
 import ent.*;
@@ -392,6 +393,7 @@ public class Inputs {
     }
 
     public static void onScroll(int scroll){
+        if(MaceBall.maceOut()) return;
         if(Trident.getCurrentScene().name.equals("world") || (Trident.getCurrentScene().name.equals("tutorial") && GameData.tutorialTriggers[0])){
             if(GameData.invOpen){
                 GameData.selCraft += scroll;

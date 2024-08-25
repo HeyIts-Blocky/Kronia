@@ -26,7 +26,7 @@ public class ItemRenderer extends TridEntity {
 
     // Render while in game
     public void render(Graphics g, JPanel panel, int x, int y){
-        if(GameData.inventory[GameData.selHotbar].id == Item.NOTHING) return;
+        if(GameData.inventory[GameData.selHotbar].id == Item.NOTHING || GameData.inventory[GameData.selHotbar].getType() == Item.T_MACE) return;
         if(GameData.atkTimer < GameData.atkTime){
             Point off = Trident.getShakeOffset();
 
@@ -38,7 +38,7 @@ public class ItemRenderer extends TridEntity {
             ImageIcon img = Item.getImg(GameData.inventory[GameData.selHotbar].id);
             AffineTransform transform = new AffineTransform();
             transform.rotate(dir, 32, 32);
-            AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
+            AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
             BufferedImage bimg = new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB);
             BufferedImage bimg2 = new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB);
             img.paintIcon(null, bimg2.getGraphics(), 32, 16);

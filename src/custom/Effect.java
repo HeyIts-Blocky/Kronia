@@ -20,7 +20,7 @@ public class Effect {
         1000, // 1
         1000, // 2
         250, // 3
-        1000, // 4
+        1, // 4
     };
     private static String[] names = {
         "Poison", // 0

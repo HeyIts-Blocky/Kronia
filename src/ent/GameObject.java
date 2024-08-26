@@ -286,5 +286,5 @@ public class GameObject extends TridEntity {
     // ID LIST
     public static final int DONTSAVE = -1;
     public static final int TREE = 0, ITEM = 1, WORKBENCH = 2, ROCK = 3, FURNACE = 4, COW = 5, SLIME = 6, LOGWALL = 7, TORCH = 8, COALORE = 9, SCP999 = 10, APEXSLIME = 11, BABYSLIME = 12, CAVEROCK = 13;
-    public static final int CAVESLIME = 14, IRONORE = 15, ANVIL = 16, COPPERORE = 17, MOLE = 18, TUTTREE = 19, CAMPFIRE = 20, CRATE = 21; 
+    public static final int CAVESLIME = 14, IRONORE = 15, ANVIL = 16, COPPERORE = 17, MOLE = 18, TUTTREE = 19, CAMPFIRE = 20, CRATE = 21, FIRE = 22;
 }

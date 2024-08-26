@@ -1,6 +1,6 @@
 { achievements
 boolean true
+boolean true
 boolean false
-boolean false
-boolean false
+boolean true
 }

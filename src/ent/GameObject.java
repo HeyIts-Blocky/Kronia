@@ -139,12 +139,16 @@ public class GameObject extends TridEntity {
     }
 
     public final void damage(int amount){
+        damage(amount, false);
+    }
+    public final void damage(int amount, boolean fire){
         Settings.playSound("data/sound/hit.wav");
         health -= Math.max(amount - defense, 0);
         tookDamage(Math.max(amount - defense, 0));
         if(health <= 0){
             Trident.destroy(this);
-            dropItems();
+            if(!fire) dropItems();
+            else dropNoDelay(Item.ASH, BTools.randInt(1, 4), position);
         }
 
         if(Settings.dmgInd) Trident.spawnEntity(new DamageIndicator(new Position(position.x + (BTools.randInt(0, 32) - 16), position.y + (BTools.randInt(0, 32) - 16)), Math.max(amount - defense, 0)));

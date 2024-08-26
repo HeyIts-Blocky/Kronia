@@ -681,6 +681,20 @@ public class Update {
                 HUD.addNotif("Test notification", type);
                 Trident.consoleOpen = false;
                 return 0;
+            case "lightFire":
+                GameObject obj = null;
+                for(int i = 0; i < Trident.getEntities().size(); i++){
+                    TridEntity ent = Trident.getEntities().get(i);
+                    if(ent instanceof GameObject){
+                        if(obj == null || BTools.getDistance(obj.position, Trident.getPlrPos()) > BTools.getDistance(ent.position, Trident.getPlrPos())){
+                            obj = (GameObject)ent;
+                        }
+                    }
+                }
+                if(obj != null){
+                    Fire.setOnFire(obj, 10000);
+                }
+                return 0;
         }
         return 1; // return 1 if command is not recognized
     }
@@ -703,6 +717,7 @@ public class Update {
         "defaultDiff [veasy/easy/normal/hard/vhard]",
         "toggleHud",
         "notifTest <notifType>",
+        "lightFire",
     };
 
     public static void printItems(int page){

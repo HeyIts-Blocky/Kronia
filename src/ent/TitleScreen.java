@@ -459,6 +459,7 @@ public class TitleScreen extends TridEntity {
         "ALYK",
         "Wizard King",
         "Superisity",
+        "JoJo",
     };
     double testerPos = 0;
     double testerSpeed = 0.05;

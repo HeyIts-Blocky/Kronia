@@ -73,7 +73,7 @@ public class Item {
     public static final int NOTHING = 0, WOOD = 1, WORKBENCH = 2, W_SWORD = 3, W_PICK = 4, W_AXE = 5, STONE = 6, FURNACE = 7, RAWMEAT = 8, COOKEDMEAT = 9, JELLY = 10, LOGWALL = 11, TORCH = 12, COAL = 13, SCP999 = 14, S_SWORD = 15, S_PICK = 16, S_AXE = 17;
     public static final int APEXSPAWN = 18, HARDJELLY = 19, BOW = 20, ARROW = 21, J_SWORD = 22, J_PICK = 23, J_AXE = 24, J_SHOVEL = 25, EMERGENCYPOGO = 26, STONELADDER = 27, IRONORE = 28, IRONINGOT = 29;
     public static final int I_SWORD = 30, I_PICK = 31, I_AXE = 32, COPPERORE = 33, COPPERINGOT = 34, C_SWORD = 35, C_PICK = 36, C_AXE = 37, ANVIL = 38, PEBBLE = 39, I_ARROW = 40, J_ARROW = 41;
-    public static final int HJ_ARROW = 42, TUTWOOD = 43, CAMPFIRE = 44, HOTDOG = 45, CRATE = 46, FLASK = 47, STR_FLASK = 48, HP_FLASK = 49, REGEN_FLASK = 50, GLOW_FLASK = 51, MACE = 52;
+    public static final int HJ_ARROW = 42, TUTWOOD = 43, CAMPFIRE = 44, HOTDOG = 45, CRATE = 46, FLASK = 47, STR_FLASK = 48, HP_FLASK = 49, REGEN_FLASK = 50, GLOW_FLASK = 51, MACE = 52, ASH = 53;
     /*****/
 
     private static ImageIcon[] imgs = {
@@ -130,6 +130,7 @@ public class Item {
             new ImageIcon("data/images/items/regenFlask.png"), // 50
             new ImageIcon("data/images/items/glowFlask.png"), // 51
             new ImageIcon("data/images/items/mace.png"), // 52
+            new ImageIcon("data/images/items/ash.png"), // 53
     };
     private static int[] types = {
             T_NULL, // 0
@@ -185,6 +186,7 @@ public class Item {
             T_EFFECT, // 50
             T_EFFECT, // 51
             T_MACE, // 52
+            T_NULL, // 53
     };
     private static int[][] data = { // atk, def, stuff like that
             {}, // 0
@@ -240,6 +242,7 @@ public class Item {
             {Effect.REGEN, 250, 50}, // 50
             {Effect.GLOW, 250, 750}, // 51
             {200, 250, 40, 4}, // 52
+            {}, // 53
     };
     public static String[] names = {
             "", // 0
@@ -295,6 +298,7 @@ public class Item {
             "Flask of Regeneration", // 50
             "Flask of Illumination", // 51
             "Mace", // 52
+            "Ash", // 53
     };
     private static String[] descriptions = {
             "", // 0
@@ -350,5 +354,6 @@ public class Item {
             "Regenerate your health for a short time", // 50
             "Cause your skin to glow, lighting up the surrounding area", // 51
             "A ball of death. That's metal as hell.", // 52
+            "A pile of unrecognizable ash. What have you done?", // 53
     };
 }

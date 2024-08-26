@@ -456,7 +456,6 @@ public class TitleScreen extends TridEntity {
         "Dusti",
         "Spud :)",
         "cg508",
-        "ALYK",
         "Wizard King",
         "Superisity",
         "JoJo",

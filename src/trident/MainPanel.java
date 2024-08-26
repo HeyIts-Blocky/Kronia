@@ -106,7 +106,7 @@ public class MainPanel extends JPanel {
                 return;
             }
             if(!inIntro){
-                if(key == 192 && Trident.consoleEnabled){
+                if((key == 192 || key == KeyEvent.VK_F10) && Trident.consoleEnabled){
                     Trident.consoleOpen = !Trident.consoleOpen;
                     Trident.consoleType = "";
                     Trident.consoleError = false;

@@ -265,7 +265,7 @@ public class Update {
                                 GameData.inventory[slot].amount--;
                                 Item item = GameData.inventory[slot];
                                 int ang = (int)(Math.toDegrees(GameData.atkDir) * 10);
-                                Trident.spawnEntity(new Projectile(Trident.getPlrPos(), new int[]{ang, item.id, item.getData()[2], item.getData()[3]}));
+                                Trident.spawnEntity(new Projectile(Trident.getPlrPos(), new int[]{ang, item.id, item.getData()[2], item.getData()[3], item.getData()[4]}));
                             }
                         }
                         if(GameData.getSelItem().getType() == Item.T_TRIGGER){

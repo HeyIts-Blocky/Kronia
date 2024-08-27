@@ -67,11 +67,12 @@ public class Fire extends GameObject{
                 Fire f = (Fire)e;
                 if(f.obj.equals(ent)){
                     f.data[0] = Math.max(time, f.data[0]);
+                    return;
                 }
-                return;
             }
         }
         int[] dat = {time, Trident.getEntities().indexOf(ent)};
+        if(dat[1] == -1) return;
         Trident.spawnEntity(new Fire(new Position(), dat));
     }
 
@@ -95,6 +96,7 @@ public class Fire extends GameObject{
         if(cooldown <= 0){
             if(obj.health > 0){
                 obj.damage(1, true);
+                if(!emitter.running) emitter.start();
             }else data[0] = 0;
             cooldown = 500;
         }
@@ -104,6 +106,7 @@ public class Fire extends GameObject{
         emitter.update(elapsedTime);
 
         data[1] = Trident.getEntities().indexOf(obj);
+        if(data[1] == -1) Trident.destroy(this);
         data[0] -= elapsedTime;
         if(data[0] <= 0){
             extraLife -= elapsedTime;

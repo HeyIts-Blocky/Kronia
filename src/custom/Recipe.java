@@ -169,5 +169,7 @@ public class Recipe {
         new Recipe(new Item[]{new Item(Item.FLASK), new Item(Item.COOKEDMEAT, 15), new Item(Item.JELLY, 10)}, new Item(Item.REGEN_FLASK), GameObject.WORKBENCH),
         new Recipe(new Item[]{new Item(Item.FLASK), new Item(Item.S_SWORD), new Item(Item.JELLY, 15)}, new Item(Item.STR_FLASK), GameObject.WORKBENCH),
         new Recipe(new Item[]{new Item(Item.FLASK), new Item(Item.TORCH, 5), new Item(Item.JELLY, 5)}, new Item(Item.GLOW_FLASK), GameObject.WORKBENCH),
+        new Recipe(new Item[]{new Item(Item.J_ARROW, 10), new Item(Item.TORCH)}, new Item(Item.FIRE_ARROW, 10)),
+        new Recipe(new Item[]{new Item(Item.J_ARROW, 10)}, new Item(Item.FIRE_ARROW, 10), GameObject.CAMPFIRE),
     };
 }

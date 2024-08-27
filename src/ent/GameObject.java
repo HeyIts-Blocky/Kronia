@@ -147,7 +147,7 @@ public class GameObject extends TridEntity {
         tookDamage(Math.max(amount - defense, 0));
         if(health <= 0){
             Trident.destroy(this);
-            if(!fire) dropItems();
+            if(!fire || (this instanceof Boss)) dropItems();
             else dropNoDelay(Item.ASH, BTools.randInt(1, 4), position);
         }
 

@@ -72,7 +72,12 @@ public class Projectile extends GameObject {
                     boolean canAttack = false;
                     canAttack = ((GameObject)e).weakness == Item.T_SWORD;
                     if(canAttack){
-                        ((GameObject)e).damage(data[3]);
+                        boolean fire = false;
+                        if(data[4] > 0){
+                            Fire.setOnFire((GameObject)e, data[4] * 1000);
+                            fire = true;
+                        }
+                        ((GameObject)e).damage(data[3], fire);
                         Trident.destroy(this);
                         return;
                     }

@@ -53,7 +53,7 @@ public class TitleScreen extends TridEntity {
                 TitleButton.CENTER
             ),
             new TitleButton(
-                new Rectangle(684, 390, 200, 30),
+                new Rectangle(684, 360, 200, 30),
                 Color.white,
                 Color.gray,
                 Color.black,
@@ -71,12 +71,21 @@ public class TitleScreen extends TridEntity {
                 TitleButton.CENTER
             ),
             new TitleButton(
-                new Rectangle(0, 390, 175, 30),
+                new Rectangle(0, 360, 175, 30),
                 Color.white,
                 Color.gray,
                 Color.black,
                 new Font(GameData.getFont(), Font.PLAIN, 25),
                 "Achievements",
+                TitleButton.LEFT
+            ),
+            new TitleButton(
+                new Rectangle(Trident.getFrameWidth() - 40, Trident.getFrameHeight() - 40, 33, 33),
+                new Color(88, 101, 242),
+                Color.white,
+                Color.black,
+                new Font(GameData.getFont(), Font.PLAIN, 25),
+                "",
                 TitleButton.LEFT
             ),
         },
@@ -450,6 +459,7 @@ public class TitleScreen extends TridEntity {
     public int screen = 0;
     int worldSel = 0;
     ImageIcon title = new ImageIcon("data/images/title.png");
+    ImageIcon discord = new ImageIcon("data/images/discord.png");
     ImageIcon thankyou = new ImageIcon("data/images/thankyou.gif");
     String[] betaTesters = {
         "Mega",
@@ -477,6 +487,7 @@ public class TitleScreen extends TridEntity {
         renderType = Entity.TOPPRIORITY;
         BTools.resizeImgIcon(title, 128 * 2, 128 * 2);
         BTools.resizeImgIcon(thankyou, 6 * 3, 134 * 3);
+        BTools.resizeImgIcon(discord, 32, 32);
     }
     // Registry constructor, used only for adding to the registry
     public TitleScreen(){
@@ -625,6 +636,9 @@ public class TitleScreen extends TridEntity {
         for(TitleButton b: buttons[screen]){
             b.render(g);
         }
+        if(screen == 0){
+            discord.paintIcon(panel, g, Trident.getFrameWidth() - 39, Trident.getFrameHeight() - 39);
+        }
     }
 
     public void sceneStart(String scene){
@@ -693,6 +707,9 @@ public class TitleScreen extends TridEntity {
                 case 6:
                     screen = 7;
                     scroll = 0;
+                    break;
+                case 7:
+                    BTools.openWebsite("https://discord.gg/kb7TqaHucu");
                     break;
             }
         }else if(screen == 1){

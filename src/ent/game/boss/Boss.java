@@ -22,6 +22,7 @@ public class Boss extends GameObject {
         GameObject.CAVESLIME,
         GameObject.DONTSAVE, // mainly for projectiles, hopefully nothing else uses this id that bosses should hit...
         GameObject.FIRE,
+        GameObject.MOLE,
     };
     boolean isRight = true;
 
@@ -109,22 +110,7 @@ public class Boss extends GameObject {
                     }
                     if(canDamage){
                         GameObject dmgObj = (GameObject)e;
-                        double dmgMult = 1;
-                        switch(WorldManager.difficulty){
-                        case WorldManager.V_EASY:
-                            dmgMult = 0.5;
-                            break;
-                        case WorldManager.EASY:
-                            dmgMult = 0.75;
-                            break;
-                        case WorldManager.HARD:
-                            dmgMult = 1.5;
-                            break;
-                        case WorldManager.V_HARD:
-                            dmgMult = 2;
-                            break;
-                        }
-                        dmgObj.damage((int)(damage * dmgMult));
+                        dmgObj.damage(damage);
                     }
                 }
             }

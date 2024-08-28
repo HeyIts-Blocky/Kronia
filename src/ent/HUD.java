@@ -48,6 +48,7 @@ public class HUD extends TridEntity {
         BTools.resizeImgIcon(selImg, 32, 8);
 
         // animator
+        notifPos = new Position();
         try{
             ArrayList<Animation> anims = new ArrayList<Animation>();
             anims.add(new Animation("data/animations/notif"));

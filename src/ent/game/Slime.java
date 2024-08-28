@@ -109,22 +109,7 @@ public class Slime extends GameObject {
                 }
             }
             if(dmgObj != null && !attacked){
-                double dmgMult = 1;
-                switch(WorldManager.difficulty){
-                case WorldManager.V_EASY:
-                    dmgMult = 0.5;
-                    break;
-                case WorldManager.EASY:
-                    dmgMult = 0.75;
-                    break;
-                case WorldManager.HARD:
-                    dmgMult = 1.5;
-                    break;
-                case WorldManager.V_HARD:
-                    dmgMult = 2;
-                    break;
-                }
-                dmgObj.damage((int)(damage * dmgMult));
+                dmgObj.damage(damage);
                 attacked = true;
             }
 

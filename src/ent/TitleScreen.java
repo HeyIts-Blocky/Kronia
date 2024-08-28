@@ -589,19 +589,19 @@ public class TitleScreen extends TridEntity {
             String diffDesc = "";
             switch(worldDiff){
             case WorldManager.V_EASY:
-                diffDesc = "- 50% entity health\n- Slimes only spawn at night\n- 50% hunger speed\n- Starving deals no damage\n- 50% damage taken\n- 1 enemy cap\n- Enemies move slower";
+                diffDesc = "- 50% entity health\n- Slimes only spawn at night\n- 50% hunger speed\n- Starving deals no damage\n- 200% health\n- 1 enemy cap\n- Enemies move slower";
                 break;
             case WorldManager.EASY:
-                diffDesc = "- 75% entity health\n- Slimes only spawn at night\n- 50% hunger speed\n- 75% damage taken\n- 2 enemy cap";
+                diffDesc = "- 75% entity health\n- Slimes only spawn at night\n- 50% hunger speed\n- 150% health\n- 2 enemy cap";
                 break;
             case WorldManager.NORMAL:
-                diffDesc = "- 100% entity health\n- Slimes spawn any time\n- 100% hunger speed\n- 100% damage taken\n- 3 enemy cap";
+                diffDesc = "- 100% entity health\n- Slimes spawn any time\n- 100% hunger speed\n- 100% health\n- 3 enemy cap";
                 break;
             case WorldManager.HARD:
-                diffDesc = "- 150% entity health\n- Slimes spawn any time\n- 10 enemy cap\n- 150% hunger speed\n- Enemies move faster\n- 125% damage taken\n- The caves are pitch-black";
+                diffDesc = "- 150% entity health\n- Slimes spawn any time\n- 10 enemy cap\n- 150% hunger speed\n- Enemies move faster\n- 75% health\n- The caves are pitch-black";
                 break;
             case WorldManager.V_HARD:
-                diffDesc = "- 200% entity health\n- Slimes spawn any time\n- 20 enemy cap\n- 200% hunger speed\n- Enemies move even faster\n- 150% damage taken\n- The caves and night are pitch-black";
+                diffDesc = "- 200% entity health\n- Slimes spawn any time\n- 20 enemy cap\n- 200% hunger speed\n- Enemies move even faster\n- 50% health\n- The caves and night are pitch-black";
                 break;
             }
             g.setFont(new Font(GameData.getFont(), Font.PLAIN, 20));

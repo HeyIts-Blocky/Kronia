@@ -126,8 +126,22 @@ public class WorldManager {
                 }
             }
         }
-        GameData.health = 100;
         GameData.maxHealth = 100;
+        switch(diff){
+            case V_EASY:
+                GameData.maxHealth = 200;
+                break;
+            case EASY:
+                GameData.maxHealth = 150;
+                break;
+            case HARD:
+                GameData.maxHealth = 75;
+                break;
+            case V_HARD:
+                GameData.maxHealth = 50;
+                break;
+        }
+        GameData.health = GameData.maxHealth;
         GameData.hunger = 100;
         GameData.maxHunger = 100;
         GameData.hungerSpeed = 0;

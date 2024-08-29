@@ -12,6 +12,9 @@ public class Boss extends GameObject {
         if(id == GameObject.APEXSLIME){
             if(Background.bg == Background.SURFACE) return true;
         }
+        if(id == GameObject.BIGMOLE){
+            if(Background.bg == Background.MINES) return true;
+        }
 
         return false;
     }

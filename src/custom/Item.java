@@ -74,7 +74,7 @@ public class Item {
     public static final int APEXSPAWN = 18, HARDJELLY = 19, BOW = 20, ARROW = 21, J_SWORD = 22, J_PICK = 23, J_AXE = 24, J_SHOVEL = 25, EMERGENCYPOGO = 26, STONELADDER = 27, IRONORE = 28, IRONINGOT = 29;
     public static final int I_SWORD = 30, I_PICK = 31, I_AXE = 32, COPPERORE = 33, COPPERINGOT = 34, C_SWORD = 35, C_PICK = 36, C_AXE = 37, ANVIL = 38, PEBBLE = 39, I_ARROW = 40, J_ARROW = 41;
     public static final int HJ_ARROW = 42, TUTWOOD = 43, CAMPFIRE = 44, HOTDOG = 45, CRATE = 46, FLASK = 47, STR_FLASK = 48, HP_FLASK = 49, REGEN_FLASK = 50, GLOW_FLASK = 51, MACE = 52, ASH = 53;
-    public static final int FIRE_ARROW = 54;
+    public static final int FIRE_ARROW = 54, WIRE = 55;
     /*****/
 
     private static ImageIcon[] imgs = {
@@ -133,6 +133,7 @@ public class Item {
             new ImageIcon("data/images/items/mace.png"), // 52
             new ImageIcon("data/images/items/ash.png"), // 53
             new ImageIcon("data/images/items/fireArrow.png"), // 54
+            new ImageIcon("data/images/items/copperWire.png"), // 55
     };
     private static int[] types = {
             T_NULL, // 0
@@ -190,6 +191,7 @@ public class Item {
             T_MACE, // 52
             T_NULL, // 53
             T_AMMO, // 54
+            T_NULL, // 55
     };
     private static int[][] data = { // atk, def, stuff like that
             {}, // 0
@@ -247,6 +249,7 @@ public class Item {
             {200, 250, 40, 4}, // 52
             {}, // 53
             {A_ARROW, 250, 40, 2, 5}, // 54
+            {}, // 55
     };
     public static String[] names = {
             "", // 0
@@ -304,6 +307,7 @@ public class Item {
             "Mace", // 52
             "Ash", // 53
             "Flaming Arrow", // 54
+            "Copper Wire", // 55
     };
     private static String[] descriptions = {
             "", // 0
@@ -361,5 +365,6 @@ public class Item {
             "A ball of death. That's metal as hell.", // 52
             "A pile of unrecognizable ash. What have you done?", // 53
             "Send them third degree burns from a safe distance.", // 54
+            "Simple, uninsulated, wire.", // 55
     };
 }

@@ -171,5 +171,6 @@ public class Recipe {
         new Recipe(new Item[]{new Item(Item.FLASK), new Item(Item.TORCH, 5), new Item(Item.JELLY, 5)}, new Item(Item.GLOW_FLASK), GameObject.WORKBENCH),
         new Recipe(new Item[]{new Item(Item.J_ARROW, 10), new Item(Item.TORCH)}, new Item(Item.FIRE_ARROW, 10)),
         new Recipe(new Item[]{new Item(Item.J_ARROW, 10)}, new Item(Item.FIRE_ARROW, 10), GameObject.CAMPFIRE),
+        new Recipe(new Item[]{new Item(Item.WOOD, 2), new Item(Item.COPPERINGOT, 10)}, new Item(Item.WIRE), GameObject.FURNACE),
     };
 }

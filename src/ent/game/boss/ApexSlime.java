@@ -1,15 +1,21 @@
 package ent.game.boss;
 
-import blib.util.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
+import javax.swing.JPanel;
+
+import blib.util.AnimImage;
+import blib.util.BTools;
+import blib.util.Position;
 import custom.Achievement;
 import custom.Item;
 import custom.Settings;
 import custom.WorldManager;
-import ent.*;
-import javax.swing.*;
-import java.awt.*;
-import trident.*;
-import ent.game.*;
+import ent.GameObject;
+import ent.game.BabySlime;
+import trident.Trident;
 public class ApexSlime extends Boss{
 
     AnimImage img = new AnimImage("data/images/ent/boss/apexSlime.png", 6, 6, 64, 64);

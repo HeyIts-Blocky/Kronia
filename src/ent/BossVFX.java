@@ -1,11 +1,15 @@
 package ent;
 
-import blib.game.ParticleEmitter;
-import blib.util.*;
-import trident.*;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
+
+import javax.swing.JPanel;
+
+import blib.game.ParticleEmitter;
+import blib.util.Position;
+import trident.TridEntity;
+import trident.Trident;
 
 public class BossVFX extends TridEntity {
 

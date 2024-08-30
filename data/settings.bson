@@ -1,4 +1,4 @@
-int volume 82
+int volume 0
 double sfx 1.0
 double music 1.0
 boolean richText false

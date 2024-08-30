@@ -1,19 +1,35 @@
 package trident;
 
-import javax.swing.*;
-import java.awt.*;
-import blib.game.*;
-import blib.util.*;
-
-import java.awt.event.*;
-
-import blib.input.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-import blib.anim.*;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
-import trident.ent.*;
-import update.*;
+import blib.anim.Animation;
+import blib.anim.Animator;
+import blib.game.CamShake;
+import blib.game.FrameManager;
+import blib.game.Player;
+import blib.input.InputAdapter;
+import blib.input.KeyManager;
+import blib.util.BTools;
+import blib.util.Position;
+import blib.util.Server;
+import trident.ent.BoxColl;
+import trident.ent.BoxNoColl;
+import trident.ent.InvisColl;
+import trident.ent.PlrStart;
+import trident.ent.TridLight;
+import trident.ent.Trigger;
+import update.Inputs;
+import update.Update;
 public class MainPanel extends JPanel {
 
     protected FrameManager frameManager = new FrameManager();

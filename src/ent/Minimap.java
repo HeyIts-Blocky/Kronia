@@ -1,12 +1,18 @@
 package ent;
 
-import blib.util.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Point;
+
+import javax.swing.JPanel;
+
+import blib.util.Position;
 import custom.GameData;
-import trident.*;
-import javax.swing.*;
-import java.awt.*;
-import ent.game.*;
-import ent.game.boss.*;
+import ent.game.LogWall;
+import ent.game.boss.Boss;
+import trident.TridEntity;
+import trident.Trident;
 public class Minimap extends TridEntity {
 
     // Constructor, runs when the entity is created

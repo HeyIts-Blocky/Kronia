@@ -1,12 +1,20 @@
 package trident;
 
-import java.awt.image.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
-import blib.util.*;
-import java.awt.*;
-import blib.game.*;
-import javax.swing.*;
+
+import javax.swing.ImageIcon;
+
+import blib.game.Entity;
+import blib.util.BTools;
+import blib.util.Position;
+import blib.util.TextBox;
 public class RenderingThread extends Thread {
 
     public BufferedImage lastFrame = null;

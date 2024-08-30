@@ -1,12 +1,18 @@
 package trident;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.awt.*;
-import java.io.*;
-import blib.bson.*;
-import blib.util.*;
-import trident.ent.*;
-import blib.game.*;
+
+import blib.bson.BSonList;
+import blib.bson.BSonObject;
+import blib.bson.BSonParser;
+import blib.game.Player;
+import blib.util.Position;
+import trident.ent.PlrStart;
 public class Scene {
     
     public final String name;

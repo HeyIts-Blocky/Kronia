@@ -1,11 +1,18 @@
 package ent;
 
-import blib.util.*;
-import trident.*;
-import javax.swing.*;
-import java.awt.*;
-import custom.*;
-import blib.game.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Point;
+
+import javax.swing.JPanel;
+
+import blib.game.Player;
+import blib.util.AnimImage;
+import blib.util.Position;
+import custom.GameData;
+import custom.Item;
+import trident.TridEntity;
+import trident.Trident;
 public class PlayerRenderer extends TridEntity {
 
     AnimImage[] imgs = {

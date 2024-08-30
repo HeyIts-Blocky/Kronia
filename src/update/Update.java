@@ -1,17 +1,41 @@
 package update;
 
-import trident.*;
-import ent.*;
+import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import blib.game.Player;
-import blib.util.*;
-import custom.*;
-import ent.game.*;
-import javax.swing.*;
-import java.awt.*;
-import ent.game.boss.*;
-import java.awt.event.*;
+import blib.util.BTools;
+import blib.util.Position;
+import custom.Achievement;
+import custom.Effect;
+import custom.GameData;
+import custom.Item;
+import custom.MusicManager;
+import custom.Recipe;
+import custom.Settings;
+import custom.WorldManager;
+import ent.Background;
+import ent.ExampleEntity;
+import ent.GameObject;
+import ent.HUD;
+import ent.ItemRenderer;
+import ent.Minimap;
+import ent.PlayerRenderer;
+import ent.PreviewRenderer;
+import ent.TitleScreen;
+import ent.TutorialBlock;
+import ent.game.Crate;
+import ent.game.Fire;
+import ent.game.LogWall;
+import ent.game.MaceBall;
+import ent.game.Projectile;
+import ent.game.Slime;
+import ent.game.boss.Boss;
+import trident.TridEntity;
+import trident.Trident;
 public class Update {
 
     public static void setup(){
@@ -526,6 +550,9 @@ public class Update {
             GameData.getSelItem().amount--;
             GameData.health = Math.min(GameData.maxHealth, GameData.health + 10);
         }
+        if(id == 4 && Background.bg == Background.MINES){
+            Background.changeBackground(Background.SURFACE);
+        }
     }
 
     public static int command(ArrayList<String> cmdParts){ // cmdParts.get(0) is the command, while the rest are arguments for the command.
@@ -696,6 +723,9 @@ public class Update {
                     Fire.setOnFire(obj, 10000);
                 }
                 return 0;
+            case "numEnt":
+                Trident.printConsole("Entities: " + Trident.getEntities().size());
+                return 0;
         }
         return 1; // return 1 if command is not recognized
     }
@@ -719,6 +749,7 @@ public class Update {
         "toggleHud",
         "notifTest <notifType>",
         "lightFire",
+        "numEnt",
     };
 
     public static void printItems(int page){

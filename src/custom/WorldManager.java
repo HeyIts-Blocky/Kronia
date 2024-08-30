@@ -1,14 +1,30 @@
 package custom;
 
-import java.io.*;
-import trident.*;
-import ent.*;
-import blib.util.*;
-import ent.game.*;
+import java.awt.Rectangle;
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import blib.bson.*;
-import ent.game.boss.*;
-import java.awt.*;
+
+import blib.bson.BSonList;
+import blib.bson.BSonObject;
+import blib.bson.BSonParser;
+import blib.util.BTools;
+import blib.util.Position;
+import ent.Background;
+import ent.GameObject;
+import ent.game.CaveRock;
+import ent.game.CaveSlime;
+import ent.game.CoalOre;
+import ent.game.CopperOre;
+import ent.game.Cow;
+import ent.game.IronOre;
+import ent.game.Mole;
+import ent.game.Rock;
+import ent.game.Slime;
+import ent.game.Tree;
+import ent.game.boss.Boss;
+import trident.TridEntity;
+import trident.Trident;
 public class WorldManager {
 
     private static final int DEFAULT_ENTITIES = 2000, MAX_ENTITIES = 8000; // default is per dimension, max is overall

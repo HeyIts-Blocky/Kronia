@@ -1,15 +1,18 @@
 package ent.game;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.util.ArrayList;
+
+import javax.swing.JPanel;
+
 import blib.game.ParticleEmitter;
 import blib.util.Position;
 import custom.Item;
-import ent.*;
+import ent.GameObject;
 import trident.TridEntity;
 import trident.Trident;
-
-import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
 
 public class Fire extends GameObject{
 

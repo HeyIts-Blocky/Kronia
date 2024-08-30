@@ -1,12 +1,17 @@
 package ent.game;
 
-import blib.util.*;
-import javax.swing.*;
-import java.awt.*;
-import ent.*;
-import custom.*;
-import blib.game.*;
-import trident.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+
+import javax.swing.JPanel;
+
+import blib.game.Light;
+import blib.util.AnimImage;
+import blib.util.Position;
+import custom.Item;
+import ent.GameObject;
+import trident.Trident;
 public class Torch extends GameObject {
 
     AnimImage img = new AnimImage("data/images/ent/torch.png", 6, 12, 32, 32);

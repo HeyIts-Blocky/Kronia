@@ -1,12 +1,23 @@
 package update;
 
-import java.awt.*;
-import java.awt.event.*;
-import blib.util.*;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
+
+import blib.util.BTools;
+import blib.util.Position;
+import custom.GameData;
+import custom.Item;
+import custom.MusicManager;
+import custom.Recipe;
+import custom.Settings;
+import custom.WorldManager;
+import ent.GameObject;
+import ent.HUD;
+import ent.TitleScreen;
 import ent.game.MaceBall;
-import trident.*;
-import custom.*;
-import ent.*;
+import trident.TridEntity;
+import trident.Trident;
 public class Inputs {
     
     public static void keyPressed(int key){

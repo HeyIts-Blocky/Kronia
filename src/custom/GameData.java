@@ -1,11 +1,12 @@
 package custom;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.awt.*;
-import ent.*;
-import trident.*;
-import ent.game.*;
-import blib.util.*;
+
+import blib.util.Position;
+import ent.GameObject;
+import ent.game.Crate;
+import trident.Trident;
 public class GameData {
     
     public static Item[] inventory = new Item[40]; // first 10 is hotbar

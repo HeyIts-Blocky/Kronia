@@ -1,14 +1,23 @@
 package ent;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
+
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
 import blib.game.Entity;
-import blib.util.*;
-import trident.*;
-import javax.swing.*;
-import java.awt.*;
+import blib.util.BTools;
+import blib.util.Position;
+import trident.TridEntity;
+import trident.Trident;
 public class Background extends TridEntity {
 
     public static int bg = 0;
-    public static final int SURFACE = 0, MINES = 1;
+    public static final int SURFACE = 0, MINES = 1, DEEPMINES = 2;
     public static final int OFFSET = 10500;
     
     ImageIcon img = new ImageIcon("data/images/bg/grass.png");
@@ -39,7 +48,7 @@ public class Background extends TridEntity {
             img.paintIcon(panel, g, x, y - 5000);
             img.paintIcon(panel, g, x - 5000, y);
             img.paintIcon(panel, g, x, y);
-        }else if(bg == MINES){
+        }else if(bg == MINES || bg == DEEPMINES){
             g.setColor(new Color(50, 50, 50));
             g.fillRect(0, 0, 700, 500);
             stone.paintIcon(panel, g, x - 5000, y - 5000);

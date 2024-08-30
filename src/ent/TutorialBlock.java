@@ -1,9 +1,14 @@
 package ent;
 
-import blib.util.*;
-import trident.*;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
+import javax.swing.JPanel;
+
+import blib.util.Position;
+import trident.TridEntity;
 public class TutorialBlock extends TridEntity {
 
     public int id;

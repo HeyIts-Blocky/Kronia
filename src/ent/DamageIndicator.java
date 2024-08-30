@@ -1,11 +1,17 @@
 package ent;
 
-import blib.util.*;
+import java.awt.Font;
+import java.awt.Graphics;
+
+import javax.swing.JPanel;
+
+import blib.util.BTools;
+import blib.util.Position;
+import blib.util.TextBox;
 import custom.GameData;
 import custom.Settings;
-import trident.*;
-import javax.swing.*;
-import java.awt.*;
+import trident.TridEntity;
+import trident.Trident;
 public class DamageIndicator extends TridEntity {
 
     private static final double gravity = 0.001;

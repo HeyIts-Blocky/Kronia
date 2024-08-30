@@ -1,10 +1,16 @@
 package trident.ent;
 
-import blib.util.*;
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
 
-import trident.*;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
+import blib.util.Position;
+import trident.TridEntity;
 public class Trigger extends TridEntity{
     
     public Color color = Color.blue;

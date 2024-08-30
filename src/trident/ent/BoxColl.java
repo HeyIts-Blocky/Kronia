@@ -1,10 +1,14 @@
 package trident.ent;
 
-import blib.util.*;
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
 
-import trident.*;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
+import blib.util.Position;
+import trident.TridEntity;
 public class BoxColl extends TridEntity{
 
     public Color color = Color.white;

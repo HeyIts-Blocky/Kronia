@@ -1,7 +1,8 @@
 package custom;
 
-import javax.swing.*;
-import blib.util.*;
+import javax.swing.ImageIcon;
+
+import blib.util.BTools;
 import ent.GameObject;
 public class Item {
 
@@ -74,7 +75,7 @@ public class Item {
     public static final int APEXSPAWN = 18, HARDJELLY = 19, BOW = 20, ARROW = 21, J_SWORD = 22, J_PICK = 23, J_AXE = 24, J_SHOVEL = 25, EMERGENCYPOGO = 26, STONELADDER = 27, IRONORE = 28, IRONINGOT = 29;
     public static final int I_SWORD = 30, I_PICK = 31, I_AXE = 32, COPPERORE = 33, COPPERINGOT = 34, C_SWORD = 35, C_PICK = 36, C_AXE = 37, ANVIL = 38, PEBBLE = 39, I_ARROW = 40, J_ARROW = 41;
     public static final int HJ_ARROW = 42, TUTWOOD = 43, CAMPFIRE = 44, HOTDOG = 45, CRATE = 46, FLASK = 47, STR_FLASK = 48, HP_FLASK = 49, REGEN_FLASK = 50, GLOW_FLASK = 51, MACE = 52, ASH = 53;
-    public static final int FIRE_ARROW = 54, WIRE = 55, ANTENNA = 56, MOLERADIO = 57, DRILLHEAD = 58;
+    public static final int FIRE_ARROW = 54, WIRE = 55, ANTENNA = 56, MOLERADIO = 57, DRILLHEAD = 58, DRILL = 59;
     /*****/
 
     private static ImageIcon[] imgs = {
@@ -137,6 +138,7 @@ public class Item {
             new ImageIcon("data/images/items/moleAntenna.png"), // 56
             new ImageIcon("data/images/items/moleRadio.png"), // 57
             new ImageIcon("data/images/items/drillhead.png"), // 58
+            new ImageIcon("data/images/items/drillhead.png"), // 59
     };
     private static int[] types = {
             T_NULL, // 0
@@ -198,6 +200,7 @@ public class Item {
             T_NULL, // 56
             T_BOSS_SPAWN, // 57
             T_NULL, // 58
+            T_TRIGGER, // 59
     };
     private static int[][] data = { // atk, def, stuff like that
             {}, // 0
@@ -259,6 +262,7 @@ public class Item {
             {}, // 56
             {GameObject.BIGMOLE}, // 57
             {}, // 58
+            {4}, // 59
     };
     public static String[] names = {
             "", // 0
@@ -320,6 +324,7 @@ public class Item {
             "Mole Antenna", // 56
             "Mole Radio", // 57
             "Drillhead", // 58
+            "Drill", // 59
     };
     private static String[] descriptions = {
             "", // 0
@@ -381,5 +386,6 @@ public class Item {
             "Fragile, but it could be used to contact someone important...", // 56
             "Here, you can speak to The Supervisor yourself.", // 57
             "Only the moles could make something as sharp as this. And only Supervisors can use it.", // 58
+            "Too heavy to use for mining, but it should be strong enough to dig yourself deeper.", // 59
     };
 }

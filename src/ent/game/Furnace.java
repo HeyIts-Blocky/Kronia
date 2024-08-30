@@ -1,10 +1,14 @@
 package ent.game;
 
-import blib.util.*;
-import javax.swing.*;
-import java.awt.*;
-import ent.*;
-import custom.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+
+import javax.swing.JPanel;
+
+import blib.util.AnimImage;
+import blib.util.Position;
+import custom.Item;
+import ent.GameObject;
 public class Furnace extends GameObject {
 
     AnimImage img = new AnimImage("data/images/ent/furnace.png", 5, 6, 32, 32);

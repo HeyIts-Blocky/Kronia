@@ -1,8 +1,9 @@
 package ent;
 
-import blib.util.*;
-import trident.*;
-import blib.game.*;
+import blib.game.Light;
+import blib.util.Position;
+import trident.TridEntity;
+import trident.Trident;
 public class GlowEffect extends TridEntity {
 
     public static boolean glow = false;

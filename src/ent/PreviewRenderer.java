@@ -1,12 +1,20 @@
 package ent;
 
-import blib.util.*;
+import java.awt.AlphaComposite;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+
+import javax.swing.JPanel;
+
+import blib.util.BTools;
+import blib.util.Position;
+import custom.GameData;
+import custom.Item;
 import ent.game.LogWall;
-import trident.*;
-import javax.swing.*;
-import java.awt.*;
-import custom.*;
-import java.awt.image.*;
+import trident.TridEntity;
+import trident.Trident;
 public class PreviewRenderer extends TridEntity {
 
     // Constructor, runs when the entity is created

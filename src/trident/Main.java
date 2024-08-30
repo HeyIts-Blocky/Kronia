@@ -1,7 +1,9 @@
 package trident;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Dimension;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 public class Main{
     protected static JFrame window = new JFrame("Kronia");
     public static void main(String[] args){

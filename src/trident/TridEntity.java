@@ -1,10 +1,15 @@
 package trident;
 
-import blib.game.*;
-import blib.util.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
+import blib.game.Entity;
+import blib.util.Position;
 public class TridEntity extends Entity {
 
     public final boolean HASCOLLISION;

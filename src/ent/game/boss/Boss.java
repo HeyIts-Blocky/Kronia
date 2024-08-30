@@ -1,11 +1,24 @@
 package ent.game.boss;
 
-import blib.util.*;
-import javax.swing.*;
-import java.awt.*;
-import ent.*;
-import custom.*;
-import trident.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
+import javax.swing.JPanel;
+
+import blib.util.BTools;
+import blib.util.Position;
+import custom.GameData;
+import custom.Item;
+import custom.MusicManager;
+import custom.Settings;
+import custom.WorldManager;
+import ent.Background;
+import ent.BossVFX;
+import ent.GameObject;
+import trident.TridEntity;
+import trident.Trident;
 public class Boss extends GameObject {
 
     public static boolean canSpawn(int id){

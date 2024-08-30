@@ -1,7 +1,11 @@
 package custom;
 
-import java.awt.*;
-import blib.util.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
+import blib.util.TextBox;
 public class TitleButton {
 
     public Rectangle rect;

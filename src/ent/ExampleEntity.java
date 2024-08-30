@@ -1,9 +1,12 @@
 package ent;
 
-import blib.util.*;
-import trident.*;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+
+import javax.swing.JPanel;
+
+import blib.util.Position;
+import trident.TridEntity;
 public class ExampleEntity extends TridEntity {
 
     // Constructor, runs when the entity is created

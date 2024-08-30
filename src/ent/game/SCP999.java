@@ -1,10 +1,15 @@
 package ent.game;
 
-import blib.util.*;
-import javax.swing.*;
-import java.awt.*;
-import ent.*;
-import custom.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
+import blib.util.BTools;
+import blib.util.Position;
+import custom.Item;
+import ent.GameObject;
 public class SCP999 extends GameObject {
 
     ImageIcon img = new ImageIcon("data/images/ent/999.png");

@@ -1,9 +1,11 @@
 package custom;
 
-import javax.swing.*;
-import blib.util.*;
-import ent.*;
-import trident.*;
+import javax.swing.ImageIcon;
+
+import blib.util.BTools;
+import blib.util.Position;
+import ent.GlowEffect;
+import trident.Trident;
 public class Effect {
     
     // effect IDs and data

@@ -1,14 +1,22 @@
 package ent.game;
 
-import blib.util.*;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.geom.*;
-import java.awt.image.*;
-import ent.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
+import blib.util.BTools;
+import blib.util.Position;
+import custom.GameData;
+import custom.Item;
+import ent.GameObject;
 import trident.TridEntity;
 import trident.Trident;
-import custom.*;
 public class Projectile extends GameObject {
 
     ImageIcon img = new ImageIcon("data/images/ent/coalOre.png");

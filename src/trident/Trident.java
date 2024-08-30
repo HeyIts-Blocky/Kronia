@@ -1,17 +1,26 @@
 package trident;
 
-import blib.game.*;
-import blib.util.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.*;
-import update.*;
-import java.io.*;
-import trident.ent.*;
-import com.jhlabs.image.GlowFilter;
+import javax.swing.ImageIcon;
+
 import com.jhlabs.image.ExposureFilter;
+import com.jhlabs.image.GlowFilter;
+
+import blib.game.CamShake;
+import blib.game.Entity;
+import blib.game.Light;
+import blib.game.LightManager;
+import blib.game.Player;
+import blib.util.BTools;
+import blib.util.Position;
+import trident.ent.TridLight;
+import update.Update;
 public class Trident {
 
     // Debug Settings

@@ -1,12 +1,42 @@
 package ent;
 
-import blib.util.*;
-import trident.*;
-import javax.swing.*;
-import java.awt.*;
-import ent.game.*;
-import custom.*;
-import ent.game.boss.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
+import javax.swing.JPanel;
+
+import blib.util.BTools;
+import blib.util.Position;
+import custom.Item;
+import custom.Settings;
+import custom.WorldManager;
+import ent.game.Anvil;
+import ent.game.Campfire;
+import ent.game.CaveRock;
+import ent.game.CaveSlime;
+import ent.game.CoalOre;
+import ent.game.CopperOre;
+import ent.game.Cow;
+import ent.game.Crate;
+import ent.game.DroppedItem;
+import ent.game.Furnace;
+import ent.game.IronOre;
+import ent.game.LogWall;
+import ent.game.Mole;
+import ent.game.Rock;
+import ent.game.SCP999;
+import ent.game.Slime;
+import ent.game.Torch;
+import ent.game.Tree;
+import ent.game.TutorialTree;
+import ent.game.Workbench;
+import ent.game.boss.ApexSlime;
+import ent.game.boss.BigMole;
+import ent.game.boss.Boss;
+import trident.TridEntity;
+import trident.Trident;
 public class GameObject extends TridEntity {
 
     public int maxHealth, health, id;

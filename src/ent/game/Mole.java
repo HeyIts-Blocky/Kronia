@@ -1,11 +1,18 @@
 package ent.game;
 
-import blib.util.*;
-import javax.swing.*;
-import java.awt.*;
-import ent.*;
-import custom.*;
-import trident.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+
+import javax.swing.JPanel;
+
+import blib.util.AnimImage;
+import blib.util.BTools;
+import blib.util.Position;
+import custom.Item;
+import custom.WorldManager;
+import ent.Background;
+import ent.GameObject;
+import trident.Trident;
 public class Mole extends GameObject {
 
     AnimImage idleR = new AnimImage("data/images/ent/mole/idleR.png", 4, 8, 32, 32);
@@ -130,6 +137,10 @@ public class Mole extends GameObject {
     public void dropItems(){
         GameObject.dropNoDelay(Item.RAWMEAT, BTools.randInt(0, 3), position);
         GameObject.dropNoDelay(Item.STONE, BTools.randInt(3, 6), position);
+        int chance = BTools.randInt(0, 20);
+        if(chance == 1){
+            GameObject.dropNoDelay(Item.ANTENNA, 1, position);
+        }
     }
     public void tookDamage(int amount){
         moveTime = 500;

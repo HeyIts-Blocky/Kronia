@@ -1,11 +1,19 @@
 package ent.game;
 
-import blib.util.*;
-import javax.swing.*;
-import java.awt.*;
-import ent.*;
-import custom.*;
-import trident.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
+import blib.util.AnimImage;
+import blib.util.BTools;
+import blib.util.Position;
+import custom.Item;
+import ent.Background;
+import ent.GameObject;
+import trident.Trident;
 public class Cow extends GameObject {
 
     ImageIcon idleR = new ImageIcon("data/images/ent/cow/idleR.png");

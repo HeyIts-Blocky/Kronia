@@ -1,17 +1,23 @@
 package ent.game.boss;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
+import javax.swing.JPanel;
+
 import blib.game.Light;
-import blib.util.*;
-import custom.Achievement;
+import blib.util.AnimImage;
+import blib.util.BTools;
+import blib.util.Position;
 import custom.GameData;
 import custom.Item;
 import custom.Settings;
 import custom.WorldManager;
-import ent.*;
-import javax.swing.*;
-import java.awt.*;
-import trident.*;
-import ent.game.*;
+import ent.Background;
+import ent.GameObject;
+import trident.TridEntity;
+import trident.Trident;
 public class BigMole extends Boss{
 
     boolean faceRight = false;

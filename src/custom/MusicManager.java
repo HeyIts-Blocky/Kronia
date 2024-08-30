@@ -2,10 +2,12 @@ package custom;
 
 import javax.sound.sampled.Clip;
 
-import blib.util.*;
-import ent.game.boss.*;
+import blib.util.Audio;
+import blib.util.BTools;
+import ent.Background;
+import ent.HUD;
+import ent.game.boss.Boss;
 import trident.Trident;
-import ent.*;
 public class MusicManager {
 
     private static Song[] titleSongs = {

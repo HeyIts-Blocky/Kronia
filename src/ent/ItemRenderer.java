@@ -1,13 +1,20 @@
 package ent;
 
-import blib.util.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
+import blib.util.Position;
 import custom.GameData;
 import custom.Item;
-import trident.*;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.*;
-import java.awt.geom.*;
+import trident.TridEntity;
+import trident.Trident;
 public class ItemRenderer extends TridEntity {
 
     // Constructor, runs when the entity is created

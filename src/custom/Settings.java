@@ -1,12 +1,15 @@
 package custom;
 
-import java.io.*;
+import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import blib.bson.*;
-import blib.util.*;
-import java.awt.*;
-import java.awt.event.*;
-import trident.*;
+
+import blib.bson.BSonObject;
+import blib.bson.BSonParser;
+import blib.util.Audio;
+import trident.Trident;
 public class Settings {
 
     public static double sfxVolume = 1;

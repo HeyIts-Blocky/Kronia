@@ -1,9 +1,15 @@
 package custom;
 
-import javax.swing.*;
-import java.awt.*;
-import blib.util.*;
-import trident.*;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
+
+import javax.swing.ImageIcon;
+
+import blib.util.Audio;
+import blib.util.TextBox;
+import trident.Trident;
 public class TitleSlider extends TitleButton{
 
     public static int MASTER = 0, SFX = 1, MUSIC = 2;

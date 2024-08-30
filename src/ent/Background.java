@@ -69,6 +69,7 @@ public class Background extends TridEntity {
         double x = 5000;
         double y = 5000;
         if(bg == MINES) x += OFFSET;
+        if(bg == DEEPMINES) y += OFFSET;
         if(Trident.getCurrentScene().name.equals("title")){
             x = 0;
             y = 0;
@@ -86,6 +87,7 @@ public class Background extends TridEntity {
         while(y > 10000) y -= OFFSET;
 
         if(bg == MINES) x += OFFSET;
+        if(bg == DEEPMINES) y += OFFSET;
 
         Trident.setPlrPos(new Position(x, y));
 
@@ -108,6 +110,10 @@ public class Background extends TridEntity {
         if(bg == MINES){
             clamps[X1] += OFFSET;
             clamps[X2] += OFFSET;
+        }
+        if(bg == DEEPMINES){
+            clamps[Y1] += OFFSET;
+            clamps[Y2] += OFFSET;
         }
 
         return clamps;

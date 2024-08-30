@@ -46,6 +46,10 @@ public class Minimap extends TridEntity {
             g.setColor(Color.gray);
             g.fillRect(Trident.getFrameWidth() - 75 - 47, Trident.getFrameHeight() - 100 + 3, 94, 94);
         }
+        if(Background.bg == Background.DEEPMINES){
+            g.setColor(Color.darkGray);
+            g.fillRect(Trident.getFrameWidth() - 75 - 47, Trident.getFrameHeight() - 100 + 3, 94, 94);
+        }
 
         for(int i = 0; i < Trident.getEntities().size(); i++){
             TridEntity e = Trident.getEntities().get(i);

@@ -138,7 +138,7 @@ public class Item {
             new ImageIcon("data/images/items/moleAntenna.png"), // 56
             new ImageIcon("data/images/items/moleRadio.png"), // 57
             new ImageIcon("data/images/items/drillhead.png"), // 58
-            new ImageIcon("data/images/items/drillhead.png"), // 59
+            new ImageIcon("data/images/items/drill.png"), // 59
     };
     private static int[] types = {
             T_NULL, // 0

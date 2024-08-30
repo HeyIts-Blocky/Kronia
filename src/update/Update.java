@@ -115,6 +115,7 @@ public class Update {
 
             if(Background.bg == Background.SURFACE) Trident.setDefaultLight(BTools.flip((int)(GameData.getDarkness() * 255), 255));
             if(Background.bg == Background.MINES) Trident.setDefaultLight((WorldManager.difficulty >= WorldManager.HARD) ? 0 : 25);
+            if(Background.bg == Background.DEEPMINES) Trident.setDefaultLight(0);
             GameData.time += elapsedTime;
             if(GameData.time > GameData.maxTime || Trident.getCurrentScene().name.equals("tutorial")) GameData.time = 0;
 
@@ -551,7 +552,7 @@ public class Update {
             GameData.health = Math.min(GameData.maxHealth, GameData.health + 10);
         }
         if(id == 4 && Background.bg == Background.MINES){
-            Background.changeBackground(Background.SURFACE);
+            Background.changeBackground(Background.DEEPMINES);
         }
     }
 

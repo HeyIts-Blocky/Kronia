@@ -51,7 +51,6 @@ public class MaceBall extends GameObject {
         BufferedImage chain = new BufferedImage(throwDist, 8, BufferedImage.TYPE_INT_ARGB);
         for(int i = 0; i < throwDist / 8 + 1; i++){
             chainImg.paintIcon(null, chain.getGraphics(), i * 25, 0);
-            System.out.println(i);
         }
         BufferedImage rotatedImg = new BufferedImage((int)(Trident.getFrameWidth() * 1.5), Trident.getFrameHeight(), BufferedImage.TYPE_INT_ARGB);
         BufferedImage positionedImg = new BufferedImage((int)(Trident.getFrameWidth() * 1.5), Trident.getFrameHeight(), BufferedImage.TYPE_INT_ARGB);

@@ -43,46 +43,49 @@ public class Inputs {
         if(Trident.getCurrentScene().name.equals("world") || (Trident.getCurrentScene().name.equals("tutorial") && GameData.tutorialTriggers[0])){
             if(GameData.spectate) return;
             // in world
-            if(key == KeyEvent.VK_1){
-                GameData.selHotbar = 0;
-                Settings.playSound("data/sound/hotbarSel.wav");
+            if(!MaceBall.maceOut()){
+                if(key == KeyEvent.VK_1){
+                    GameData.selHotbar = 0;
+                    Settings.playSound("data/sound/hotbarSel.wav");
+                }
+                if(key == KeyEvent.VK_2){
+                    GameData.selHotbar = 1;
+                    Settings.playSound("data/sound/hotbarSel.wav");
+                }
+                if(key == KeyEvent.VK_3){
+                    GameData.selHotbar = 2;
+                    Settings.playSound("data/sound/hotbarSel.wav");
+                }
+                if(key == KeyEvent.VK_4){
+                    GameData.selHotbar = 3;
+                    Settings.playSound("data/sound/hotbarSel.wav");
+                }
+                if(key == KeyEvent.VK_5){
+                    GameData.selHotbar = 4;
+                    Settings.playSound("data/sound/hotbarSel.wav");
+                }
+                if(key == KeyEvent.VK_6){
+                    GameData.selHotbar = 5;
+                    Settings.playSound("data/sound/hotbarSel.wav");
+                }
+                if(key == KeyEvent.VK_7){
+                    GameData.selHotbar = 6;
+                    Settings.playSound("data/sound/hotbarSel.wav");
+                }
+                if(key == KeyEvent.VK_8){
+                    GameData.selHotbar = 7;
+                    Settings.playSound("data/sound/hotbarSel.wav");
+                }
+                if(key == KeyEvent.VK_9){
+                    GameData.selHotbar = 8;
+                    Settings.playSound("data/sound/hotbarSel.wav");
+                }
+                if(key == KeyEvent.VK_0){
+                    GameData.selHotbar = 9;
+                    Settings.playSound("data/sound/hotbarSel.wav");
+                }
             }
-            if(key == KeyEvent.VK_2){
-                GameData.selHotbar = 1;
-                Settings.playSound("data/sound/hotbarSel.wav");
-            }
-            if(key == KeyEvent.VK_3){
-                GameData.selHotbar = 2;
-                Settings.playSound("data/sound/hotbarSel.wav");
-            }
-            if(key == KeyEvent.VK_4){
-                GameData.selHotbar = 3;
-                Settings.playSound("data/sound/hotbarSel.wav");
-            }
-            if(key == KeyEvent.VK_5){
-                GameData.selHotbar = 4;
-                Settings.playSound("data/sound/hotbarSel.wav");
-            }
-            if(key == KeyEvent.VK_6){
-                GameData.selHotbar = 5;
-                Settings.playSound("data/sound/hotbarSel.wav");
-            }
-            if(key == KeyEvent.VK_7){
-                GameData.selHotbar = 6;
-                Settings.playSound("data/sound/hotbarSel.wav");
-            }
-            if(key == KeyEvent.VK_8){
-                GameData.selHotbar = 7;
-                Settings.playSound("data/sound/hotbarSel.wav");
-            }
-            if(key == KeyEvent.VK_9){
-                GameData.selHotbar = 8;
-                Settings.playSound("data/sound/hotbarSel.wav");
-            }
-            if(key == KeyEvent.VK_0){
-                GameData.selHotbar = 9;
-                Settings.playSound("data/sound/hotbarSel.wav");
-            }
+            
 
             if(key == Settings.keybinds[Settings.INVENTORY]){
                 GameData.invOpen = !GameData.invOpen;
@@ -366,18 +369,21 @@ public class Inputs {
                     }
                 }
             }else{
-                int slot = -1;
-                for(int i = 0; i < GameData.invBoxes.size(); i++){
-                    Rectangle r = GameData.invBoxes.get(i);
-                    if(r.contains(mousePos)){
-                        slot = i;
-                        break;
+                if(!MaceBall.maceOut()){
+                    int slot = -1;
+                    for(int i = 0; i < GameData.invBoxes.size(); i++){
+                        Rectangle r = GameData.invBoxes.get(i);
+                        if(r.contains(mousePos)){
+                            slot = i;
+                            break;
+                        }
+                    }
+                    if(slot >= 0 && slot <= 9){
+                        GameData.selHotbar = slot;
+                        
                     }
                 }
-                if(slot >= 0 && slot <= 9){
-                    GameData.selHotbar = slot;
-                    
-                }
+                
             }
         }
         if(Trident.getCurrentScene().name.equals("title") || GameData.settingsOpen){

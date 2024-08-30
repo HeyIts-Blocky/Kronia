@@ -105,7 +105,7 @@ public class Mole extends GameObject {
                     // Throw Projectile
                     double dir = BTools.getAngle(position, Trident.getPlrPos());
                     int ang = (int)(Math.toDegrees(dir) * 10);
-                    int[] data = {ang, Item.PEBBLE, 35, 5};
+                    int[] data = {ang, Item.PEBBLE, 35, 5, 0};
                     Trident.spawnEntity(new Projectile(position.copy(), data, this));
 
                     return;

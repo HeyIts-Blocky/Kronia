@@ -205,7 +205,7 @@ public class GameObject extends TridEntity {
         case CRATE:
             return new Crate(pos, hp, data);
         default:
-            Trident.printConsole("<mkObj>: Unkown id: " + id);
+            Trident.printConsole("<mkObj>: Unknown id: " + id);
             return new Tree(pos);
         }
     }
@@ -255,8 +255,10 @@ public class GameObject extends TridEntity {
             return new Campfire(pos);
         case CRATE:
             return new Crate(pos, data);
+        case BIGMOLE:
+            return new BigMole(pos);
         default:
-            Trident.printConsole("<placeObj>: Unkown id: " + id);
+            Trident.printConsole("<placeObj>: Unknown id: " + id);
             return new Tree(pos);
         }
     }

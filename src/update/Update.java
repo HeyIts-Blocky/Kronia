@@ -393,6 +393,7 @@ public class Update {
                     if(i.id != Item.NOTHING) GameObject.dropNoDelay(i, Trident.getPlrPos());
                 }
                 GameData.clearInventory();
+                GameData.effects = new ArrayList<Effect>();
 
                 if(!GameData.spectate){
                     GameData.spectate = true;

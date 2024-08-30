@@ -13,23 +13,44 @@ public class BossVFX extends TridEntity {
     long life = 1750;
 
     // Constructor, runs when the entity is created
-    public BossVFX(Position pos){
+    public BossVFX(Position pos, int id){
         super(pos);
 
-        emitter = new ParticleEmitter(new Position(0, 0), 16, 0, true);
-        emitter.spawnSquares = false;
-        emitter.spawnCircles = true;
-        emitter.spawnImages = false;
-        emitter.speed = 0.81;
-        emitter.size = 27;
-        emitter.minLife = 118;
-        emitter.maxLife = 613;
-        emitter.fadeOut = true;
-        ArrayList<Color> circleColors = new ArrayList<Color>();
-        circleColors.add(new Color(141, 0, 240));
-        circleColors.add(new Color(63, 0, 171));
-        circleColors.add(new Color(209, 11, 221));
-        emitter.circleColors = circleColors;
+        switch(id){
+        case GameObject.APEXSLIME:
+            emitter = new ParticleEmitter(new Position(0, 0), 16, 0, true);
+            emitter.spawnSquares = false;
+            emitter.spawnCircles = true;
+            emitter.spawnImages = false;
+            emitter.speed = 0.81;
+            emitter.size = 27;
+            emitter.minLife = 118;
+            emitter.maxLife = 613;
+            emitter.fadeOut = true;
+            ArrayList<Color> circleColors = new ArrayList<Color>();
+            circleColors.add(new Color(141, 0, 240));
+            circleColors.add(new Color(63, 0, 171));
+            circleColors.add(new Color(209, 11, 221));
+            emitter.circleColors = circleColors;
+            break;
+        case GameObject.BIGMOLE:
+            emitter = new ParticleEmitter(new Position(0, 0), 16, 0, true);
+            emitter.spawnSquares = false;
+            emitter.spawnCircles = true;
+            emitter.spawnImages = false;
+            emitter.speed = 0.81;
+            emitter.size = 27;
+            emitter.minLife = 118;
+            emitter.maxLife = 613;
+            emitter.fadeOut = true;
+            circleColors = new ArrayList<Color>();
+            circleColors.add(new Color(234, 234, 234));
+            circleColors.add(new Color(255, 0, 0));
+            circleColors.add(new Color(150, 0, 0));
+            emitter.circleColors = circleColors;
+            break;
+        }
+        
 
     }
 

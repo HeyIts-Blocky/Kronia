@@ -81,22 +81,6 @@ public class GameData {
 
     public static void damage(int amount){
         if(hurtTime > 0 || (Trident.getCurrentScene().name.equals("tutorial") && !tutorialTriggers[3]) || health <= 0) return;
-        double hpMult = 1;
-        switch(WorldManager.difficulty){
-        case WorldManager.V_EASY:
-            hpMult = 0.5;
-            break;
-        case WorldManager.EASY:
-            hpMult = 0.75;
-            break;
-        case WorldManager.HARD:
-            hpMult = 1.5;
-            break;
-        case WorldManager.V_HARD:
-            hpMult = 2;
-            break;
-        }
-        amount *= hpMult;
         health -= amount;
         hurtTime = 1000;
         healTime += 2000;
@@ -104,22 +88,6 @@ public class GameData {
         Settings.playSound("data/sound/damage.wav");
     }
     public static void forceDamage(int amount){
-        double hpMult = 1;
-        switch(WorldManager.difficulty){
-            case WorldManager.V_EASY:
-                hpMult = 0.5;
-                break;
-            case WorldManager.EASY:
-                hpMult = 0.75;
-                break;
-            case WorldManager.HARD:
-                hpMult = 1.5;
-                break;
-            case WorldManager.V_HARD:
-                hpMult = 2;
-                break;
-            }
-            amount *= hpMult;
         health -= amount;
         hurtTime = 1000;
         healTime += 2000;

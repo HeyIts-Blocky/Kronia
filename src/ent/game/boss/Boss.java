@@ -143,14 +143,15 @@ public class Boss extends GameObject {
         if(health <= 0){
             Settings.playSound("data/sound/bossDeath.wav");
             Trident.shakeCam(1);
-            Trident.spawnEntity(new BossVFX(position.copy()));
+            Trident.spawnEntity(new BossVFX(position.copy(), id));
         }
     }
 
     public void clampTarget(){
         // assumes targetPos is not null
-        targetPos.x = BTools.clamp(targetPos.x, 15, 10000 - 15);
-        targetPos.y = BTools.clamp(targetPos.y, 15, 10000 - 15);
+        int[] clamp = Background.getClampPos();
+        targetPos.x = BTools.clamp(targetPos.x, clamp[0], clamp[1]);
+        targetPos.y = BTools.clamp(targetPos.y, clamp[2], clamp[3]);
     }
 
     // Runs at the beginning of the scene

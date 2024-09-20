@@ -25,12 +25,12 @@ public class DroppedItem extends GameObject {
     // Render while in game
     public void render(Graphics g, JPanel panel, int x, int y){
         if(data[1] > 1){
-            g.drawImage(Item.getImg(data[0]).getImage(), x - 6, y - 6, 16, 16, null);
+            g.drawImage(Item.getImg((short)data[0]).getImage(), x - 6, y - 6, 16, 16, null);
         }
         if(data[1] > 10){
-            g.drawImage(Item.getImg(data[0]).getImage(), x - 10, y - 10, 16, 16, null);
+            g.drawImage(Item.getImg((short)data[0]).getImage(), x - 10, y - 10, 16, 16, null);
         }
-        g.drawImage(Item.getImg(data[0]).getImage(), x - 8, y - 8, 16, 16, null);
+        g.drawImage(Item.getImg((short)data[0]).getImage(), x - 8, y - 8, 16, 16, null);
         
     }
 
@@ -67,7 +67,7 @@ public class DroppedItem extends GameObject {
         return data[1];
     }
     public Item getItem(){
-        return new Item(data[0], data[1]);
+        return new Item((short)data[0], data[1]);
     }
 
 

@@ -237,12 +237,12 @@ public class Inputs {
                                 }else{
                                     int total = GameData.cursorItem.amount + GameData.inventory[slot].amount;
                                     if(total <= 999){
-                                        GameData.inventory[slot].amount = total;
+                                        GameData.inventory[slot].amount = (short)total;
                                         GameData.cursorItem = null;
                                     }else{
                                         int diff = total - 999;
                                         GameData.inventory[slot].amount = 999;
-                                        GameData.cursorItem.amount = diff;
+                                        GameData.cursorItem.amount = (short)diff;
                                     }
                                 }
                                 
@@ -318,20 +318,20 @@ public class Inputs {
                                     }else{
                                         int total = GameData.cursorItem.amount + GameData.openCrate.getSlot(slot).amount;
                                         if(total <= 999){
-                                            int id = GameData.openCrate.getSlot(slot).id;
+                                            short id = GameData.openCrate.getSlot(slot).id;
                                             GameData.openCrate.setSlot(slot, new Item(id, total));
                                             GameData.cursorItem = null;
                                         }else{
                                             int diff = total - 999;
-                                            int id = GameData.openCrate.getSlot(slot).id;
+                                            short id = GameData.openCrate.getSlot(slot).id;
                                             GameData.openCrate.setSlot(slot, new Item(id, 999));
-                                            GameData.cursorItem.amount = diff;
+                                            GameData.cursorItem.amount = (short)diff;
                                         }
                                     }
                                     
                                 }
                                 if(mb == 3){
-                                    int id = GameData.openCrate.getSlot(slot).id;
+                                    short id = GameData.openCrate.getSlot(slot).id;
                                     int amount = GameData.openCrate.getSlot(slot).amount;
                                     GameData.openCrate.setSlot(slot, new Item(id, amount + 1));
                                     GameData.cursorItem.amount--;

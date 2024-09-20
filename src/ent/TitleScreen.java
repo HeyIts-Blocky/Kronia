@@ -890,7 +890,7 @@ public class TitleScreen extends TridEntity {
         Trident.resetKeys();
         Trident.setupScenes(); // make sure any previous sessions are removed
         Trident.loadScene("world");
-        WorldManager.newWorld(worldName, worldDiff);
+        WorldManager.newWorld(worldName, (byte)worldDiff);
         
     }
 }

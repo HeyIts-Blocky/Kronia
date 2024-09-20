@@ -3,11 +3,11 @@ double x 132.0
 double y 94.5
 int health 100
 int maxHP 100
-int hunger 100
+int hunger 99
 int maxHunger 100
-double hungerSpeed 0.0
+double hungerSpeed 0.6
 long hungerTime 10000
-long time 12416
+long time 101967
 int dimension 0
 int difficulty 2
 { surfaceEnt
@@ -19,10 +19,10 @@ int difficulty 2
 { inventory
 int 5
 int 1
-int 59
-int 1
 int 25
 int 1
+int 27
+int 996
 int 0
 int 0
 int 0

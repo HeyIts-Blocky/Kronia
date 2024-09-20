@@ -2,6 +2,7 @@ package update;
 
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -581,7 +582,7 @@ public class Update {
                     Trident.printConsole("Item ID " + Integer.parseInt(cmdParts.get(1)) + " is out of bounds!");
                     return 0;
                 }
-                GameData.addItem(new Item(Integer.parseInt(cmdParts.get(1)), Integer.parseInt(cmdParts.get(2))));
+                GameData.addItem(new Item((short)Integer.parseInt(cmdParts.get(1)), Integer.parseInt(cmdParts.get(2))));
                 return 0;
             case "fillMeWithWood":
                 while(GameData.canAdd(new Item(Item.WOOD, 999))){
@@ -727,6 +728,28 @@ public class Update {
             case "numEnt":
                 Trident.printConsole("Entities: " + Trident.getEntities().size());
                 return 0;
+            case "ramUsage":
+                Runtime runtime = Runtime.getRuntime();
+
+                NumberFormat format = NumberFormat.getInstance();
+
+                long maxMemory = runtime.maxMemory();
+                long allocatedMemory = runtime.totalMemory();
+                long freeMemory = runtime.freeMemory();
+
+                Trident.printConsole(" -------- ");
+                Trident.printConsole("free memory: " + format.format(freeMemory / 1024 / 1024) + " MB\n");
+                Trident.printConsole("allocated memory: " + format.format(allocatedMemory / 1024 / 1024) + " MB  <--- This is seen in the task manager\n");
+                Trident.printConsole("used memory: " + format.format((allocatedMemory - freeMemory) / 1024 / 1024) + " MB  <--- This is what's being used by objects and the such");
+                Trident.printConsole("max memory: " + format.format(maxMemory / 1024 / 1024) + " MB\n");
+                Trident.printConsole("total free memory: " + format.format((freeMemory + (maxMemory - allocatedMemory)) / 1024 / 1024) + " MB\n");
+                Trident.printConsole(" -------- ");
+                return 0;
+            case "cleanRam":
+                System.gc();
+                
+                Trident.runCommand("ramUsage");
+                return 0;
         }
         return 1; // return 1 if command is not recognized
     }
@@ -751,6 +774,8 @@ public class Update {
         "notifTest <notifType>",
         "lightFire",
         "numEnt",
+        "ramUsage",
+        "cleanRam", 
     };
 
     public static void printItems(int page){

@@ -72,7 +72,7 @@ public class Crate extends GameObject {
 
         int id = data[slot];
         int amount = data[slot + 30];
-        return new Item(id, amount);
+        return new Item((short)id, amount);
     }
     public void setSlot(int slot, Item item){
         if(slot < 0 || slot >= 30) return;

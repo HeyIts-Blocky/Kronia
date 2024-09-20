@@ -42,7 +42,7 @@ public class Projectile extends GameObject {
 
     // Render while in game
     public void render(Graphics g, JPanel panel, int x, int y){
-        ImageIcon img = Item.getImg(data[1]);
+        ImageIcon img = Item.getImg((short)data[1]);
         AffineTransform transform = new AffineTransform();
         transform.rotate(dir, 32, 32);
         AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);

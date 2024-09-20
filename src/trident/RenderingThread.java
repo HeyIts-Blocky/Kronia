@@ -142,6 +142,7 @@ public class RenderingThread extends Thread {
                     g.setFont(new Font("Arial", Font.BOLD, 20));
                     TextBox.draw("ERROR\nOpen console with [~](tilde)", g, Trident.getFrameWidth() / 2, 10, TextBox.CENTER);
                 }
+                
 
                 lastFrame = newFrame;
             }catch(Exception e){
@@ -153,4 +154,6 @@ public class RenderingThread extends Thread {
 
         }
     }
+
+
 }

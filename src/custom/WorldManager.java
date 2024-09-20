@@ -12,6 +12,7 @@ import blib.util.BTools;
 import blib.util.Position;
 import ent.Background;
 import ent.GameObject;
+import ent.HUD;
 import ent.game.CaveRock;
 import ent.game.CaveSlime;
 import ent.game.CoalOre;
@@ -27,16 +28,18 @@ import trident.TridEntity;
 import trident.Trident;
 public class WorldManager {
 
-    private static final int DEFAULT_ENTITIES = 2000, MAX_ENTITIES = 8000; // default is per dimension, max is overall
-    private static long spawnTimer = 0, spawnTime = 60000;
-    private static long enemyTimer = 0, enemyTime = 30000;
+    private static final int DEFAULT_ENTITIES = 2000, MAX_ENTITIES = 5000; // per dimension
+    private static int spawnTimer = 0, spawnTime = 60000;
+    private static int enemyTimer = 0, enemyTime = 30000;
 
-    public static int enemyCap = 3;
+    public static byte enemyCap = 3;
 
     public static String worldName = "";
-    public static int difficulty = 2;
-    public static final int V_EASY = 0, EASY = 1, NORMAL = 2, HARD = 3, V_HARD = 4;
-    public static int defaultDiff = NORMAL;
+    public static byte difficulty = 2;
+    public static final byte V_EASY = 0, EASY = 1, NORMAL = 2, HARD = 3, V_HARD = 4;
+    public static byte defaultDiff = NORMAL;
+
+    public static final byte WORLD_SAVE_VERSION = 1; // INCREASE THIS NUMBER EVERY TIME THE WAY WORLDS ARE SAVED GETS CHANGED
 
     public static void checkWorld(long elapsedTime){
         if(Trident.getCurrentScene().name.equals("tutorial")) return;
@@ -63,7 +66,7 @@ public class WorldManager {
             enemyCap = 20;
             break;
         }
-        if(enemyTimer >= enemyTime && numEnemies() < enemyCap){
+        if(spawnEnemies && enemyTimer >= enemyTime && numEnemies() < enemyCap){
             enemyTimer = 0;
             // spawn an enemy
             int ang = BTools.randInt(0, 360);
@@ -122,7 +125,7 @@ public class WorldManager {
         return num;
     }
     
-    public static void newWorld(String name, int diff){
+    public static void newWorld(String name, byte diff){
         worldName = name;
         GameData.clearInventory();
         difficulty = diff;
@@ -170,41 +173,113 @@ public class WorldManager {
 
     private static void spawnEnt(){
 
-        // Spawn Surface
-        Position pos = new Position(BTools.randInt(10, 10000 - 10), BTools.randInt(10, 10000 - 10));
-        int type = BTools.randInt(0, 5);
-        if(type == 0){
-            Trident.spawnEntity(new Tree(pos));
+        if(Background.bg == Background.SURFACE){
+            // Spawn Surface
+            Position pos = new Position(BTools.randInt(10, 10000 - 10), BTools.randInt(10, 10000 - 10));
+            int type = BTools.randInt(0, 5);
+            if(type == 0){
+                Trident.spawnEntity(new Tree(pos));
+            }
+            if(type == 1){
+                Trident.spawnEntity(new Rock(pos));
+            }
+            if(type == 2){
+                Trident.spawnEntity(new Cow(pos));
+            }
+            if(type == 3){
+                Trident.spawnEntity(new Tree(pos));
+                Trident.spawnEntity(new Tree(new Position(pos.x - BTools.randInt(10, 50), pos.y - BTools.randInt(10, 50))));
+                Trident.spawnEntity(new Tree(new Position(pos.x + BTools.randInt(10, 50), pos.y - BTools.randInt(10, 50))));
+                Trident.spawnEntity(new Tree(new Position(pos.x - BTools.randInt(10, 50), pos.y + BTools.randInt(10, 50))));
+                Trident.spawnEntity(new Tree(new Position(pos.x + BTools.randInt(10, 50), pos.y + BTools.randInt(10, 50))));
+            }
+            if(type == 4){
+                Trident.spawnEntity(new CoalOre(pos));
+            }
         }
-        if(type == 1){
-            Trident.spawnEntity(new Rock(pos));
+        
+        if(Background.bg == Background.MINES){
+            // Spawn Mines
+            Position pos = new Position(BTools.randInt(10, 10000 - 10), BTools.randInt(10, 10000 - 10));
+            pos.x += Background.OFFSET;
+            int type = BTools.randInt(0, 3);
+            if(type == 0){
+                Trident.spawnEntity(new CaveRock(pos));
+            }
+            if(type == 1){
+                Trident.spawnEntity(new IronOre(pos));
+            }
+            if(type == 2){
+                Trident.spawnEntity(new CopperOre(pos));
+            }
         }
-        if(type == 2){
-            Trident.spawnEntity(new Cow(pos));
+        
+        if(Background.bg == Background.DEEPMINES){
+            // Spawn Deep Mines
+            Position pos = new Position(BTools.randInt(10, 10000 - 10), BTools.randInt(10, 10000 - 10));
+            pos.y += Background.OFFSET;
+            int type = BTools.randInt(0, 2);
+            if(type == 0){
+                Trident.spawnEntity(new CaveRock(pos));
+            }
+            if(type == 1){
+                Trident.spawnEntity(new IronOre(pos));
+            }
         }
-        if(type == 3){
-            Trident.spawnEntity(new Tree(pos));
-            Trident.spawnEntity(new Tree(new Position(pos.x - BTools.randInt(10, 50), pos.y - BTools.randInt(10, 50))));
-            Trident.spawnEntity(new Tree(new Position(pos.x + BTools.randInt(10, 50), pos.y - BTools.randInt(10, 50))));
-            Trident.spawnEntity(new Tree(new Position(pos.x - BTools.randInt(10, 50), pos.y + BTools.randInt(10, 50))));
-            Trident.spawnEntity(new Tree(new Position(pos.x + BTools.randInt(10, 50), pos.y + BTools.randInt(10, 50))));
-        }
-        if(type == 4){
-            Trident.spawnEntity(new CoalOre(pos));
+        
+    }
+
+    public static void loadEntities(int dimension){
+        // save game
+        saveWorld();
+        HUD.addNotif("World Saved", HUD.NOTIF_AUTOSAVE);
+
+        Position pos = Trident.getPlrPos();
+        Trident.setupScenes();
+        Trident.loadScene("world");
+        Trident.setPlrPos(pos);
+        ArrayList<BSonObject> objects = BSonParser.readFile("data/worlds/" + worldName + ".bson");
+        BSonList l;
+        switch(dimension){
+        case Background.SURFACE:
+            l = (BSonList)BSonParser.getObject("surfaceEnt", objects);
+            break;
+        case Background.MINES:
+            l = (BSonList)BSonParser.getObject("minesEnt", objects);
+            break;
+        case Background.DEEPMINES:
+            l = (BSonList)BSonParser.getObject("deepMinesEnt", objects);
+            break;
+        default:
+            l = (BSonList)BSonParser.getObject("surfaceEnt", objects);
         }
 
-        // Spawn Mines
-        pos = new Position(BTools.randInt(10, 10000 - 10), BTools.randInt(10, 10000 - 10));
-        pos.x += Background.OFFSET;
-        type = BTools.randInt(0, 3);
-        if(type == 0){
-            Trident.spawnEntity(new CaveRock(pos));
+        for(int i = 0; i < l.list.size(); i++){
+            int id = l.list.get(i).getInt();
+            i++;
+            double x = l.list.get(i).getDouble();
+            i++;
+            double y = l.list.get(i).getDouble();
+            i++;
+            int hp = l.list.get(i).getInt();
+            i++;
+            int numData = l.list.get(i).getInt();
+            i++;
+            int[] data = new int[numData];
+            for(int j = 0; j < numData; j++){
+                data[j] = l.list.get(i).getInt();
+                i++;
+            }
+            i--;
+
+            Trident.spawnEntity(GameObject.mkObj(new Position(x, y), id, hp, data));
         }
-        if(type == 1){
-            Trident.spawnEntity(new IronOre(pos));
-        }
-        if(type == 2){
-            Trident.spawnEntity(new CopperOre(pos));
+
+        if(l.list.size() == 0){
+            // first time in dimension, probably
+            for(int i = 0; i < DEFAULT_ENTITIES; i++){
+                spawnEnt();
+            }
         }
     }
 
@@ -214,6 +289,7 @@ public class WorldManager {
             File file = new File("data/worlds/" + worldName + ".bson");
             file.createNewFile();
             PrintWriter writer = new PrintWriter(file);
+            writer.println("int version " + WORLD_SAVE_VERSION);
             writer.println("double x " + Trident.getPlrPos().x);
             writer.println("double y " + Trident.getPlrPos().y);
             writer.println("int health " + GameData.health);
@@ -225,20 +301,67 @@ public class WorldManager {
             writer.println("long time " + GameData.time);
             writer.println("int dimension " + Background.bg);
             writer.println("int difficulty " + difficulty);
-            writer.println("{ entities");
+            writer.println("{ surfaceEnt");
             for(int i = 0; i < Trident.getEntities().size(); i++){
                 TridEntity e = Trident.getEntities().get(i);
-                if(e instanceof GameObject){
-                    if(e instanceof Boss) continue;
-                    GameObject go = (GameObject)e;
-                    if(go.id == -1) continue;
-                    writer.println("int " + go.id); // id
-                    writer.println("double " + go.position.x);
-                    writer.println("double " + go.position.y);
-                    writer.println("int " + go.health);
-                    writer.println("int " + go.data.length);
-                    for(int j = 0; j < go.data.length; j++){
-                        writer.println("int " + go.data[j]);
+                Rectangle bounds = new Rectangle(-16, -16, 10032, 10032);
+                if(bounds.contains(e.position.toPoint())){ // check to make sure it's in the surface
+                    if(e instanceof GameObject){
+                        if(e instanceof Boss) continue;
+                        GameObject go = (GameObject)e;
+                        if(go.id == -1) continue;
+                        writer.println("int " + go.id); // id
+                        writer.println("double " + go.position.x);
+                        writer.println("double " + go.position.y);
+                        writer.println("int " + go.health);
+                        writer.println("int " + go.data.length);
+                        for(int j = 0; j < go.data.length; j++){
+                            writer.println("int " + go.data[j]);
+                        }
+                    }
+                }
+            }
+            writer.println("}");
+            writer.println("{ minesEnt");
+            for(int i = 0; i < Trident.getEntities().size(); i++){
+                TridEntity e = Trident.getEntities().get(i);
+                Rectangle bounds = new Rectangle(-16, -16, 10032, 10032);
+                bounds.x += Background.OFFSET;
+                if(bounds.contains(e.position.toPoint())){ // check to make sure it's in the surface
+                    if(e instanceof GameObject){
+                        if(e instanceof Boss) continue;
+                        GameObject go = (GameObject)e;
+                        if(go.id == -1) continue;
+                        writer.println("int " + go.id); // id
+                        writer.println("double " + go.position.x);
+                        writer.println("double " + go.position.y);
+                        writer.println("int " + go.health);
+                        writer.println("int " + go.data.length);
+                        for(int j = 0; j < go.data.length; j++){
+                            writer.println("int " + go.data[j]);
+                        }
+                    }
+                }
+            }
+            writer.println("}");
+            writer.println("{ deepMinesEnt");
+            for(int i = 0; i < Trident.getEntities().size(); i++){
+                TridEntity e = Trident.getEntities().get(i);
+                Rectangle bounds = new Rectangle(-16, -16, 10032, 10032);
+                bounds.y += Background.OFFSET;
+                if(bounds.contains(e.position.toPoint())){ // check to make sure it's in the surface
+                    if(e instanceof GameObject){
+                        if(e instanceof Boss) continue;
+                        GameObject go = (GameObject)e;
+                        if(go.id == -1) continue;
+                        writer.println("int " + go.id); // id
+                        writer.println("double " + go.position.x);
+                        writer.println("double " + go.position.y);
+                        writer.println("int " + go.health);
+                        writer.println("int " + go.data.length);
+                        for(int j = 0; j < go.data.length; j++){
+                            writer.println("int " + go.data[j]);
+                        }
                     }
                 }
             }
@@ -272,41 +395,47 @@ public class WorldManager {
         GameData.clearInventory();
         try{
             ArrayList<BSonObject> objects = BSonParser.readFile("data/worlds/" + worldName + ".bson");
-            try{
-                BSonObject obj = BSonParser.getObject("difficulty", objects);
-                difficulty = obj.getInt();
-            }catch(Exception e){
-                Trident.printExceptionSilent("Error loading difficulty. Likely an old save.", e);
-            }
-            BSonObject obj = BSonParser.getObject("entities", objects);
-            BSonList asList = (BSonList)obj;
-            for(int i = 0; i < asList.list.size(); i++){
-                int id = asList.list.get(i).getInt();
-                i++;
-                double x = asList.list.get(i).getDouble();
-                i++;
-                double y = asList.list.get(i).getDouble();
-                i++;
-                int hp = asList.list.get(i).getInt();
-                i++;
-                int numData = asList.list.get(i).getInt();
-                i++;
-                int[] data = new int[numData];
-                for(int j = 0; j < numData; j++){
-                    data[j] = asList.list.get(i).getInt();
-                    i++;
-                }
-                i--;
+            BSonObject obj = BSonParser.getObject("version", objects);
+            int saveVersion = 0;
+            if(obj != null) saveVersion = obj.getInt();
 
-                Trident.spawnEntity(GameObject.mkObj(new Position(x, y), id, hp, data));
+            // World data
+            if(saveVersion == 0){ // Old entities
+                obj = BSonParser.getObject("entities", objects);
+                BSonList asList = (BSonList)obj;
+                for(int i = 0; i < asList.list.size(); i++){
+                    int id = asList.list.get(i).getInt();
+                    i++;
+                    double x = asList.list.get(i).getDouble();
+                    i++;
+                    double y = asList.list.get(i).getDouble();
+                    i++;
+                    int hp = asList.list.get(i).getInt();
+                    i++;
+                    int numData = asList.list.get(i).getInt();
+                    i++;
+                    int[] data = new int[numData];
+                    for(int j = 0; j < numData; j++){
+                        data[j] = asList.list.get(i).getInt();
+                        i++;
+                    }
+                    i--;
+
+                    Trident.spawnEntity(GameObject.mkObj(new Position(x, y), id, hp, data));
+                }
             }
+            
             obj = BSonParser.getObject("inventory", objects);
-            asList = (BSonList)obj;
+            BSonList asList = (BSonList)obj;
             for(int i = 0; i < asList.list.size(); i += 2){
                 int id = asList.list.get(i).getInt();
                 int amount = asList.list.get(i + 1).getInt();
-                GameData.inventory[i / 2] = new Item(id, amount);
+                GameData.inventory[i / 2] = new Item((short)id, (short)amount);
             }
+            obj = BSonParser.getObject("difficulty", objects);
+            difficulty = (byte)obj.getInt();
+
+            // Player data
             obj = BSonParser.getObject("x", objects);
             double x = obj.getDouble();
             obj = BSonParser.getObject("y", objects);
@@ -319,29 +448,38 @@ public class WorldManager {
             GameData.hunger = obj.getInt();
             obj = BSonParser.getObject("maxHunger", objects);
             GameData.maxHunger = obj.getInt();
+
+            // Hunger data
             obj = BSonParser.getObject("hungerSpeed", objects);
             GameData.hungerSpeed = obj.getDouble();
             obj = BSonParser.getObject("hungerTime", objects);
             GameData.hungerTime = obj.getLong();
+
+            // Time
             obj = BSonParser.getObject("time", objects);
             GameData.time = obj.getLong();
+
+            // Dimension
             obj = BSonParser.getObject("dimension", objects);
-            Background.changeBackground(obj.getInt());
+            Background.changeBackground((byte)obj.getInt());
             Trident.setPlrPos(new Position(x, y));
-            try{
-                GameData.effects = new ArrayList<Effect>();
-                obj = BSonParser.getObject("effects", objects);
-                asList = (BSonList)obj;
-                for(int i = 0; i < asList.list.size(); i += 5){
-                    int id = asList.list.get(i).getInt();
-                    long time = asList.list.get(i + 1).getLong();
-                    long maxTime = asList.list.get(i + 2).getLong();
-                    long coolTimer = asList.list.get(i + 3).getLong();
-                    long cooldown = asList.list.get(i + 4).getLong();
-                    GameData.effects.add(new Effect(id, time, maxTime, coolTimer, cooldown));
-                }
-            }catch(Exception e){
-                Trident.printExceptionSilent("Error loading effects. Likely an old save.", e);
+
+            // Effects
+            GameData.effects = new ArrayList<Effect>();
+            obj = BSonParser.getObject("effects", objects);
+            asList = (BSonList)obj;
+            for(int i = 0; i < asList.list.size(); i += 5){
+                int id = asList.list.get(i).getInt();
+                long time = asList.list.get(i + 1).getLong();
+                long maxTime = asList.list.get(i + 2).getLong();
+                long coolTimer = asList.list.get(i + 3).getLong();
+                long cooldown = asList.list.get(i + 4).getLong();
+                GameData.effects.add(new Effect(id, time, maxTime, coolTimer, cooldown));
+            }
+
+            if(saveVersion == 0){ // makes sure entities are optimized
+                saveWorld();
+                loadWorld(name);
             }
         }catch(Exception e){
             Trident.printException("Error while loading world!", e);

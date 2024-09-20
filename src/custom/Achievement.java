@@ -36,7 +36,7 @@ public class Achievement {
     };
     private static boolean[] hasAchievement = new boolean[titles.length];
 
-    public static final int APEXSLIME = 0, RAWMEAT = 1, APEXVHARD = 2, TUTORIAL = 3;
+    public static final byte APEXSLIME = 0, RAWMEAT = 1, APEXVHARD = 2, TUTORIAL = 3;
 
     public static void resizeIcons(){
         BTools.resizeImgIcon(lockedIcon, 64, 64);

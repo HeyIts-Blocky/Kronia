@@ -12,12 +12,13 @@ import javax.swing.JPanel;
 import blib.game.Entity;
 import blib.util.BTools;
 import blib.util.Position;
+import custom.WorldManager;
 import trident.TridEntity;
 import trident.Trident;
 public class Background extends TridEntity {
 
-    public static int bg = 0;
-    public static final int SURFACE = 0, MINES = 1, DEEPMINES = 2;
+    public static byte bg = 0;
+    public static final byte SURFACE = 0, MINES = 1, DEEPMINES = 2;
     public static final int OFFSET = 10500;
     
     ImageIcon img = new ImageIcon("data/images/bg/grass.png");
@@ -78,7 +79,7 @@ public class Background extends TridEntity {
         position = new Position(x, y);
     }
 
-    public static void changeBackground(int b){
+    public static void changeBackground(byte b){
         bg = b;
         
         double x = Trident.getPlrPos().x;
@@ -90,6 +91,9 @@ public class Background extends TridEntity {
         if(bg == DEEPMINES) y += OFFSET;
 
         Trident.setPlrPos(new Position(x, y));
+
+        // load entities
+        WorldManager.loadEntities(b);
 
         for(int i = 0; i < Trident.getEntities().size(); i++){
             TridEntity e = Trident.getEntities().get(i);

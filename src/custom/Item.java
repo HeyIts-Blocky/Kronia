@@ -6,13 +6,13 @@ import blib.util.BTools;
 import ent.GameObject;
 public class Item {
 
-    public int id, amount;
+    public short id, amount;
     
-    public Item(int id, int a){
+    public Item(short id, int a){
         this.id = id;
-        amount = a;
+        amount = (short)a;
     }
-    public Item(int id){
+    public Item(short id){
         this.id = id;
         amount = 1;
     }
@@ -50,32 +50,32 @@ public class Item {
     }
 
 
-    public static ImageIcon getImg(int id){
+    public static ImageIcon getImg(short id){
         return imgs[id];
     }
-    public static int getType(int id){
+    public static byte getType(short id){
         return types[id];
     }
-    public static int[] getData(int id){
+    public static int[] getData(short id){
         return data[id];
     }
-    public static String getName(int id){
+    public static String getName(short id){
         return names[id];
     }
-    public static String getDescription(int id){
+    public static String getDescription(short id){
         return descriptions[id];
     }
 
     // Item Types
-    public static final int T_NULL = 0, T_SWORD = 1, T_PICK = 2, T_AXE = 3, T_CONSUMABLE = 4, T_PLACEABLE = 5, T_BOSS_SPAWN = 6, T_RANGED = 7, T_AMMO = 8, T_TRIGGER = 9, T_EFFECT = 10, T_MACE = 11;
+    public static final byte T_NULL = 0, T_SWORD = 1, T_PICK = 2, T_AXE = 3, T_CONSUMABLE = 4, T_PLACEABLE = 5, T_BOSS_SPAWN = 6, T_RANGED = 7, T_AMMO = 8, T_TRIGGER = 9, T_EFFECT = 10, T_MACE = 11;
     // Ammo Types
-    public static final int A_ARROW = 0, A_PEBBLE = 1;
+    public static final byte A_ARROW = 0, A_PEBBLE = 1;
     /* Item IDs */
-    public static final int NOTHING = 0, WOOD = 1, WORKBENCH = 2, W_SWORD = 3, W_PICK = 4, W_AXE = 5, STONE = 6, FURNACE = 7, RAWMEAT = 8, COOKEDMEAT = 9, JELLY = 10, LOGWALL = 11, TORCH = 12, COAL = 13, SCP999 = 14, S_SWORD = 15, S_PICK = 16, S_AXE = 17;
-    public static final int APEXSPAWN = 18, HARDJELLY = 19, BOW = 20, ARROW = 21, J_SWORD = 22, J_PICK = 23, J_AXE = 24, J_SHOVEL = 25, EMERGENCYPOGO = 26, STONELADDER = 27, IRONORE = 28, IRONINGOT = 29;
-    public static final int I_SWORD = 30, I_PICK = 31, I_AXE = 32, COPPERORE = 33, COPPERINGOT = 34, C_SWORD = 35, C_PICK = 36, C_AXE = 37, ANVIL = 38, PEBBLE = 39, I_ARROW = 40, J_ARROW = 41;
-    public static final int HJ_ARROW = 42, TUTWOOD = 43, CAMPFIRE = 44, HOTDOG = 45, CRATE = 46, FLASK = 47, STR_FLASK = 48, HP_FLASK = 49, REGEN_FLASK = 50, GLOW_FLASK = 51, MACE = 52, ASH = 53;
-    public static final int FIRE_ARROW = 54, WIRE = 55, ANTENNA = 56, MOLERADIO = 57, DRILLHEAD = 58, DRILL = 59;
+    public static final short NOTHING = 0, WOOD = 1, WORKBENCH = 2, W_SWORD = 3, W_PICK = 4, W_AXE = 5, STONE = 6, FURNACE = 7, RAWMEAT = 8, COOKEDMEAT = 9, JELLY = 10, LOGWALL = 11, TORCH = 12, COAL = 13, SCP999 = 14, S_SWORD = 15, S_PICK = 16, S_AXE = 17;
+    public static final short APEXSPAWN = 18, HARDJELLY = 19, BOW = 20, ARROW = 21, J_SWORD = 22, J_PICK = 23, J_AXE = 24, J_SHOVEL = 25, EMERGENCYPOGO = 26, STONELADDER = 27, IRONORE = 28, IRONINGOT = 29;
+    public static final short I_SWORD = 30, I_PICK = 31, I_AXE = 32, COPPERORE = 33, COPPERINGOT = 34, C_SWORD = 35, C_PICK = 36, C_AXE = 37, ANVIL = 38, PEBBLE = 39, I_ARROW = 40, J_ARROW = 41;
+    public static final short HJ_ARROW = 42, TUTWOOD = 43, CAMPFIRE = 44, HOTDOG = 45, CRATE = 46, FLASK = 47, STR_FLASK = 48, HP_FLASK = 49, REGEN_FLASK = 50, GLOW_FLASK = 51, MACE = 52, ASH = 53;
+    public static final short FIRE_ARROW = 54, WIRE = 55, ANTENNA = 56, MOLERADIO = 57, DRILLHEAD = 58, DRILL = 59;
     /*****/
 
     private static ImageIcon[] imgs = {
@@ -140,7 +140,7 @@ public class Item {
             new ImageIcon("data/images/items/drillhead.png"), // 58
             new ImageIcon("data/images/items/drill.png"), // 59
     };
-    private static int[] types = {
+    private static byte[] types = {
             T_NULL, // 0
             T_NULL, // 1
             T_PLACEABLE, // 2

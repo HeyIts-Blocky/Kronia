@@ -75,7 +75,7 @@ public class Item {
     public static final short APEXSPAWN = 18, HARDJELLY = 19, BOW = 20, ARROW = 21, J_SWORD = 22, J_PICK = 23, J_AXE = 24, J_SHOVEL = 25, EMERGENCYPOGO = 26, STONELADDER = 27, IRONORE = 28, IRONINGOT = 29;
     public static final short I_SWORD = 30, I_PICK = 31, I_AXE = 32, COPPERORE = 33, COPPERINGOT = 34, C_SWORD = 35, C_PICK = 36, C_AXE = 37, ANVIL = 38, PEBBLE = 39, I_ARROW = 40, J_ARROW = 41;
     public static final short HJ_ARROW = 42, TUTWOOD = 43, CAMPFIRE = 44, HOTDOG = 45, CRATE = 46, FLASK = 47, STR_FLASK = 48, HP_FLASK = 49, REGEN_FLASK = 50, GLOW_FLASK = 51, MACE = 52, ASH = 53;
-    public static final short FIRE_ARROW = 54, WIRE = 55, ANTENNA = 56, MOLERADIO = 57, DRILLHEAD = 58, DRILL = 59;
+    public static final short FIRE_ARROW = 54, WIRE = 55, ANTENNA = 56, MOLERADIO = 57, DRILLHEAD = 58, DRILL = 59, MUSHROOMCHUNK = 60;
     /*****/
 
     private static ImageIcon[] imgs = {
@@ -139,6 +139,7 @@ public class Item {
             new ImageIcon("data/images/items/moleRadio.png"), // 57
             new ImageIcon("data/images/items/drillhead.png"), // 58
             new ImageIcon("data/images/items/drill.png"), // 59
+            new ImageIcon("data/images/items/mushroomChunk.png"), // 60
     };
     private static byte[] types = {
             T_NULL, // 0
@@ -201,6 +202,7 @@ public class Item {
             T_BOSS_SPAWN, // 57
             T_NULL, // 58
             T_TRIGGER, // 59
+            T_CONSUMABLE, // 60
     };
     private static int[][] data = { // atk, def, stuff like that
             {}, // 0
@@ -263,6 +265,7 @@ public class Item {
             {GameObject.BIGMOLE}, // 57
             {}, // 58
             {4}, // 59
+            {5, 250, 0, Effect.POISON}, // 60
     };
     public static String[] names = {
             "", // 0
@@ -325,6 +328,7 @@ public class Item {
             "Mole Radio", // 57
             "Drillhead", // 58
             "Drill", // 59
+            "Mushroom Chunk", // 60
     };
     private static String[] descriptions = {
             "", // 0
@@ -372,7 +376,7 @@ public class Item {
             "Not the sharpest, but it'll fly quick", // 42
             "It comes from the endangered Tutorial Tree, you monster.", // 43
             "Cooking on the go", // 44
-            "its got that cow in 'em", // 45
+            "Quick and easy, but loses some nutritional value.", // 45
             "You can put your stuff in here for safe keeping", // 46
             "It's not big, but you can do some simple alchemy with this", // 47
             "Your blade feels particularly sharp for a short while", // 48
@@ -382,10 +386,11 @@ public class Item {
             "A ball of death. That's metal as hell.", // 52
             "A pile of unrecognizable ash. What have you done?", // 53
             "Send them third degree burns from a safe distance.", // 54
-            "Simple, uninsulated, wire.", // 55
+            "Simple, uninsulated wire.", // 55
             "Fragile, but it could be used to contact someone important...", // 56
             "Here, you can speak to The Supervisor yourself.", // 57
             "Only the moles could make something as sharp as this. And only Supervisors can use it.", // 58
             "Too heavy to use for mining, but it should be strong enough to dig yourself deeper.", // 59
+            "Somewhat nutritious, but very deadly.", // 60
     };
 }

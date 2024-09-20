@@ -129,6 +129,7 @@ public class WorldManager {
         worldName = name;
         GameData.clearInventory();
         difficulty = diff;
+        Background.bg = Background.SURFACE;
         for(int i = 0; i < DEFAULT_ENTITIES; i++){
             spawnEnt();
         }
@@ -167,7 +168,6 @@ public class WorldManager {
         GameData.hungerTimer = 0;
         spawnTimer = -(spawnTime * 10);
         GameData.time = 0;
-        Background.bg = Background.SURFACE;
         saveWorld();
     }
 
@@ -234,6 +234,10 @@ public class WorldManager {
         saveWorld();
         HUD.addNotif("World Saved", HUD.NOTIF_AUTOSAVE);
 
+        loadEntitiesNoSave(dimension);
+    }
+
+    public static void loadEntitiesNoSave(int dimension){
         Position pos = Trident.getPlrPos();
         Trident.setupScenes();
         Trident.loadScene("world");
@@ -319,7 +323,7 @@ public class WorldManager {
                             writer.println("int " + go.data[j]);
                         }
                     }
-                }
+                }else Trident.printError("uhhh something didnt save at " + e.position.toStringSimple());
             }
             writer.println("}");
             writer.println("{ minesEnt");
@@ -461,7 +465,16 @@ public class WorldManager {
 
             // Dimension
             obj = BSonParser.getObject("dimension", objects);
-            Background.changeBackground((byte)obj.getInt());
+            Background.bg = ((byte)obj.getInt());
+            for(int i = 0; i < Trident.getEntities().size(); i++){
+                TridEntity e = Trident.getEntities().get(i);
+                if(e instanceof GameObject){
+                    if(e.HASCOLLISION && e.getCollision().intersects(Trident.getPlr().getCollision())){
+                        Trident.destroy(e);
+                    }
+                }
+                
+            }
             Trident.setPlrPos(new Position(x, y));
 
             // Effects
@@ -475,6 +488,10 @@ public class WorldManager {
                 long coolTimer = asList.list.get(i + 3).getLong();
                 long cooldown = asList.list.get(i + 4).getLong();
                 GameData.effects.add(new Effect(id, time, maxTime, coolTimer, cooldown));
+            }
+
+            if(saveVersion >= 1){ // load entities v1
+                loadEntitiesNoSave(Background.bg);
             }
 
             if(saveVersion == 0){ // makes sure entities are optimized

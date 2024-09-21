@@ -20,6 +20,7 @@ import ent.game.CopperOre;
 import ent.game.Cow;
 import ent.game.IronOre;
 import ent.game.Mole;
+import ent.game.Mushroom;
 import ent.game.Rock;
 import ent.game.Slime;
 import ent.game.Tree;
@@ -218,12 +219,15 @@ public class WorldManager {
             // Spawn Deep Mines
             Position pos = new Position(BTools.randInt(10, 10000 - 10), BTools.randInt(10, 10000 - 10));
             pos.y += Background.OFFSET;
-            int type = BTools.randInt(0, 2);
+            int type = BTools.randInt(0, 3);
             if(type == 0){
                 Trident.spawnEntity(new CaveRock(pos));
             }
             if(type == 1){
                 Trident.spawnEntity(new IronOre(pos));
+            }
+            if(type == 2){
+                Trident.spawnEntity(new Mushroom(pos));
             }
         }
         
@@ -323,7 +327,7 @@ public class WorldManager {
                             writer.println("int " + go.data[j]);
                         }
                     }
-                }else Trident.printError("uhhh something didnt save at " + e.position.toStringSimple());
+                }
             }
             writer.println("}");
             writer.println("{ minesEnt");

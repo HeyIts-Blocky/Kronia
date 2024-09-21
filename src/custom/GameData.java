@@ -60,6 +60,8 @@ public class GameData {
             }
         }
 
+        if(hasEffect(e.id)) return;
+
         effects.add(e);
     }
     public static boolean hasEffect(int id){

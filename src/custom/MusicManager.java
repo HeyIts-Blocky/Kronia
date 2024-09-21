@@ -62,7 +62,7 @@ public class MusicManager {
                             int selSong = BTools.randInt(0, songs.length);
                             currentSong = songs[selSong].play();
                             lastName = songs[selSong].name;
-                        }else if(Background.bg == Background.MINES){
+                        }else if(Background.bg == Background.MINES || Background.bg == Background.DEEPMINES){
                             int selSong = BTools.randInt(0, caveSongs.length);
                             currentSong = caveSongs[selSong].play();
                             lastName = caveSongs[selSong].name;

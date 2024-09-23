@@ -2,8 +2,16 @@ package update;
 
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 
@@ -87,6 +95,51 @@ public class Update {
         if(chance == 1){
             Trident.setWindowTitle("クロニア");
         }
+
+        try {
+            URL targetUrl = new URL ("https://raw.githubusercontent.com/HeyIts-Blocky/kronianews/refs/heads/main/news.txt"); 
+            
+            BufferedReader read = new BufferedReader(new InputStreamReader(targetUrl.openStream()));
+
+            String input = read.readLine();
+            while(input != null){
+
+                URL news = new URL("https://raw.githubusercontent.com/HeyIts-Blocky/kronianews/refs/heads/main/" + input);
+                BufferedReader read2 = new BufferedReader(new InputStreamReader(news.openStream()));
+
+                String in2 = read2.readLine();
+                TitleScreen.newsDates.add(in2);
+
+                in2 = read2.readLine();
+                TitleScreen.newsTitles.add(in2);
+
+                in2 = read2.readLine();
+                String newsText = "";
+                while(in2 != null){
+                    newsText += in2 + "\n";
+                    in2 = read2.readLine();
+                }
+                TitleScreen.newsTexts.add(newsText);
+
+                read2.close();
+
+                input = read.readLine();
+            }
+            
+            read.close();
+            
+        } catch (MalformedURLException ex) {
+            Trident.printException("Something went wrong while connecting to Github!", ex);
+            ex.printStackTrace();
+        }
+        catch (IOException ex) {
+            Trident.printException("Something went wrong while connecting to Github!", ex);
+            ex.printStackTrace();
+        }
+
+        Collections.reverse(TitleScreen.newsDates);
+        Collections.reverse(TitleScreen.newsTitles);
+        Collections.reverse(TitleScreen.newsTexts);
     }
 
     public static void sceneStart(String scene){

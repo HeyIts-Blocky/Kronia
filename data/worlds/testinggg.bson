@@ -1,13 +1,13 @@
 int version 1
-double x 6950.152400519728
-double y 318.9573704084128
+double x 7473.208075797727
+double y 984.628458916994
 int health 100
 int maxHP 100
 int hunger 100
 int maxHunger 100
 double hungerSpeed 0.0
 long hungerTime 10000
-long time 50026
+long time 116975
 int dimension 0
 int difficulty 2
 { surfaceEnt
@@ -417,11 +417,6 @@ double 317.0
 int 40
 int 0
 int 5
-double 8857.0
-double 320.0
-int 20
-int 0
-int 5
 double 2171.0
 double 322.0
 int 20
@@ -636,6 +631,11 @@ double 6566.0
 double 498.0
 int 45
 int 0
+int 5
+double 8778.1853897624
+double 502.45683672566173
+int 20
+int 0
 int 0
 double 6324.0
 double 504.0
@@ -661,11 +661,6 @@ double 7298.0
 double 523.0
 int 45
 int 0
-int 5
-double 8711.0
-double 523.0
-int 20
-int 0
 int 3
 double 2298.0
 double 527.0
@@ -684,6 +679,11 @@ int 0
 int 0
 double 7989.0
 double 536.0
+int 20
+int 0
+int 5
+double 8871.518756917589
+double 536.9377668602353
 int 20
 int 0
 int 3
@@ -776,6 +776,11 @@ double 9018.0
 double 585.0
 int 40
 int 0
+int 6
+double 7046.372510701179
+double 586.8629354412393
+int 15
+int 0
 int 0
 double 4539.0
 double 590.0
@@ -829,7 +834,7 @@ int 0
 int 9
 double 6901.0
 double 619.0
-int 45
+int 35
 int 0
 int 0
 double 3917.0
@@ -879,6 +884,11 @@ int 0
 int 0
 double 7371.0
 double 649.0
+int 20
+int 0
+int 5
+double 8353.408724207675
+double 650.2910291963722
 int 20
 int 0
 int 0
@@ -975,6 +985,11 @@ int 3
 double 8762.0
 double 705.0
 int 40
+int 0
+int 5
+double 7605.061737638097
+double 705.2572435643052
+int 20
 int 0
 int 0
 double 5879.0
@@ -1236,13 +1251,13 @@ double 1772.0
 double 812.0
 int 20
 int 0
-int 0
-double 5877.0
-double 814.0
+int 5
+double 8864.741387916656
+double 813.0455823116451
 int 20
 int 0
-int 5
-double 8857.0
+int 0
+double 5877.0
 double 814.0
 int 20
 int 0
@@ -1289,6 +1304,11 @@ int 0
 int 0
 double 1421.0
 double 830.0
+int 20
+int 0
+int 5
+double 8085.616797388546
+double 831.2954008128277
 int 20
 int 0
 int 0
@@ -1364,11 +1384,6 @@ int 0
 int 0
 double 5082.0
 double 862.0
-int 20
-int 0
-int 5
-double 7760.438424837087
-double 865.8865091708942
 int 20
 int 0
 int 0
@@ -1466,11 +1481,6 @@ double 8833.0
 double 903.0
 int 20
 int 0
-int 5
-double 8497.0
-double 907.0
-int 20
-int 0
 int 0
 double 7823.0
 double 912.0
@@ -1561,11 +1571,6 @@ double 7840.0
 double 970.0
 int 20
 int 0
-int 5
-double 7988.0
-double 972.0
-int 20
-int 0
 int 3
 double 5352.0
 double 972.0
@@ -1626,11 +1631,6 @@ double 4344.0
 double 1005.0
 int 20
 int 0
-int 5
-double 7425.730155417106
-double 1007.4113909031577
-int 20
-int 0
 int 9
 double 8024.0
 double 1008.0
@@ -1655,11 +1655,6 @@ int 9
 double 82.0
 double 1017.0
 int 45
-int 0
-int 5
-double 6347.348370336676
-double 1019.6835875926627
-int 20
 int 0
 int 0
 double 2755.0
@@ -1696,11 +1691,6 @@ double 5748.0
 double 1048.0
 int 20
 int 0
-int 5
-double 6506.769132882819
-double 1049.3359587799346
-int 20
-int 0
 int 0
 double 3212.0
 double 1056.0
@@ -1719,6 +1709,11 @@ int 0
 int 0
 double 3134.0
 double 1064.0
+int 20
+int 0
+int 5
+double 6284.743811070244
+double 1064.8555828890337
 int 20
 int 0
 int 0
@@ -1991,6 +1986,11 @@ double 5251.0
 double 1162.0
 int 20
 int 0
+int 5
+double 6489.634038760891
+double 1164.8367891163093
+int 20
+int 0
 int 0
 double 8865.0
 double 1167.0
@@ -2024,6 +2024,11 @@ int 0
 int 5
 double 4605.0
 double 1184.0
+int 20
+int 0
+int 5
+double 7439.163636242031
+double 1185.6824230399966
 int 20
 int 0
 int 0
@@ -2077,8 +2082,8 @@ double 1229.0
 int 20
 int 0
 int 5
-double 6725.243794128069
-double 1230.3735028108363
+double 6705.701209956219
+double 1234.6816491711063
 int 20
 int 0
 int 0
@@ -2276,11 +2281,6 @@ double 5435.0
 double 1324.0
 int 20
 int 0
-int 5
-double 7748.0
-double 1326.0
-int 20
-int 0
 int 0
 double 2106.0
 double 1326.0
@@ -2364,6 +2364,11 @@ int 0
 int 5
 double 4878.0
 double 1351.0
+int 20
+int 0
+int 5
+double 7665.156088379514
+double 1353.7464647365412
 int 20
 int 0
 int 0
@@ -2871,6 +2876,11 @@ double 5934.0
 double 1577.0
 int 20
 int 0
+int 5
+double 7132.019438011286
+double 1584.6525775554105
+int 20
+int 0
 int 0
 double 813.0
 double 1587.0
@@ -2976,11 +2986,6 @@ double 7895.0
 double 1648.0
 int 20
 int 0
-int 5
-double 7216.0
-double 1651.0
-int 20
-int 0
 int 0
 double 2355.0
 double 1652.0
@@ -3074,6 +3079,11 @@ int 0
 int 0
 double 754.0
 double 1688.0
+int 20
+int 0
+int 5
+double 7647.293401085077
+double 1694.6231468396088
 int 20
 int 0
 int 0
@@ -3486,11 +3496,6 @@ double 2232.0
 double 1868.0
 int 40
 int 0
-int 5
-double 7621.0
-double 1872.0
-int 20
-int 0
 int 0
 double 2333.0
 double 1875.0
@@ -3566,11 +3571,6 @@ double 449.0
 double 1925.0
 int 45
 int 0
-int 5
-double 7737.0
-double 1926.0
-int 20
-int 0
 int 0
 double 7232.0
 double 1928.0
@@ -3605,6 +3605,11 @@ int 9
 double 5203.0
 double 1944.0
 int 45
+int 0
+int 5
+double 7756.3600063900385
+double 1944.8462842691183
+int 20
 int 0
 int 0
 double 9261.0
@@ -8125,6 +8130,11 @@ int 3
 double 5285.0
 double 4465.0
 int 40
+int 0
+int 5
+double 8110.0
+double 4468.0
+int 20
 int 0
 int 0
 double 212.0
@@ -15459,6 +15469,11 @@ int 0
 int 0
 double 6691.0
 double 8742.0
+int 20
+int 0
+int 5
+double 3338.0
+double 8744.0
 int 20
 int 0
 int 0

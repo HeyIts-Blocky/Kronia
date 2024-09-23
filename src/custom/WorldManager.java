@@ -4,6 +4,8 @@ import java.awt.Rectangle;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 
 import blib.bson.BSonList;
 import blib.bson.BSonObject;
@@ -532,6 +534,11 @@ public class WorldManager {
             return list;
         }
         File[] files = dir.listFiles();
+        Arrays.sort(files, new Comparator<File>(){
+            public int compare(File f1, File f2)
+            {
+                return Long.valueOf(f2.lastModified()).compareTo(f1.lastModified());
+            } });
         for(File f: files){
             String name = f.getName();
             list.add(name.substring(0, name.length() - 5));

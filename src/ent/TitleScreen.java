@@ -500,6 +500,7 @@ public class TitleScreen extends TridEntity {
     public static String worldName = "";
     public static int worldDiff = WorldManager.defaultDiff;
 
+    public static ArrayList<String> newsLinks = new ArrayList<String>();
     public static ArrayList<String> newsDates = new ArrayList<String>();
     public static ArrayList<String> newsTitles = new ArrayList<String>();
     public static ArrayList<String> newsTexts = new ArrayList<String>();

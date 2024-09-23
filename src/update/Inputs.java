@@ -57,43 +57,43 @@ public class Inputs {
             if(!MaceBall.maceOut()){
                 if(key == KeyEvent.VK_1){
                     GameData.selHotbar = 0;
-                    Settings.playSound("data/sound/hotbarSel.wav");
+                    Settings.playSound("data/sound/hotbarSel.wav", 0.5);
                 }
                 if(key == KeyEvent.VK_2){
                     GameData.selHotbar = 1;
-                    Settings.playSound("data/sound/hotbarSel.wav");
+                    Settings.playSound("data/sound/hotbarSel.wav", 0.5);
                 }
                 if(key == KeyEvent.VK_3){
                     GameData.selHotbar = 2;
-                    Settings.playSound("data/sound/hotbarSel.wav");
+                    Settings.playSound("data/sound/hotbarSel.wav", 0.5);
                 }
                 if(key == KeyEvent.VK_4){
                     GameData.selHotbar = 3;
-                    Settings.playSound("data/sound/hotbarSel.wav");
+                    Settings.playSound("data/sound/hotbarSel.wav", 0.5);
                 }
                 if(key == KeyEvent.VK_5){
                     GameData.selHotbar = 4;
-                    Settings.playSound("data/sound/hotbarSel.wav");
+                    Settings.playSound("data/sound/hotbarSel.wav", 0.5);
                 }
                 if(key == KeyEvent.VK_6){
                     GameData.selHotbar = 5;
-                    Settings.playSound("data/sound/hotbarSel.wav");
+                    Settings.playSound("data/sound/hotbarSel.wav", 0.5);
                 }
                 if(key == KeyEvent.VK_7){
                     GameData.selHotbar = 6;
-                    Settings.playSound("data/sound/hotbarSel.wav");
+                    Settings.playSound("data/sound/hotbarSel.wav", 0.5);
                 }
                 if(key == KeyEvent.VK_8){
                     GameData.selHotbar = 7;
-                    Settings.playSound("data/sound/hotbarSel.wav");
+                    Settings.playSound("data/sound/hotbarSel.wav", 0.5);
                 }
                 if(key == KeyEvent.VK_9){
                     GameData.selHotbar = 8;
-                    Settings.playSound("data/sound/hotbarSel.wav");
+                    Settings.playSound("data/sound/hotbarSel.wav", 0.5);
                 }
                 if(key == KeyEvent.VK_0){
                     GameData.selHotbar = 9;
-                    Settings.playSound("data/sound/hotbarSel.wav");
+                    Settings.playSound("data/sound/hotbarSel.wav", 0.5);
                 }
             }
             
@@ -415,12 +415,12 @@ public class Inputs {
             if(GameData.invOpen){
                 GameData.selCraft += scroll;
                 GameData.selCraft = BTools.clamp(GameData.selCraft, 0, Recipe.getRecipes().size() - 1);
-                Settings.playSound("data/sound/hotbarSel.wav");
+                Settings.playSound("data/sound/hotbarSel.wav", 0.5);
             }else{
                 GameData.selHotbar += scroll;
                 if(GameData.selHotbar > 9) GameData.selHotbar = 0;
                 if(GameData.selHotbar < 0) GameData.selHotbar = 9;
-                Settings.playSound("data/sound/hotbarSel.wav");
+                Settings.playSound("data/sound/hotbarSel.wav", 0.5);
             }
             
         }

@@ -216,6 +216,7 @@ public class MushroomSlime extends GameObject {
     }
     public void dropItems(){
         GameObject.dropNoDelay(Item.JELLY, BTools.randInt(2, 6), position);
+        GameObject.dropNoDelay(Item.MUSHROOMCHUNK, BTools.randInt(1, 4), position);
     }
     public void tookDamage(int amount){
         

@@ -34,6 +34,7 @@ public class MaceBall extends GameObject {
         double ang = data[0] / 10.0;
         dir = Math.toRadians(ang);
         speed = data[2] / 100.0;
+        BTools.resizeImgIcon(img, 32, 32);
         BTools.resizeImgIcon(chainImg, 25, 8);
         renderType = ABOVE;
     }
@@ -43,6 +44,7 @@ public class MaceBall extends GameObject {
         dir = Math.toRadians(ang);
         speed = data[2] / 100.0;
         thrower = t;
+        BTools.resizeImgIcon(img, 32, 32);
         BTools.resizeImgIcon(chainImg, 25, 8);
         renderType = ABOVE;
     }

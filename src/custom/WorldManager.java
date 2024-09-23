@@ -12,6 +12,7 @@ import blib.util.BTools;
 import blib.util.Position;
 import ent.Background;
 import ent.GameObject;
+import ent.GlowEffect;
 import ent.HUD;
 import ent.game.CaveRock;
 import ent.game.CaveSlime;
@@ -181,6 +182,7 @@ public class WorldManager {
         GameData.hungerTimer = 0;
         spawnTimer = -(spawnTime * 10);
         GameData.time = 0;
+        enemyTimer = -enemyTime * 2; // takes 3x as long before enemies actually start spawning
         saveWorld();
     }
 
@@ -254,6 +256,8 @@ public class WorldManager {
     }
 
     public static void loadEntitiesNoSave(int dimension){
+        GlowEffect.glow = false;
+
         Position pos = Trident.getPlrPos();
         Trident.setupScenes();
         Trident.loadScene("world");

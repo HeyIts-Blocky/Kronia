@@ -35,6 +35,9 @@ public class Settings {
     public static void playSound(String file){
         Audio.play(file, sfxVolume);
     }
+    public static void playSound(String file, double vol){
+        Audio.play(file, sfxVolume * vol);
+    }
     
     public static void saveSettings(){
         try{

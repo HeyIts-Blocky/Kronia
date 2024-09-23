@@ -26,6 +26,7 @@ import ent.game.IronOre;
 import ent.game.LogWall;
 import ent.game.Mole;
 import ent.game.Mushroom;
+import ent.game.MushroomSlime;
 import ent.game.Rock;
 import ent.game.SCP999;
 import ent.game.Slime;
@@ -237,6 +238,8 @@ public class GameObject extends TridEntity {
             return new Crate(pos, hp, data);
         case MUSHROOM:
             return new Mushroom(pos, hp);
+        case MUSHROOMSLIME:
+            return new MushroomSlime(pos, hp);
         default:
             Trident.printConsole("<mkObj>: Unknown id: " + id);
             return new Tree(pos);
@@ -292,6 +295,8 @@ public class GameObject extends TridEntity {
             return new BigMole(pos);
         case MUSHROOM:
             return new Mushroom(pos);
+        case MUSHROOMSLIME:
+            return new MushroomSlime(pos);
         default:
             Trident.printConsole("<placeObj>: Unknown id: " + id);
             return new Tree(pos);
@@ -327,5 +332,5 @@ public class GameObject extends TridEntity {
     // ID LIST
     public static final int DONTSAVE = -1;
     public static final int TREE = 0, ITEM = 1, WORKBENCH = 2, ROCK = 3, FURNACE = 4, COW = 5, SLIME = 6, LOGWALL = 7, TORCH = 8, COALORE = 9, SCP999 = 10, APEXSLIME = 11, BABYSLIME = 12, CAVEROCK = 13;
-    public static final int CAVESLIME = 14, IRONORE = 15, ANVIL = 16, COPPERORE = 17, MOLE = 18, TUTTREE = 19, CAMPFIRE = 20, CRATE = 21, FIRE = 22, BIGMOLE = 23, MUSHROOM = 24;
+    public static final int CAVESLIME = 14, IRONORE = 15, ANVIL = 16, COPPERORE = 17, MOLE = 18, TUTTREE = 19, CAMPFIRE = 20, CRATE = 21, FIRE = 22, BIGMOLE = 23, MUSHROOM = 24, MUSHROOMSLIME = 25;
 }

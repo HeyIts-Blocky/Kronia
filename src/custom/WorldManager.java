@@ -21,6 +21,7 @@ import ent.game.Cow;
 import ent.game.IronOre;
 import ent.game.Mole;
 import ent.game.Mushroom;
+import ent.game.MushroomSlime;
 import ent.game.Rock;
 import ent.game.Slime;
 import ent.game.Tree;
@@ -94,6 +95,17 @@ public class WorldManager {
                     break;
                 case 1:
                     Trident.spawnEntity(new Mole(vec));
+                    break;
+                }
+            }
+            if(Background.bg == Background.DEEPMINES){
+                int type = BTools.randInt(0, 2);
+                switch(type){
+                case 0:
+                    Trident.spawnEntity(new CaveSlime(vec));
+                    break;
+                case 1:
+                    Trident.spawnEntity(new MushroomSlime(vec));
                     break;
                 }
             }
@@ -219,14 +231,14 @@ public class WorldManager {
             // Spawn Deep Mines
             Position pos = new Position(BTools.randInt(10, 10000 - 10), BTools.randInt(10, 10000 - 10));
             pos.y += Background.OFFSET;
-            int type = BTools.randInt(0, 3);
+            int type = BTools.randInt(0, 5);
             if(type == 0){
                 Trident.spawnEntity(new CaveRock(pos));
             }
-            if(type == 1){
+            if(type >= 1 && type <= 3){
                 Trident.spawnEntity(new IronOre(pos));
             }
-            if(type == 2){
+            if(type == 4){
                 Trident.spawnEntity(new Mushroom(pos));
             }
         }

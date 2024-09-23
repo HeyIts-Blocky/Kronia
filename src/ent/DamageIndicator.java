@@ -24,7 +24,7 @@ public class DamageIndicator extends TridEntity {
         super(pos);
         vector = new Position((BTools.randInt(0, 5) - 2) / 10.0, -0.3);
         dmg = amount;
-        renderType = ABOVE;
+        renderType = TOPPRIORITY;
     }
 
     // Render while in game

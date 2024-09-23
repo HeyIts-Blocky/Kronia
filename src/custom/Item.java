@@ -75,7 +75,7 @@ public class Item {
     public static final short APEXSPAWN = 18, HARDJELLY = 19, BOW = 20, ARROW = 21, J_SWORD = 22, J_PICK = 23, J_AXE = 24, J_SHOVEL = 25, EMERGENCYPOGO = 26, STONELADDER = 27, IRONORE = 28, IRONINGOT = 29;
     public static final short I_SWORD = 30, I_PICK = 31, I_AXE = 32, COPPERORE = 33, COPPERINGOT = 34, C_SWORD = 35, C_PICK = 36, C_AXE = 37, ANVIL = 38, PEBBLE = 39, I_ARROW = 40, J_ARROW = 41;
     public static final short HJ_ARROW = 42, TUTWOOD = 43, CAMPFIRE = 44, HOTDOG = 45, CRATE = 46, FLASK = 47, STR_FLASK = 48, HP_FLASK = 49, REGEN_FLASK = 50, GLOW_FLASK = 51, MACE = 52, ASH = 53;
-    public static final short FIRE_ARROW = 54, WIRE = 55, ANTENNA = 56, MOLERADIO = 57, DRILLHEAD = 58, DRILL = 59, MUSHROOMCHUNK = 60, MUSHROOMSKEWER = 61;
+    public static final short FIRE_ARROW = 54, WIRE = 55, ANTENNA = 56, MOLERADIO = 57, DRILLHEAD = 58, DRILL = 59, MUSHROOMCHUNK = 60, MUSHROOMSKEWER = 61, POISONFLASK = 62;
     /*****/
 
     private static ImageIcon[] imgs = {
@@ -141,6 +141,7 @@ public class Item {
             new ImageIcon("data/images/items/drill.png"), // 59
             new ImageIcon("data/images/items/mushroomChunk.png"), // 60
             new ImageIcon("data/images/items/mushroomSkewer.png"), // 61
+            new ImageIcon("data/images/items/poisonFlask.png"), // 62
     };
     private static byte[] types = {
             T_NULL, // 0
@@ -205,6 +206,7 @@ public class Item {
             T_TRIGGER, // 59
             T_CONSUMABLE, // 60
             T_CONSUMABLE, // 61
+            T_EFFECT, // 62
     };
     private static int[][] data = { // atk, def, stuff like that
             {}, // 0
@@ -269,6 +271,7 @@ public class Item {
             {4}, // 59
             {5, 250, 0, Effect.POISON}, // 60
             {25, 250, 0, Effect.REGEN}, // 61
+            {Effect.POISON, 250, 300}, // 62
     };
     public static String[] names = {
             "", // 0
@@ -333,6 +336,7 @@ public class Item {
             "Drill", // 59
             "Mushroom Chunk", // 60
             "Mushroom Skewer", // 61
+            "Flask of Poison", // 62
     };
     private static String[] descriptions = {
             "", // 0
@@ -396,6 +400,7 @@ public class Item {
             "Only the moles could make something as sharp as this. And only Supervisors can use it.", // 58
             "Too heavy to use for mining, but it should be strong enough to dig yourself deeper.", // 59
             "Somewhat nutritious, but very deadly.", // 60
-            "It seems roasting the mushrooms over a fire with meat reversed the poisonous effects.", // 61
+            "It seems roasting the mushrooms over a fire with meat reversed the poisonous effects", // 61
+            "For now it's poisonous, but you might be able to make something more useful", // 62
     };
 }

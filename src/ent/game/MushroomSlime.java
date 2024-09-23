@@ -1,14 +1,18 @@
 package ent.game;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import blib.game.ParticleEmitter;
 import blib.util.AnimImage;
 import blib.util.BTools;
 import blib.util.Position;
+import custom.Effect;
 import custom.GameData;
 import custom.Item;
 import custom.WorldManager;
@@ -16,7 +20,7 @@ import ent.Background;
 import ent.GameObject;
 import trident.TridEntity;
 import trident.Trident;
-public class CaveSlime extends GameObject {
+public class MushroomSlime extends GameObject {
 
     public static int[] cantDamage = {
         GameObject.SLIME,
@@ -26,30 +30,74 @@ public class CaveSlime extends GameObject {
         GameObject.MUSHROOM,
     };
 
-    AnimImage img = new AnimImage("data/images/ent/caveSlime.png", 4, 4, 32, 32);
+    AnimImage img = new AnimImage("data/images/ent/mushroomSlime.png", 4, 4, 32, 32);
     boolean isRight = true;
 
     Position targetPos = null;
     long moveTime;
     int range = 200;
-    double speed = 0.35;
+    double speed = 0.4;
 
     boolean attacked = false;
 
     int damage = 20;
 
+    ParticleEmitter emitter;
+
     // Constructor, runs when the entity is created
-    public CaveSlime(Position pos){
+    public MushroomSlime(Position pos){
         super(pos, 50, GameObject.CAVESLIME, new Dimension(0, 0));
         img.resize(64, 64);
         weakness = Item.T_SWORD;
         moveTime = BTools.randInt(2000, 4000);
+
+        defense = 2;
+
+        emitter = new ParticleEmitter(new Position(0, 0), 65, 2, true);
+        emitter.spawnSquares = true;
+        emitter.spawnCircles = false;
+        emitter.spawnImages = false;
+        emitter.speed = 0.25;
+        emitter.size = 5;
+        emitter.minLife = 2000;
+        emitter.maxLife = 5000;
+        emitter.fadeOut = true;
+        emitter.spawnRect = new Dimension(64, 64);
+        emitter.worldBased = true;
+        ArrayList<Color> squareColors = new ArrayList<Color>();
+        // Add your own colors and images here!
+        squareColors.add(new Color(103, 58, 183));
+        squareColors.add(new Color(81, 45, 168));
+        squareColors.add(new Color(49, 27, 146));
+
+        emitter.squareColors = squareColors;
     }
-    public CaveSlime(Position pos, int hp){
+    public MushroomSlime(Position pos, int hp){
         super(pos, hp, GameObject.CAVESLIME, 50, new Dimension(0, 0));
         img.resize(64, 64);
         weakness = Item.T_SWORD;
         moveTime = BTools.randInt(2000, 4000);
+
+        defense = 2;
+
+        emitter = new ParticleEmitter(new Position(0, 0), 65, 2, true);
+        emitter.spawnSquares = true;
+        emitter.spawnCircles = false;
+        emitter.spawnImages = false;
+        emitter.speed = 0.25;
+        emitter.size = 5;
+        emitter.minLife = 2000;
+        emitter.maxLife = 5000;
+        emitter.fadeOut = true;
+        emitter.spawnRect = new Dimension(64, 64);
+        emitter.worldBased = true;
+        ArrayList<Color> squareColors = new ArrayList<Color>();
+        // Add your own colors and images here!
+        squareColors.add(new Color(103, 58, 183));
+        squareColors.add(new Color(81, 45, 168));
+        squareColors.add(new Color(49, 27, 146));
+
+        emitter.squareColors = squareColors;
     }
 
     // Render while in game
@@ -57,11 +105,16 @@ public class CaveSlime extends GameObject {
         
         img.paint(panel, g, x - 32, y - 48);
 
+        emitter.render(g, panel, x, y);
+
         super.render(g, panel, x, y);
     }
 
     // Runs every tick while the game is running
     public void update(long elapsedTime){
+        emitter.position = position.copy();
+        emitter.update(elapsedTime);
+
         if(BTools.getDistance(position, Trident.getPlrPos()) > 1000 || !Background.isInDimension(this)){
             Trident.destroy(this);
             return;
@@ -152,6 +205,7 @@ public class CaveSlime extends GameObject {
 
             if(BTools.getDistance(position, Trident.getPlrPos()) < 32){
                 GameData.damage(damage);
+                GameData.addEffect(new Effect(Effect.POISON, 2000));
             }
             
             if(BTools.getDistance(position, targetPos) < 10){

@@ -550,7 +550,7 @@ public class Update {
         }
         if(id == 3 && GameData.health < GameData.maxHealth){
             GameData.getSelItem().amount--;
-            GameData.health = Math.min(GameData.maxHealth, GameData.health + 10);
+            GameData.health = Math.min(GameData.maxHealth, GameData.health + 5);
         }
         if(id == 4 && Background.bg == Background.MINES){
             Background.changeBackground(Background.DEEPMINES);

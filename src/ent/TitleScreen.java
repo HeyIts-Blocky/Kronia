@@ -107,6 +107,15 @@ public class TitleScreen extends TridEntity {
                 "",
                 TitleButton.LEFT
             ),
+            new TitleButton(
+                new Rectangle(0, 310, 100, 30),
+                Color.white,
+                Color.gray,
+                Color.black,
+                new Font(GameData.getFont(), Font.PLAIN, 25),
+                "News",
+                TitleButton.LEFT
+            ),
         },
         { // 1
             new TitleButton(
@@ -413,6 +422,37 @@ public class TitleScreen extends TridEntity {
                 TitleButton.LEFT
             ),
         },
+        { // 8
+            new TitleButton(
+                new Rectangle(10, 10, 100, 30),
+                Color.white,
+                Color.gray,
+                Color.black,
+                new Font(GameData.getFont(), Font.PLAIN, 25),
+                "Back",
+                TitleButton.LEFT
+            ),
+        },
+        { // 9
+            new TitleButton(
+                new Rectangle(10, 10, 100, 30),
+                Color.white,
+                Color.gray,
+                Color.black,
+                new Font(GameData.getFont(), Font.PLAIN, 25),
+                "Back",
+                TitleButton.LEFT
+            ),
+            new TitleButton(
+                new Rectangle(684 / 2, Trident.getFrameHeight() - 30, 150, 25),
+                Color.white,
+                Color.gray,
+                Color.black,
+                new Font(GameData.getFont(), Font.PLAIN, 20),
+                "Open Link",
+                TitleButton.CENTER
+            ),
+        },
     };
 
     public static void updateButtonFont(){
@@ -504,6 +544,7 @@ public class TitleScreen extends TridEntity {
     public static ArrayList<String> newsDates = new ArrayList<String>();
     public static ArrayList<String> newsTitles = new ArrayList<String>();
     public static ArrayList<String> newsTexts = new ArrayList<String>();
+    int selNews = 0;
 
     // Constructor, runs when the entity is created
     public TitleScreen(Position pos){
@@ -632,6 +673,9 @@ public class TitleScreen extends TridEntity {
             TextBox.draw(diffDesc, g, Trident.getFrameWidth() / 2, 270, TextBox.CENTER, TextBox.NOMAXWIDTH, ((worldDiff == WorldManager.V_HARD) ? 2 : 0));
         }
         if(screen == 7){
+            g.setColor(new Color(0f, 0f, 0f, 0.5f));
+            g.fillRect(0, 0, Trident.getFrameWidth(), Trident.getFrameHeight());
+
             ArrayList<Integer> list = Achievement.getSorted();
             for(int i = 0; i < list.size(); i++){
                 int a = list.get(i);
@@ -656,6 +700,42 @@ public class TitleScreen extends TridEntity {
             g.setColor(Color.white);
             g.drawRect(Trident.getFrameWidth() / 2 - 150, Trident.getFrameHeight() - 20, 300, 20);
             TextBox.draw((int)(percent * 100) + "%", g, Trident.getFrameWidth() / 2 + 150, Trident.getFrameHeight() - 10);
+        }
+        if(screen == 8){
+            g.setColor(new Color(0f, 0f, 0f, 0.5f));
+            g.fillRect(0, 0, Trident.getFrameWidth(), Trident.getFrameHeight());
+
+            for(int i = 0; i < newsTitles.size(); i++){
+                String title = newsTitles.get(i);
+                String date = newsDates.get(i);
+                
+                // title
+                g.setColor(Color.white);
+                g.setFont(new Font(GameData.getFont(), Font.PLAIN, 25));
+                TextBox.draw(title, g, 94, 75 - scroll + (74 * i));
+                // date
+                g.setFont(new Font(GameData.getFont(), Font.ITALIC, 20));
+                TextBox.draw(date, g, 94, 100 - scroll + (74 * i));
+            }
+        }
+        if(screen == 9){
+            g.setColor(new Color(0f, 0f, 0f, 0.5f));
+            g.fillRect(0, 0, Trident.getFrameWidth(), Trident.getFrameHeight());
+
+            // Title
+            g.setColor(Color.white);
+            g.setFont(new Font(GameData.getFont(), Font.BOLD, 25));
+            TextBox.draw(newsTitles.get(selNews), g, Trident.getFrameWidth() / 2, 20, TextBox.CENTER);
+
+            // Date
+            g.setColor(Color.lightGray);
+            g.setFont(new Font(GameData.getFont(), Font.ITALIC, 15));
+            TextBox.draw(newsDates.get(selNews), g, Trident.getFrameWidth() / 2, 50, TextBox.CENTER);
+
+            // Text
+            g.setColor(Color.white);
+            g.setFont(new Font(GameData.getFont(), Font.PLAIN, 20));
+            TextBox.draw(newsTexts.get(selNews), g, 70, 100, TextBox.LEFT, (int)(Trident.getFrameHeight()));
         }
         for(TitleButton b: buttons[screen]){
             b.render(g);
@@ -689,7 +769,16 @@ public class TitleScreen extends TridEntity {
             TitleButton b = buttons[screen][i];
             if(b.rect.contains(mousePos)){
                 buttonPressed(i);
-                break;
+                return;
+            }
+        }
+
+        if(screen == 8){
+            int y = mousePos.y - 50 + scroll; // relative y to the list
+            if(y >= 0 && y <= newsTitles.size() * 74){
+                int sel = y / 74;
+                selNews = sel;
+                screen = 9; 
             }
         }
     }
@@ -697,6 +786,10 @@ public class TitleScreen extends TridEntity {
         if(screen == 7){
             scroll += s * 20;
             scroll = BTools.clamp(scroll, 0, Math.max(0, -(74 * 5) + (74 * Achievement.num())));
+        }
+        if(screen == 8){
+            scroll += s * 20;
+            scroll = BTools.clamp(scroll, 0, Math.max(0, -(74 * 5) + (74 * newsTitles.size())));
         }
     }
 
@@ -734,6 +827,10 @@ public class TitleScreen extends TridEntity {
                     break;
                 case 7:
                     BTools.openWebsite("https://discord.gg/kb7TqaHucu");
+                    break;
+                case 8:
+                    screen = 8;
+                    scroll = 0;
                     break;
             }
         }else if(screen == 1){
@@ -880,6 +977,21 @@ public class TitleScreen extends TridEntity {
             switch(button){
                 case 0:
                     screen = 0;
+                    break;
+            }
+        }else if(screen == 8){
+            switch(button){
+                case 0:
+                    screen = 0;
+                    break;
+            }
+        }else if(screen == 9){
+            switch(button){
+                case 0:
+                    screen = 8;
+                    break;
+                case 1:
+                    BTools.openWebsite(newsLinks.get(selNews));
                     break;
             }
         }

@@ -10,8 +10,6 @@ import java.net.URL;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 
@@ -108,6 +106,9 @@ public class Update {
                 BufferedReader read2 = new BufferedReader(new InputStreamReader(news.openStream()));
 
                 String in2 = read2.readLine();
+                TitleScreen.newsLinks.add(in2);
+
+                in2 = read2.readLine();
                 TitleScreen.newsDates.add(in2);
 
                 in2 = read2.readLine();

@@ -146,6 +146,7 @@ public class Update {
     public static void sceneStart(String scene){
         MusicManager.sceneChange(scene);
         Trident.resetKeys();
+        HUD.clearNotif();
         if(Trident.getCurrentScene().name.equals("title")){
             int light = BTools.randInt((int)(0.1 * 255), 255);
             Trident.setDefaultLight(light);
@@ -597,6 +598,7 @@ public class Update {
         // items
         if(id == 1 && Background.bg == Background.SURFACE){
             Background.changeBackground(Background.MINES);
+            Achievement.get(Achievement.MINES);
         }
         if(id == 2 && Background.bg == Background.MINES){
             GameData.getSelItem().amount--;
@@ -608,6 +610,7 @@ public class Update {
         }
         if(id == 4 && Background.bg == Background.MINES){
             Background.changeBackground(Background.DEEPMINES);
+            Achievement.get(Achievement.DEEPMINES);
         }
     }
 

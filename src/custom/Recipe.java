@@ -11,6 +11,8 @@ public class Recipe {
     public Item[] ingredients;
     public Item output;
     int workstation = -1;
+    private static final int NOWORKSTATION = -1;
+    short achievement = -1;
     
     public Recipe(Item[] ing, Item out){
         ingredients = ing;
@@ -20,6 +22,12 @@ public class Recipe {
         ingredients = ing;
         output = out;
         workstation = station;
+    }
+    public Recipe(Item[] ing, Item out, int station, short a){
+        ingredients = ing;
+        output = out;
+        workstation = station;
+        achievement = a;
     }
 
     public boolean canCraft(){
@@ -107,6 +115,7 @@ public class Recipe {
                     }
                 }
             }
+            Achievement.get(achievement);
             return output.copy();
         }else{
             return null;
@@ -126,19 +135,19 @@ public class Recipe {
     }
 
     private static Recipe[] recipes = {
-        new Recipe(new Item[]{new Item(Item.WOOD, 10)}, new Item(Item.WORKBENCH)),
+        new Recipe(new Item[]{new Item(Item.WOOD, 10)}, new Item(Item.WORKBENCH), NOWORKSTATION, Achievement.WORKBENCH),
         new Recipe(new Item[]{new Item(Item.WOOD, 15)}, new Item(Item.W_SWORD), GameObject.WORKBENCH),
         new Recipe(new Item[]{new Item(Item.WOOD, 10)}, new Item(Item.W_PICK), GameObject.WORKBENCH),
         new Recipe(new Item[]{new Item(Item.WOOD, 10)}, new Item(Item.W_AXE), GameObject.WORKBENCH),
         new Recipe(new Item[]{new Item(Item.STONE, 20)}, new Item(Item.FURNACE), GameObject.WORKBENCH),
         new Recipe(new Item[]{new Item(Item.WOOD, 10)}, new Item(Item.COAL), GameObject.FURNACE),
-        new Recipe(new Item[]{new Item(Item.RAWMEAT), new Item(Item.COAL)}, new Item(Item.COOKEDMEAT), GameObject.FURNACE),
+        new Recipe(new Item[]{new Item(Item.RAWMEAT), new Item(Item.COAL)}, new Item(Item.COOKEDMEAT), GameObject.FURNACE, Achievement.MEAT),
         new Recipe(new Item[]{new Item(Item.WOOD, 10)}, new Item(Item.LOGWALL), GameObject.WORKBENCH),
         new Recipe(new Item[]{new Item(Item.WOOD), new Item(Item.JELLY)}, new Item(Item.TORCH)),
         new Recipe(new Item[]{new Item(Item.JELLY, 999)}, new Item(Item.SCP999)),
-        new Recipe(new Item[]{new Item(Item.W_SWORD), new Item(Item.STONE, 5)}, new Item(Item.S_SWORD), GameObject.WORKBENCH),
-        new Recipe(new Item[]{new Item(Item.WOOD, 7), new Item(Item.STONE, 5)}, new Item(Item.S_PICK), GameObject.WORKBENCH),
-        new Recipe(new Item[]{new Item(Item.WOOD, 7), new Item(Item.STONE, 5)}, new Item(Item.S_AXE), GameObject.WORKBENCH),
+        new Recipe(new Item[]{new Item(Item.W_SWORD), new Item(Item.STONE, 5)}, new Item(Item.S_SWORD), GameObject.WORKBENCH, Achievement.STONETOOL),
+        new Recipe(new Item[]{new Item(Item.WOOD, 7), new Item(Item.STONE, 5)}, new Item(Item.S_PICK), GameObject.WORKBENCH, Achievement.STONETOOL),
+        new Recipe(new Item[]{new Item(Item.WOOD, 7), new Item(Item.STONE, 5)}, new Item(Item.S_AXE), GameObject.WORKBENCH, Achievement.STONETOOL),
         new Recipe(new Item[]{new Item(Item.JELLY, 30)}, new Item(Item.APEXSPAWN), GameObject.WORKBENCH),
         new Recipe(new Item[]{new Item(Item.WOOD, 10)}, new Item(Item.BOW), GameObject.WORKBENCH),
         new Recipe(new Item[]{new Item(Item.WOOD), new Item(Item.STONE)}, new Item(Item.ARROW, 10), GameObject.WORKBENCH),

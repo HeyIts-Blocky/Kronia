@@ -10,6 +10,7 @@ import blib.game.Light;
 import blib.util.AnimImage;
 import blib.util.BTools;
 import blib.util.Position;
+import custom.Achievement;
 import custom.GameData;
 import custom.Item;
 import custom.Settings;
@@ -64,8 +65,9 @@ public class BigMole extends Boss{
 
         if(health <= 0){
             Trident.removeLight(light);
-
-            Trident.printError("mole achievement WIP");
+            
+            Achievement.get(Achievement.SUPERVISOR);
+            if(WorldManager.difficulty == WorldManager.V_HARD) Achievement.get(Achievement.SUPERVISORVHARD);
         }
     }
 

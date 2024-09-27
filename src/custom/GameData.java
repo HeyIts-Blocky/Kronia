@@ -21,6 +21,7 @@ public class GameData {
     public static boolean minimapEnabled = true;
     public static int selCraft = 0;
     public static boolean settingsOpen = false;
+    public static boolean bigCraft = false;
 
     public static int health = 100, maxHealth = 100;
     public static long hurtTime = 0;

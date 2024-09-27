@@ -51,18 +51,23 @@ public class Item {
 
 
     public static ImageIcon getImg(short id){
+        if(id >= imgs.length || id < 0) return imgs[WOOD];
         return imgs[id];
     }
     public static byte getType(short id){
+        if(id >= types.length || id < 0) return T_NULL;
         return types[id];
     }
     public static int[] getData(short id){
+        if(id >= data.length || id < 0) return new int[0];
         return data[id];
     }
     public static String getName(short id){
+        if(id >= names.length || id < 0) return "NULL";
         return names[id];
     }
     public static String getDescription(short id){
+        if(id >= descriptions.length || id < 0) return "UNKNOWN ITEM: " + id;
         return descriptions[id];
     }
 

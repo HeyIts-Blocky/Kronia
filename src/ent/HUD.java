@@ -157,7 +157,7 @@ public class HUD extends TridEntity {
 
         if(!GameData.invOpen) img.paintIcon(panel, g, 0, 0);
         else{
-            if(GameData.openCrate != null){
+            if(GameData.openCrate != null || GameData.bigCraft){
                 crateImg.paintIcon(panel, g, 0, 0);
             }else{
                 invImg.paintIcon(panel, g, 0, 0);
@@ -182,7 +182,60 @@ public class HUD extends TridEntity {
         }
 
         if(GameData.invOpen){
-            if(GameData.openCrate != null){
+            if(GameData.bigCraft){
+                ArrayList<Recipe> recipes = Recipe.getRecipes();
+                for(int i = 0; i < 10; i++){
+                    if(i + GameData.selCraft >= recipes.size()) break;
+                    Item it = recipes.get(i + GameData.selCraft).output;
+                    if(it.id != Item.NOTHING){
+                        Item.getImg(it.id).paintIcon(panel, g, 20 + ((i) * 52), 184);
+                    }
+                    if(it.amount != 1 && it.id != Item.NOTHING){
+                        g.setColor(Color.white);
+                        TextBox.outlineColor = Color.black;
+                        g.setFont(new Font(GameData.getFont(), Font.ITALIC, 15));
+                        TextBox.draw(it.amount + "", g, 20 + ((i) * 52) + 35, 184 + 32, TextBox.RIGHT, TextBox.NOMAXWIDTH, 1);
+                    }
+                    if(!recipes.get(i + GameData.selCraft).canCraft()){
+                        g.setColor(new Color(1f, 0f, 0f, 0.5f));
+                        g.fillRect(20 + ((i) * 52), 184, 32, 32);
+                    }
+                }
+                for(int i = 10; i < 20; i++){
+                    if(i + GameData.selCraft >= recipes.size()) break;
+                    Item it = recipes.get(i + GameData.selCraft).output;
+                    if(it.id != Item.NOTHING){
+                        Item.getImg(it.id).paintIcon(panel, g, 20 + ((i - 10) * 52), 129);
+                    }
+                    if(it.amount != 1 && it.id != Item.NOTHING){
+                        g.setColor(Color.white);
+                        TextBox.outlineColor = Color.black;
+                        g.setFont(new Font(GameData.getFont(), Font.ITALIC, 15));
+                        TextBox.draw(it.amount + "", g, 20 + ((i - 10) * 52) + 35, 129 + 32, TextBox.RIGHT, TextBox.NOMAXWIDTH, 1);
+                    }
+                    if(!recipes.get(i + GameData.selCraft).canCraft()){
+                        g.setColor(new Color(1f, 0f, 0f, 0.5f));
+                        g.fillRect(20 + ((i - 10) * 52), 129, 32, 32);
+                    }
+                }
+                for(int i = 20; i < 30; i++){
+                    if(i + GameData.selCraft >= recipes.size()) break;
+                    Item it = recipes.get(i + GameData.selCraft).output;
+                    if(it.id != Item.NOTHING){
+                        Item.getImg(it.id).paintIcon(panel, g, 20 + ((i - 20) * 52), 81);
+                    }
+                    if(it.amount != 1 && it.id != Item.NOTHING){
+                        g.setColor(Color.white);
+                        TextBox.outlineColor = Color.black;
+                        g.setFont(new Font(GameData.getFont(), Font.ITALIC, 15));
+                        TextBox.draw(it.amount + "", g, 20 + ((i - 20) * 52) + 35, 81 + 32, TextBox.RIGHT, TextBox.NOMAXWIDTH, 1);
+                    }
+                    if(!recipes.get(i + GameData.selCraft).canCraft()){
+                        g.setColor(new Color(1f, 0f, 0f, 0.5f));
+                        g.fillRect(20 + ((i - 20) * 52), 81, 32, 32);
+                    }
+                }
+            }else if(GameData.openCrate != null){
                 for(int i = 0; i < 10; i++){
                     Item it = GameData.openCrate.getSlot(i);
                     if(it.id != Item.NOTHING){
@@ -257,48 +310,52 @@ public class HUD extends TridEntity {
                     TextBox.draw(it.amount + "", g, 20 + ((i - 30) * 52) + 35, 237 + 32, TextBox.RIGHT, TextBox.NOMAXWIDTH, 1);
                 }
             }
-
+            
             ArrayList<Recipe> recipes = Recipe.getRecipes();
-            if(recipes.size() > 0){
-                if(GameData.selCraft > 0){
-                    recipes.get(GameData.selCraft - 1).output.getImg().paintIcon(panel, g, 636, 32);
-                    if(!recipes.get(GameData.selCraft - 1).canCraft()){
-                        g.setColor(new Color(1f, 0f, 0f, 0.5f));
-                        g.fillRect(636, 32, 32, 32);
+            if(!GameData.bigCraft){
+                
+                if(recipes.size() > 0){
+                    if(GameData.selCraft > 0){
+                        recipes.get(GameData.selCraft - 1).output.getImg().paintIcon(panel, g, 636, 32);
+                        if(!recipes.get(GameData.selCraft - 1).canCraft()){
+                            g.setColor(new Color(1f, 0f, 0f, 0.5f));
+                            g.fillRect(636, 32, 32, 32);
+                        }
                     }
-                }
-                recipes.get(GameData.selCraft).output.getImg().paintIcon(panel, g, 636, 84);
-                if(!recipes.get(GameData.selCraft).canCraft()){
-                    g.setColor(new Color(1f, 0f, 0f, 0.5f));
-                    g.fillRect(636, 84, 32, 32);
-                }
-                if(recipes.get(GameData.selCraft).output.amount > 1){
-                    g.setColor(Color.white);
-                    TextBox.outlineColor = Color.black;
-                    g.setFont(new Font(GameData.getFont(), Font.ITALIC, 15));
-                    TextBox.draw(recipes.get(GameData.selCraft).output.amount + "", g, 636 + 32, 84 + 32, TextBox.RIGHT, TextBox.NOMAXWIDTH, 1);
-                }
-                Image[] imgs = new Image[recipes.get(GameData.selCraft).ingredients.length];
-                for(int i = 0; i < imgs.length; i++){
-                    imgs[i] = recipes.get(GameData.selCraft).ingredients[i].getImg().getImage();
-                }
-                for(int i = 0; i < imgs.length; i++){
-                    g.drawImage(imgs[i], 609 - (i * 18), 91, 16, 16, null);
-                    if(recipes.get(GameData.selCraft).ingredients[i].amount > 1){
+                    recipes.get(GameData.selCraft).output.getImg().paintIcon(panel, g, 636, 84);
+                    if(!recipes.get(GameData.selCraft).canCraft()){
+                        g.setColor(new Color(1f, 0f, 0f, 0.5f));
+                        g.fillRect(636, 84, 32, 32);
+                    }
+                    if(recipes.get(GameData.selCraft).output.amount > 1){
                         g.setColor(Color.white);
                         TextBox.outlineColor = Color.black;
-                        g.setFont(new Font(GameData.getFont(), Font.ITALIC, 7));
-                        TextBox.draw(recipes.get(GameData.selCraft).ingredients[i].amount + "", g, 609 - (i * 18) + 16, 91 + 16, TextBox.RIGHT, TextBox.NOMAXWIDTH, 1);
+                        g.setFont(new Font(GameData.getFont(), Font.ITALIC, 15));
+                        TextBox.draw(recipes.get(GameData.selCraft).output.amount + "", g, 636 + 32, 84 + 32, TextBox.RIGHT, TextBox.NOMAXWIDTH, 1);
                     }
-                }
-                if(GameData.selCraft < recipes.size() - 1){
-                    recipes.get(GameData.selCraft + 1).output.getImg().paintIcon(panel, g, 636, 136);
-                    if(!recipes.get(GameData.selCraft + 1).canCraft()){
-                        g.setColor(new Color(1f, 0f, 0f, 0.5f));
-                        g.fillRect(636, 136, 32, 32);
+                    Image[] imgs = new Image[recipes.get(GameData.selCraft).ingredients.length];
+                    for(int i = 0; i < imgs.length; i++){
+                        imgs[i] = recipes.get(GameData.selCraft).ingredients[i].getImg().getImage();
+                    }
+                    for(int i = 0; i < imgs.length; i++){
+                        g.drawImage(imgs[i], 609 - (i * 18), 91, 16, 16, null);
+                        if(recipes.get(GameData.selCraft).ingredients[i].amount > 1){
+                            g.setColor(Color.white);
+                            TextBox.outlineColor = Color.black;
+                            g.setFont(new Font(GameData.getFont(), Font.ITALIC, 7));
+                            TextBox.draw(recipes.get(GameData.selCraft).ingredients[i].amount + "", g, 609 - (i * 18) + 16, 91 + 16, TextBox.RIGHT, TextBox.NOMAXWIDTH, 1);
+                        }
+                    }
+                    if(GameData.selCraft < recipes.size() - 1){
+                        recipes.get(GameData.selCraft + 1).output.getImg().paintIcon(panel, g, 636, 136);
+                        if(!recipes.get(GameData.selCraft + 1).canCraft()){
+                            g.setColor(new Color(1f, 0f, 0f, 0.5f));
+                            g.fillRect(636, 136, 32, 32);
+                        }
                     }
                 }
             }
+            
 
             if(GameData.cursorItem != null){
                 Point offset = new Point();
@@ -327,7 +384,7 @@ public class HUD extends TridEntity {
             String label = "";
             String desc = "";
             if(slot != -1){
-                if(slot == 40 && recipes.size() > 0){ 
+                if(slot == 40 && recipes.size() > 0 && !GameData.bigCraft){ 
                     // craft
                     label = recipes.get(GameData.selCraft).output.getName();
                     desc = recipes.get(GameData.selCraft).output.getDescription();

@@ -100,6 +100,7 @@ public class Inputs {
 
             if(key == Settings.keybinds[Settings.INVENTORY]){
                 GameData.invOpen = !GameData.invOpen;
+                GameData.bigCraft = false;
                 if(GameData.cursorItem != null){
                     GameData.addItem(GameData.cursorItem);
                     GameData.cursorItem = null;
@@ -137,7 +138,17 @@ public class Inputs {
                 }
                 if(slot != -1){
                     if(slot == 40){
+                        if(GameData.bigCraft){
+                            GameData.bigCraft = false;
+                            GameData.selCraft = 0;
+                            return;
+                        }
                         if(Recipe.getRecipes().size() == 0) return;
+                        if(Trident.getKeyDown(KeyEvent.VK_CONTROL)){
+                            GameData.bigCraft = true;
+                            GameData.selCraft = 0;
+                            return;
+                        }
                         if(GameData.cursorItem == null || (GameData.cursorItem.id == Recipe.getRecipes().get(GameData.selCraft).output.id && GameData.cursorItem.amount + Recipe.getRecipes().get(GameData.selCraft).output.amount < 999)){
                             int initialSize = Recipe.getRecipes().size();
                             Recipe recipe = Recipe.getRecipes().get(GameData.selCraft);
@@ -166,14 +177,14 @@ public class Inputs {
                         }
                         return;
                     }
-                    if(slot == 41){
+                    if(slot == 41 && GameData.cursorItem == null){
                         WorldManager.saveWorld();
                         HUD.addNotif("Game saved.", HUD.NOTIF_SAVE);
                         Trident.resetKeys();
                         GameData.invOpen = false;
                         return;
                     }
-                    if(slot == 42){
+                    if(slot == 42 && GameData.cursorItem == null){
                         WorldManager.saveWorld();
                         GameData.invOpen = false;
                         Trident.loadScene("title");
@@ -266,6 +277,20 @@ public class Inputs {
                                 
                             }
                         }
+                    }
+                }else if(GameData.bigCraft){
+                    slot = -1;
+                    for(int i = 0; i < GameData.crateBoxes.size(); i++){
+                        Rectangle r = GameData.crateBoxes.get(i);
+                        if(r.contains(mousePos)){
+                            slot = i - 10;
+                            break;
+                        }
+                    }
+
+                    if(slot != -1 && slot < Recipe.getRecipes().size()){
+                        GameData.selCraft = slot + GameData.selCraft;
+                        GameData.bigCraft = false;
                     }
                 }else if(GameData.openCrate != null){
                     
@@ -413,8 +438,14 @@ public class Inputs {
         if(MaceBall.maceOut()) return;
         if(Trident.getCurrentScene().name.equals("world") || (Trident.getCurrentScene().name.equals("tutorial") && GameData.tutorialTriggers[0])){
             if(GameData.invOpen){
-                GameData.selCraft += scroll;
-                GameData.selCraft = BTools.clamp(GameData.selCraft, 0, Recipe.getRecipes().size() - 1);
+                if(GameData.bigCraft){
+                    GameData.selCraft -= scroll * 10;
+                    GameData.selCraft = BTools.clamp(GameData.selCraft / 10, 0, Recipe.getRecipes().size() / 10) * 10;
+                }else{
+                    GameData.selCraft += scroll;
+                    GameData.selCraft = BTools.clamp(GameData.selCraft, 0, Recipe.getRecipes().size() - 1);
+                }
+                
                 Settings.playSound("data/sound/hotbarSel.wav", 0.5);
             }else{
                 GameData.selHotbar += scroll;

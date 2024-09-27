@@ -43,12 +43,13 @@ public class Trident {
     public static boolean drawPlayer = true;
     public static Position mouseWorldPos = new Position();
     public static boolean enableBloom = true, enableExposure = true;
+    public static MainPanel panel;
 
 
     // Trident Variables
     protected static Player player;
     protected static Scene currentScene;
-    protected static boolean fullscreen = false;
+    public static boolean fullscreen = false;
     protected static ArrayList<Scene> loadedScenes = new ArrayList<Scene>();
     protected static ArrayList<TridEntity> entRegistry = new ArrayList<TridEntity>();
     protected static String defaultScene = "default";

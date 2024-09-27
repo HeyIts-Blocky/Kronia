@@ -28,6 +28,7 @@ import custom.Settings;
 import custom.TitleButton;
 import custom.TitleSlider;
 import custom.WorldManager;
+import trident.Main;
 import trident.TridEntity;
 import trident.Trident;
 
@@ -277,6 +278,15 @@ public class TitleScreen extends TridEntity {
                 new Font(GameData.getFont(), Font.PLAIN, 20),
                 "Keybinds",
                 TitleButton.CENTER
+            ),
+            new TitleButton(
+                new Rectangle(684 - 5, 210, 290, 25),
+                Color.white,
+                Color.gray,
+                Color.black,
+                new Font(GameData.getFont(), Font.PLAIN, 20),
+                "Toggle Fullscreen",
+                TitleButton.RIGHT
             ),
         },
         { // 4
@@ -912,6 +922,10 @@ public class TitleScreen extends TridEntity {
                 break;
             case 10:
                 screen = 4;
+                break;
+            case 11:
+                Trident.fullscreen = !Trident.fullscreen;
+                Main.window = BTools.getWindowFullscreen(Main.window, Trident.fullscreen, Trident.panel);
                 break;
             }
         }else if(screen == 4){

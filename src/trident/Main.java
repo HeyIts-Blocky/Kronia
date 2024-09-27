@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 public class Main{
-    protected static JFrame window = new JFrame("Kronia");
+    public static JFrame window = new JFrame("Kronia");
     public static void main(String[] args){
         window.setSize(700, 500);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -43,6 +43,8 @@ public class MainPanel extends JPanel {
     
     public MainPanel(){
 
+        Trident.panel = this;
+
         System.setProperty("sun.java2d.opengl", "true"); // hardware acceleration?
 
         setBackground(Color.black);

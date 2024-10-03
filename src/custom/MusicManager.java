@@ -25,7 +25,7 @@ public class MusicManager {
     };
     private static Song[] bossSongs = {
         new Song("data/music/slimes court.wav", "Slime's Court - Blocky"), // Apex Slime
-        new Song("data/music/slimes court.wav", "Slime's Court (PLACEHOLDER) - Blocky"), // Big Mole (The Supervisor)
+        new Song("data/music/moleSong.wav", "molesong - rascal writes"), // Big Mole (The Supervisor)
     };
 
     public static double volume = 1;
@@ -39,7 +39,11 @@ public class MusicManager {
     public static void update(long elapsedTime){
         if(songTime > 0) songTime -= elapsedTime;
 
-        if(currentSong == null || !currentSong.isActive()){
+        if(Trident.getCurrentScene().name.equals("newTut")){
+            stopSong();
+        }
+
+        if((currentSong == null || !currentSong.isActive()) && !Trident.getCurrentScene().name.equals("newTut")){
             if(boss) songTime = 0;
             if(songTime <= 0){
                 // Play new song

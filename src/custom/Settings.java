@@ -19,6 +19,7 @@ public class Settings {
     public static Color assistColor = Color.white;
     public static boolean camShake = true;
     public static boolean dmgInd = true;
+    public static boolean subtitles = true;
 
     public static int[] keybinds = {
         KeyEvent.VK_TAB, // inventory
@@ -64,6 +65,8 @@ public class Settings {
             writer.println("int keyrotate " + keybinds[ROTATE]);
             writer.println("boolean camShake " + camShake);
             writer.println("boolean dmgInd " + dmgInd);
+            writer.println("boolean dev " + Trident.consoleEnabled);
+            writer.println("boolean subtitles " + subtitles);
             writer.close();
         }catch(Exception e){
             Trident.printException("Problem while saving settings!", e);
@@ -118,6 +121,16 @@ public class Settings {
             camShake = obj.getBoolean();
             obj = BSonParser.getObject("dmgInd", objects);
             dmgInd = obj.getBoolean();
+
+            try{ // v0.7
+                obj = BSonParser.getObject("dev", objects);
+                Trident.consoleEnabled = obj.getBoolean();
+                obj = BSonParser.getObject("subtitles", objects);
+                subtitles = obj.getBoolean();
+            }catch(Exception e){
+                Trident.consoleEnabled = false;
+                subtitles = true;
+            }
             applyKeybinds();
         }catch(Exception e){
             Trident.printException("Problem while loading settings!", e);

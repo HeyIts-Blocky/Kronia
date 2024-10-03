@@ -288,6 +288,15 @@ public class TitleScreen extends TridEntity {
                 "Toggle Fullscreen",
                 TitleButton.RIGHT
             ),
+            new TitleButton(
+                new Rectangle(684 - 5, 240, 290, 25),
+                Color.white,
+                Color.gray,
+                Color.black,
+                new Font(GameData.getFont(), Font.PLAIN, 20),
+                "Subtitles: ---",
+                TitleButton.RIGHT
+            ),
         },
         { // 4
             new TitleButton(
@@ -481,6 +490,7 @@ public class TitleScreen extends TridEntity {
         buttons[3][7].color = Settings.assistColor;
         buttons[3][8].text = "Cam Shake: " + Settings.camShake;
         buttons[3][9].text = "Damage Indicators: " + Settings.dmgInd;
+        buttons[3][12].text = "Subtitles: " + Settings.subtitles;
 
         // keybinds
         buttons[4][1].text = "Open Inventory: " + KeyEvent.getKeyText(Settings.keybinds[Settings.INVENTORY]);
@@ -927,6 +937,10 @@ public class TitleScreen extends TridEntity {
             case 11:
                 Trident.fullscreen = !Trident.fullscreen;
                 Main.window = BTools.getWindowFullscreen(Main.window, Trident.fullscreen, Trident.panel);
+                break;
+            case 12:
+                Settings.subtitles = !Settings.subtitles;
+                updateButtonText();
                 break;
             }
         }else if(screen == 4){

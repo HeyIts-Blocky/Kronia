@@ -17,6 +17,7 @@ import blib.game.Player;
 import blib.util.BTools;
 import blib.util.Position;
 import custom.Achievement;
+import custom.Dialog;
 import custom.Effect;
 import custom.GameData;
 import custom.Item;
@@ -165,12 +166,14 @@ public class Update {
             GameData.tutProgress = 0;
             GameData.tutTimer = 1000;
             GameData.tutWaiting = true;
+            GameData.clearInventory();
         }
         
     }
     
     public static void update(long elapsedTime){
         MusicManager.update(elapsedTime);
+        Dialog.update();
         if(Trident.getCurrentScene().name.equals("world") || (Trident.getCurrentScene().name.equals("newTut"))){
             Settings.applyKeybinds();
             Trident.drawPlayer = false;
@@ -560,17 +563,16 @@ public class Update {
                         // do logic
                         switch(GameData.tutProgress){
                         case 0:
-                            System.out.println("Dialog 1");
+                            Dialog.playDialog(0);
                             GameData.tutWaiting = true;
-                            GameData.tutTimer = 1000;
+                            GameData.tutTimer = 14000;
                             break;
                         case 1:
                             Trident.setPlrPos(new Position(-165, 400));
-                            Trident.spawnEntity(new HUD(new Position()));
                             GameData.clearInventory();
                             GameData.inventory[0] = new Item(Item.W_AXE);
                             GameData.inventory[10] = new Item(Item.W_PICK);
-                            System.out.println("Dialog 2");
+                            Dialog.playDialog(1);
                             break;
                         case 6:
                             TutorialBlock.disable(2);
@@ -608,7 +610,7 @@ public class Update {
                         }
                     }
                     if(!trees){
-                        System.out.println("Dialog 3");
+                        Dialog.playDialog(2);
                         GameData.tutProgress++;
                         TutorialBlock.disable(1);
                     }
@@ -616,7 +618,7 @@ public class Update {
                 if(GameData.tutProgress == 4){
                     for(TridEntity e: Trident.getEntities()){
                         if(e instanceof Workbench){
-                            System.out.println("Dialog 5");
+                            Dialog.playDialog(4);
                             GameData.tutProgress++;
                             break;
                         }
@@ -625,9 +627,9 @@ public class Update {
                 if(GameData.tutProgress == 5){
                     for(TridEntity e: Trident.getEntities()){
                         if(e instanceof Furnace){
-                            System.out.println("Dialog 6");
+                            Dialog.playDialog(5);
                             GameData.tutProgress++;
-                            GameData.tutTimer = 2000;
+                            GameData.tutTimer = 28000;
                             GameData.tutWaiting = true;
                             break;
                         }
@@ -642,41 +644,41 @@ public class Update {
                         }
                     }
                     if(!cows){
-                        System.out.println("Dialog 7");
+                        Dialog.playDialog(6);
                         GameData.tutProgress++;
-                        GameData.tutTimer = 1000;
+                        GameData.tutTimer = 21000;
                         GameData.tutWaiting = true;
                     }
                 }
                 if(GameData.tutProgress == 9){
                     if(GameData.hunger > 70){
-                        System.out.println("Dialog 8");
+                        Dialog.playDialog(7);
                         TutorialBlock.disable(3);
                         GameData.tutProgress++;
                     }
                 }
                 if(GameData.tutProgress == 10){
                     if(GameData.openCrate != null){
-                        System.out.println("Dialog 9");
+                        Dialog.playDialog(8);
                         TutorialBlock.enable(3);
                         GameData.tutProgress++;
-                        GameData.tutTimer = 3000;
+                        GameData.tutTimer = 26000;
                         GameData.tutWaiting = true;
                     }
                 }
                 if(GameData.tutProgress == 14){
                     if(WorldManager.numEnemies() == 0){
-                        System.out.println("Dialog 11");
+                        Dialog.playDialog(10);
                         GameData.tutProgress++;
-                        GameData.tutTimer = 3000;
+                        GameData.tutTimer = 21000;
                         GameData.tutWaiting = true;
                     }
                 }
                 if(GameData.tutProgress == 16){
                     if(WorldManager.numEnemies() == 0){
-                        System.out.println("Dialog 12");
+                        Dialog.playDialog(11);
                         GameData.tutProgress++;
-                        GameData.tutTimer = 5000;
+                        GameData.tutTimer = 10000;
                         GameData.tutWaiting = true;
                     }
                 }
@@ -698,7 +700,7 @@ public class Update {
     public static void trigger(int id){
         // tutorial
         if(id == -2 && GameData.tutProgress == 3){
-            System.out.println("Dialog 4");
+            Dialog.playDialog(3);
             TutorialBlock.enable(1);
             GameData.tutProgress++;
         }
@@ -718,9 +720,9 @@ public class Update {
             }
             if(!hasSword) GameData.addItem(new Item(Item.I_SWORD));
 
-            System.out.println("Dialog 10");
+            Dialog.playDialog(9);
             GameData.tutProgress++;
-            GameData.tutTimer = 1000;
+            GameData.tutTimer = 5000;
             GameData.tutWaiting = true;
         }
 

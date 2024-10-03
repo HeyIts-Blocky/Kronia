@@ -1,0 +1,162 @@
+int version 1
+double x 293.7039999999998
+double y 400.0
+int health 100
+int maxHP 100
+int hunger 100
+int maxHunger 100
+double hungerSpeed 0.9000000000000002
+long hungerTime 10000
+long time 0
+int dimension 0
+int difficulty 2
+{ surfaceEnt
+int 19
+double 337.14999999999986
+double 302.6499999999998
+int 20
+int 0
+int 19
+double 478.14999999999986
+double 373.6499999999998
+int 20
+int 0
+int 19
+double 294.14999999999986
+double 438.6499999999998
+int 2
+int 0
+int 19
+double 459.14999999999986
+double 548.6499999999999
+int 20
+int 0
+int 19
+double 310.14999999999986
+double 580.6499999999999
+int 20
+int 0
+int 26
+double 393.14999999999986
+double 828.6499999999999
+int 40
+int 0
+int 8
+double 109.64999999999986
+double 1384.6499999999999
+int 1
+int 0
+int 8
+double 183.64999999999986
+double 1384.6499999999999
+int 1
+int 0
+int 8
+double 31.649999999999864
+double 1385.6499999999999
+int 1
+int 0
+int 8
+double 185.64999999999986
+double 1493.6499999999999
+int 1
+int 0
+int 8
+double 111.64999999999986
+double 1493.6499999999999
+int 1
+int 0
+int 8
+double 30.649999999999864
+double 1493.6499999999999
+int 1
+int 0
+}
+{ minesEnt
+}
+{ deepMinesEnt
+}
+{ inventory
+int 5
+int 1
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 4
+int 1
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+int 0
+}
+{ effects
+}

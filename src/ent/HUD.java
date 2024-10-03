@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ import blib.anim.Animator;
 import blib.util.BTools;
 import blib.util.Position;
 import blib.util.TextBox;
+import custom.Dialog;
 import custom.Effect;
 import custom.GameData;
 import custom.Item;
@@ -514,6 +516,68 @@ public class HUD extends TridEntity {
         TextBox.draw(notifText, g, Trident.getFrameWidth() - ((notifType == NOTIF_BLANK) ? 0 : 20), -12 + (int)notifPos.y, TextBox.RIGHT);
         if(notifType != NOTIF_BLANK){
             notifImgs[notifType - 1].paintIcon(panel, g, Trident.getFrameWidth() - 16, -20 + (int)notifPos.y);
+        }
+
+        if(Trident.getCurrentScene().name.equals("newTut")){
+            switch(GameData.tutProgress){
+            case 2:
+                g.setColor(new Color(0f, 0.5f, 0.5f, 0.75f));
+                g.setFont(new Font(GameData.getFont(), Font.PLAIN, 20));
+                int strWidth = g.getFontMetrics().stringWidth("Left Mouse to attack");
+                g.fillRect(Trident.getFrameWidth() / 2 - strWidth / 2, 10, strWidth, 25);
+                g.setColor(Color.white);
+                TextBox.draw("Left Mouse to attack", g, Trident.getFrameWidth() / 2, 20, TextBox.CENTER);
+                break;
+            case 3:
+                if(!GameData.invOpen){
+                    g.setColor(new Color(0f, 0.5f, 0.5f, 0.75f));
+                    g.setFont(new Font(GameData.getFont(), Font.PLAIN, 20));
+                    strWidth = g.getFontMetrics().stringWidth(KeyEvent.getKeyText(Settings.keybinds[Settings.INVENTORY]) + " to open inventory");
+                    g.fillRect(Trident.getFrameWidth() / 2 - strWidth / 2, 10, strWidth, 25);
+                    g.setColor(Color.white);
+                    TextBox.draw(KeyEvent.getKeyText(Settings.keybinds[Settings.INVENTORY]) + " to open inventory", g, Trident.getFrameWidth() / 2, 20, TextBox.CENTER);
+                    break;
+                }
+                break;
+            case 4:
+            case 5:
+            case 9:
+                if(!GameData.invOpen){
+                    g.setColor(new Color(0f, 0.5f, 0.5f, 0.75f));
+                    g.setFont(new Font(GameData.getFont(), Font.PLAIN, 20));
+                    strWidth = g.getFontMetrics().stringWidth(KeyEvent.getKeyText(Settings.keybinds[Settings.INVENTORY]) + " to open inventory");
+                    g.fillRect(Trident.getFrameWidth() / 2 - strWidth / 2, 10, strWidth, 25);
+                    g.setColor(Color.white);
+                    TextBox.draw(KeyEvent.getKeyText(Settings.keybinds[Settings.INVENTORY]) + " to open inventory", g, Trident.getFrameWidth() / 2, 20, TextBox.CENTER);
+                    break;
+                }else{
+                    g.setColor(new Color(0f, 0.5f, 0.5f, 0.75f));
+                    g.setFont(new Font(GameData.getFont(), Font.PLAIN, 20));
+                    strWidth = g.getFontMetrics().stringWidth("Craft items with the crafting slots in the top right");
+                    g.fillRect(Trident.getFrameWidth() / 2 - strWidth / 2, 10, strWidth, 25);
+                    g.setColor(Color.white);
+                    TextBox.draw("Craft items with the crafting slots in the top right", g, Trident.getFrameWidth() / 2, 20, TextBox.CENTER);
+                    break;
+                }
+            case 10:
+                g.setColor(new Color(0f, 0.5f, 0.5f, 0.75f));
+                g.setFont(new Font(GameData.getFont(), Font.PLAIN, 20));
+                strWidth = g.getFontMetrics().stringWidth("Open inventory near crate to open it");
+                g.fillRect(Trident.getFrameWidth() / 2 - strWidth / 2, 10, strWidth, 25);
+                g.setColor(Color.white);
+                TextBox.draw("Open inventory near crate to open it", g, Trident.getFrameWidth() / 2, 20, TextBox.CENTER);
+                break;
+            }
+        }
+
+        if(Dialog.dialog != -1 && Settings.subtitles){
+            g.setColor(new Color(0f, 0.5f, 0.5f, 0.75f));
+            g.setFont(new Font(GameData.getFont(), Font.PLAIN, 15));
+            int strWidth = TextBox.textWidth(Dialog.dialogSubs[Dialog.dialog], g, Trident.getFrameHeight());
+            int strHeight = TextBox.numLines(Dialog.dialogSubs[Dialog.dialog], g, Trident.getFrameHeight()) * 15;
+            g.fillRect(Trident.getFrameWidth() / 2 - strWidth / 2, Trident.getFrameHeight() - strHeight - 10, strWidth, strHeight + 5);
+            g.setColor(Color.white);
+            TextBox.draw(Dialog.dialogSubs[Dialog.dialog], g, Trident.getFrameWidth() / 2, Trident.getFrameHeight() - strHeight - 3, TextBox.CENTER, Trident.getFrameHeight());
         }
 
         if(Trident.getCurrentScene().name.equals("newTut") && GameData.tutProgress == 17){

@@ -151,6 +151,7 @@ public class Slime extends GameObject {
     }
 
     public void clampTarget(){
+        if(Trident.getCurrentScene().name.equals("newTut")) return;
         // assumes targetPos is not null
         targetPos.x = BTools.clamp(targetPos.x, 15, 10000 - 15);
         targetPos.y = BTools.clamp(targetPos.y, 15, 10000 - 15);

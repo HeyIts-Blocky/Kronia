@@ -27,6 +27,14 @@ public class Inputs {
             TitleScreen.updateButtonText();
         }
         if(Trident.getCurrentScene().name.equals("title")){
+            if(!Trident.consoleEnabled && key == 192){
+                if(TitleScreen.worldName.equals("iamdev")){
+                    Trident.consoleEnabled = true;
+                    Trident.printConsole("Console Enabled!");
+                    Trident.consoleOpen = true;
+                    Settings.saveSettings();
+                }
+            }
             // world name
             if(TitleScreen.worldName.length() < 20){
                 if(key >= KeyEvent.VK_A && key <= KeyEvent.VK_Z){

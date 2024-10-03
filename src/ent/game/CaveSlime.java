@@ -168,6 +168,7 @@ public class CaveSlime extends GameObject {
     }
 
     public void clampTarget(){
+        if(Trident.getCurrentScene().name.equals("newTut")) return;
         // assumes targetPos is not null
         int[] clamps = Background.getClampPos();
         targetPos.x = BTools.clamp(targetPos.x, clamps[0], clamps[1]);

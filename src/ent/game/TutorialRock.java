@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import blib.util.BTools;
 import blib.util.Position;
+import custom.GameData;
 import custom.Item;
 import ent.GameObject;
 public class TutorialRock extends GameObject {
@@ -41,7 +42,7 @@ public class TutorialRock extends GameObject {
         
     }
     public void dropItems(){
-        GameObject.dropNoDelay(Item.STONE, 20, position);
+        GameData.addItem(new Item(Item.STONE, 20));
     }
     public void tookDamage(int amount){
 

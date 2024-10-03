@@ -51,7 +51,7 @@ public class Inputs {
                 if(TitleScreen.worldName.length() > 0) TitleScreen.worldName = TitleScreen.worldName.substring(0, TitleScreen.worldName.length() - 1);
             }
         }
-        if(Trident.getCurrentScene().name.equals("world") || (Trident.getCurrentScene().name.equals("tutorial") && GameData.tutorialTriggers[0])){
+        if(Trident.getCurrentScene().name.equals("world") || (Trident.getCurrentScene().name.equals("newTut") && GameData.tutProgress > 0)){
             if(GameData.spectate) return;
             // in world
             if(!MaceBall.maceOut()){
@@ -125,7 +125,7 @@ public class Inputs {
     }
 
     public static void mousePressed(int mb, Point mousePos, Position worldPos){
-        if(Trident.getCurrentScene().name.equals("world") || (Trident.getCurrentScene().name.equals("tutorial") && GameData.tutorialTriggers[0])){
+        if(Trident.getCurrentScene().name.equals("world") || (Trident.getCurrentScene().name.equals("newTut") && GameData.tutProgress > 0)){
             if(GameData.spectate) return;
             if(GameData.invOpen){
                 int slot = -1;
@@ -436,7 +436,7 @@ public class Inputs {
 
     public static void onScroll(int scroll){
         if(MaceBall.maceOut()) return;
-        if(Trident.getCurrentScene().name.equals("world") || (Trident.getCurrentScene().name.equals("tutorial") && GameData.tutorialTriggers[0])){
+        if(Trident.getCurrentScene().name.equals("world") || (Trident.getCurrentScene().name.equals("newTut") && GameData.tutProgress > 0)){
             if(GameData.invOpen){
                 if(GameData.bigCraft){
                     GameData.selCraft -= scroll * 10;

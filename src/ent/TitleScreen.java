@@ -630,7 +630,7 @@ public class TitleScreen extends TridEntity {
 
             g.setColor(Color.white);
             g.setFont(new Font(GameData.getFont(), Font.PLAIN, 30));
-            TextBox.draw("Programming, Art, Design\n   Blocky\n\nMusic\n   Blocky\n\nEpic Gamer\n   You\n\nBuilt with Trident Engine", g, 20, 100);
+            TextBox.draw("Programming, Art, Design\n   Blocky\n\nMusic\n   Blocky\n\nTutorial Voice\n   Jack Catt\n\nBuilt with Trident Engine", g, 20, 100);
         }
         if(screen == 6){
             g.setColor(Color.white);
@@ -816,8 +816,9 @@ public class TitleScreen extends TridEntity {
                     }
                     break;
                 case 1:
+                    WorldManager.difficulty = WorldManager.NORMAL;
                     Trident.setupScenes();
-                    Trident.loadScene("tutorial");
+                    Trident.loadScene("newTut");
                     break;
                 case 2:
                     screen = 3;

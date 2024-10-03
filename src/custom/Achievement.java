@@ -113,7 +113,7 @@ public class Achievement {
     }
 
     public static void get(short a){
-        if(Trident.getCurrentScene().name.equals("tutorial") && a != 3) return;
+        if(Trident.getCurrentScene().name.equals("newTut") && a != 3) return;
         if(!hasAchievement[a]){
             hasAchievement[a] = true;
             HUD.addNotif(titles[a], HUD.NOTIF_TRPHY);

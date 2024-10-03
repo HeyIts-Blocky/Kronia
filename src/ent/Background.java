@@ -71,7 +71,7 @@ public class Background extends TridEntity {
         double y = 5000;
         if(bg == MINES) x += OFFSET;
         if(bg == DEEPMINES) y += OFFSET;
-        if(Trident.getCurrentScene().name.equals("title")){
+        if(Trident.getCurrentScene().name.equals("title") || Trident.getCurrentScene().name.equals("newTut")){
             x = 0;
             y = 0;
         }
@@ -124,6 +124,7 @@ public class Background extends TridEntity {
     }
 
     public static boolean isInDimension(TridEntity e){
+        if(Trident.getCurrentScene().name.equals("newTut") || Trident.getCurrentScene().name.equals("title")) return true;
         // check if it's in the current dimension
 
         Rectangle rect = new Rectangle(getClampPos()[0], getClampPos()[2], 10000, 10000);

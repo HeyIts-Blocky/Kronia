@@ -11,6 +11,7 @@ import blib.util.Position;
 import custom.GameData;
 import custom.Item;
 import ent.GameObject;
+import trident.TridEntity;
 public class Crate extends GameObject {
 
     ImageIcon img = new ImageIcon("data/images/ent/crate.png");
@@ -34,6 +35,21 @@ public class Crate extends GameObject {
         weakness = Item.T_AXE;
         if(dat.length == 1) clear();
     }
+    public Crate(Position pos){
+        super(pos, 20, GameObject.CRATE, new int[60], new Dimension(20, 10));
+        BTools.resizeImgIcon(img, 64, 64);
+        weakness = Item.T_AXE;
+        data[0] = Item.I_SWORD;
+        data[30] = 1;
+    }
+
+    public Crate(){
+        super("tutcrate", 0);
+    }
+    public TridEntity construct(Position pos, Dimension collision, int[] data){
+        return new Crate(pos); 
+    }
+
 
     // Render while in game
     public void render(Graphics g, JPanel panel, int x, int y){

@@ -47,7 +47,7 @@ public class WorldManager {
     public static final byte WORLD_SAVE_VERSION = 1; // INCREASE THIS NUMBER EVERY TIME THE WAY WORLDS ARE SAVED GETS CHANGED
 
     public static void checkWorld(long elapsedTime){
-        if(Trident.getCurrentScene().name.equals("tutorial")) return;
+        if(Trident.getCurrentScene().name.equals("newTut")) return;
         if(spawnTimer > 0) spawnTimer -= elapsedTime;
         if(spawnTimer <= 0 && Trident.getEntities().size() < MAX_ENTITIES){
             spawnEnt();

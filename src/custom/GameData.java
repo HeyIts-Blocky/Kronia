@@ -38,7 +38,9 @@ public class GameData {
     public static boolean spectate = false;
     public static long deadTime = 0;
 
-    public static boolean[] tutorialTriggers = new boolean[4];
+    public static int tutProgress = 0;
+    public static long tutTimer = 0;
+    public static boolean tutWaiting = false;
 
     public static boolean setKeybind = false;
     public static int keybindSel = 0;
@@ -84,7 +86,7 @@ public class GameData {
     }
 
     public static void damage(int amount){
-        if(hurtTime > 0 || (Trident.getCurrentScene().name.equals("tutorial") && !tutorialTriggers[3]) || health <= 0) return;
+        if(hurtTime > 0 || (Trident.getCurrentScene().name.equals("newTut")) || health <= 0) return;
         health -= amount;
         hurtTime = 1000;
         healTime += 2000;

@@ -34,12 +34,18 @@ import ent.PlayerRenderer;
 import ent.PreviewRenderer;
 import ent.TitleScreen;
 import ent.TutorialBlock;
+import ent.game.CaveSlime;
+import ent.game.Cow;
 import ent.game.Crate;
 import ent.game.Fire;
+import ent.game.Furnace;
 import ent.game.LogWall;
 import ent.game.MaceBall;
 import ent.game.Projectile;
 import ent.game.Slime;
+import ent.game.Tree;
+import ent.game.TutorialTree;
+import ent.game.Workbench;
 import ent.game.boss.Boss;
 import trident.TridEntity;
 import trident.Trident;
@@ -57,6 +63,7 @@ public class Update {
         Trident.addCustomEntity(new GameObject());
         Trident.addCustomEntity(new PlayerRenderer());
         Trident.addCustomEntity(new TutorialBlock());
+        Trident.addCustomEntity(new Crate());
 
         // Set settings
         Trident.setPlrSpeed(0.2);
@@ -151,14 +158,20 @@ public class Update {
             int light = BTools.randInt((int)(0.1 * 255), 255);
             Trident.setDefaultLight(light);
         }
-        for(int i = 0; i < GameData.tutorialTriggers.length; i++){
-            GameData.tutorialTriggers[i] = false;
+
+        if(scene.equals("newTut")){
+            GameData.health = 100;
+            GameData.hunger = 100;
+            GameData.tutProgress = 0;
+            GameData.tutTimer = 1000;
+            GameData.tutWaiting = true;
         }
+        
     }
     
     public static void update(long elapsedTime){
         MusicManager.update(elapsedTime);
-        if(Trident.getCurrentScene().name.equals("world") || (Trident.getCurrentScene().name.equals("tutorial") && GameData.tutorialTriggers[0])){
+        if(Trident.getCurrentScene().name.equals("world") || (Trident.getCurrentScene().name.equals("newTut"))){
             Settings.applyKeybinds();
             Trident.drawPlayer = false;
 
@@ -173,7 +186,7 @@ public class Update {
             if(Background.bg == Background.MINES) Trident.setDefaultLight((WorldManager.difficulty >= WorldManager.HARD) ? 0 : 25);
             if(Background.bg == Background.DEEPMINES) Trident.setDefaultLight(0);
             GameData.time += elapsedTime;
-            if(GameData.time > GameData.maxTime || Trident.getCurrentScene().name.equals("tutorial")) GameData.time = 0;
+            if(GameData.time > GameData.maxTime || Trident.getCurrentScene().name.equals("newTut")) GameData.time = 0;
 
             if(GameData.getSelItem().getData().length >= 2){
                 GameData.atkTime = GameData.getSelItem().getData()[1];
@@ -182,7 +195,7 @@ public class Update {
             }
 
             int[] clamps = Background.getClampPos();
-            Trident.getPlr().clampPos(clamps[0], clamps[1], clamps[2], clamps[3]);
+            if(!Trident.getCurrentScene().name.equals("newTut")) Trident.getPlr().clampPos(clamps[0], clamps[1], clamps[2], clamps[3]);
 
             if(GameData.atkTimer < GameData.atkTime + 50){
                 GameData.atkTimer += elapsedTime;
@@ -511,16 +524,6 @@ public class Update {
                 }
             }
 
-            if(Trident.getCurrentScene().name.equals("tutorial") && GameData.tutorialTriggers[3] && WorldManager.numEnemies() == 0){
-                for(int i = 0; i < Trident.getEntities().size(); i++){
-                    TridEntity e = Trident.getEntities().get(i);
-                    if(e instanceof TutorialBlock && ((TutorialBlock)e).id == 1){
-                        Trident.destroy(e);
-                        break;
-                    }
-                }
-            }
-
             double hungerMult = 1;
             switch(WorldManager.difficulty){
             case WorldManager.V_EASY:
@@ -548,6 +551,137 @@ public class Update {
 
             if(GameData.hungerSpeed > 2) GameData.hungerSpeed = 2;
 
+            if(Trident.getCurrentScene().name.equals("newTut")){
+                if(GameData.tutWaiting){
+                    GameData.tutTimer -= elapsedTime;
+                    if(GameData.tutTimer <= 0){
+                        GameData.tutWaiting = false;
+
+                        // do logic
+                        switch(GameData.tutProgress){
+                        case 0:
+                            System.out.println("Dialog 1");
+                            GameData.tutWaiting = true;
+                            GameData.tutTimer = 1000;
+                            break;
+                        case 1:
+                            Trident.setPlrPos(new Position(-165, 400));
+                            Trident.spawnEntity(new HUD(new Position()));
+                            GameData.clearInventory();
+                            GameData.inventory[0] = new Item(Item.W_AXE);
+                            GameData.inventory[10] = new Item(Item.W_PICK);
+                            System.out.println("Dialog 2");
+                            break;
+                        case 6:
+                            TutorialBlock.disable(2);
+                            GameData.hunger = 50;
+                            break;
+                        case 8:
+                            GameData.addItem(new Item(Item.COAL, 1000));
+                            break;
+                        case 11:
+                            TutorialBlock.disable(4);
+                            break;
+                        case 13:
+                            Trident.spawnEntity(new Slime(new Position(180, 1880)));
+                            break;
+                        case 15:
+                            Trident.spawnEntity(new CaveSlime(new Position(180, 1880)));
+                            break;
+                        case 17:
+                            Trident.loadScene("title");
+                            Achievement.get(Achievement.TUTORIAL);
+                            break;
+                        }
+
+                        GameData.tutProgress++;
+                    }
+                }
+
+
+                if(GameData.tutProgress == 2){
+                    boolean trees = false;
+                    for(TridEntity e: Trident.getEntities()){
+                        if(e instanceof TutorialTree){
+                            trees = true;
+                            break;
+                        }
+                    }
+                    if(!trees){
+                        System.out.println("Dialog 3");
+                        GameData.tutProgress++;
+                        TutorialBlock.disable(1);
+                    }
+                }
+                if(GameData.tutProgress == 4){
+                    for(TridEntity e: Trident.getEntities()){
+                        if(e instanceof Workbench){
+                            System.out.println("Dialog 5");
+                            GameData.tutProgress++;
+                            break;
+                        }
+                    }
+                }
+                if(GameData.tutProgress == 5){
+                    for(TridEntity e: Trident.getEntities()){
+                        if(e instanceof Furnace){
+                            System.out.println("Dialog 6");
+                            GameData.tutProgress++;
+                            GameData.tutTimer = 2000;
+                            GameData.tutWaiting = true;
+                            break;
+                        }
+                    }
+                }
+                if(GameData.tutProgress == 7){
+                    boolean cows = false;
+                    for(TridEntity e: Trident.getEntities()){
+                        if(e instanceof Cow){
+                            cows = true;
+                            break;
+                        }
+                    }
+                    if(!cows){
+                        System.out.println("Dialog 7");
+                        GameData.tutProgress++;
+                        GameData.tutTimer = 1000;
+                        GameData.tutWaiting = true;
+                    }
+                }
+                if(GameData.tutProgress == 9){
+                    if(GameData.hunger > 70){
+                        System.out.println("Dialog 8");
+                        TutorialBlock.disable(3);
+                        GameData.tutProgress++;
+                    }
+                }
+                if(GameData.tutProgress == 10){
+                    if(GameData.openCrate != null){
+                        System.out.println("Dialog 9");
+                        TutorialBlock.enable(3);
+                        GameData.tutProgress++;
+                        GameData.tutTimer = 3000;
+                        GameData.tutWaiting = true;
+                    }
+                }
+                if(GameData.tutProgress == 14){
+                    if(WorldManager.numEnemies() == 0){
+                        System.out.println("Dialog 11");
+                        GameData.tutProgress++;
+                        GameData.tutTimer = 3000;
+                        GameData.tutWaiting = true;
+                    }
+                }
+                if(GameData.tutProgress == 16){
+                    if(WorldManager.numEnemies() == 0){
+                        System.out.println("Dialog 12");
+                        GameData.tutProgress++;
+                        GameData.tutTimer = 5000;
+                        GameData.tutWaiting = true;
+                    }
+                }
+            }
+
             WorldManager.checkWorld(elapsedTime);
         }
         if(Trident.getCurrentScene().name.equals("title")){
@@ -563,35 +697,31 @@ public class Update {
 
     public static void trigger(int id){
         // tutorial
-        if(id == -1 && !GameData.tutorialTriggers[0]){
-            GameData.clearInventory();
-            Trident.spawnEntity(new HUD(new Position()));
-            Trident.spawnEntity(new PreviewRenderer(new Position()));
-            Trident.spawnEntity(new ItemRenderer(new Position()));
-
-            GameData.tutorialTriggers[0] = true;
+        if(id == -2 && GameData.tutProgress == 3){
+            System.out.println("Dialog 4");
+            TutorialBlock.enable(1);
+            GameData.tutProgress++;
         }
-        if(id == -2 && !GameData.tutorialTriggers[1]){
-            GameData.addItem(new Item(Item.I_AXE));
+        if(id == -3 && GameData.tutProgress == 12){
+            TutorialBlock.enable(4);
 
-            GameData.tutorialTriggers[1] = true;
-        }
-        if(id == -3 && !GameData.tutorialTriggers[2]){
-            GameData.hunger = 0;
-            GameData.addItem(new Item(Item.W_SWORD));
+            // Check if has sword
+            boolean hasSword = false;
+            if(GameData.cursorItem != null && GameData.cursorItem.id == Item.I_SWORD) hasSword = true;
+            else{
+                for(Item i: GameData.inventory){
+                    if(i.id == Item.I_SWORD){
+                        hasSword = true;
+                        break;
+                    }
+                }
+            }
+            if(!hasSword) GameData.addItem(new Item(Item.I_SWORD));
 
-            GameData.tutorialTriggers[2] = true;
-        }
-        if(id == -4 && !GameData.tutorialTriggers[3]){
-            GameData.health = 100;
-            GameData.hungerSpeed = 0;
-            Trident.spawnEntity(new Slime(new Position(960, 1960)));
-
-            GameData.tutorialTriggers[3] = true;
-        }
-        if(id == -5){
-            Achievement.get(Achievement.TUTORIAL);
-            Trident.loadScene("title");
+            System.out.println("Dialog 10");
+            GameData.tutProgress++;
+            GameData.tutTimer = 1000;
+            GameData.tutWaiting = true;
         }
 
 
@@ -807,6 +937,13 @@ public class Update {
                 
                 Trident.runCommand("ramUsage");
                 return 0;
+            case "tutProgress":
+                if(Trident.getCurrentScene().name.equals("newTut")){
+                    Trident.printConsole("Current tutorial progress: " + GameData.tutProgress);
+                }else{
+                    Trident.printConsole("Not in tutorial.");
+                }
+                return 0;
         }
         return 1; // return 1 if command is not recognized
     }
@@ -833,6 +970,7 @@ public class Update {
         "numEnt",
         "ramUsage",
         "cleanRam", 
+        "tutProgress",
     };
 
     public static void printItems(int page){

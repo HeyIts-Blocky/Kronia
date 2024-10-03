@@ -506,25 +506,6 @@ public class HUD extends TridEntity {
             TextBox.draw(label, g, Trident.mousePos.x, Trident.mousePos.y + 15, TextBox.RIGHT);
         }
 
-        if(Trident.getCurrentScene().name.equals("tutorial")){
-            if(GameData.tutorialTriggers[3]){
-                // slime
-                g.setColor(Settings.assistColor);
-                g.setFont(new Font("Arial", Font.PLAIN, 20));
-                TextBox.draw("Kill the slime.\nOnce it has fallen, you can enjoy Kronia!\n\nTIP: If you're having trouble hitting it,\nyou can enable an aim helper in the settings.", g, Trident.getFrameWidth() / 2, 10, TextBox.CENTER);
-            }else if(GameData.tutorialTriggers[2]){
-                // starving
-                g.setColor(Settings.assistColor);
-                g.setFont(new Font("Arial", Font.PLAIN, 20));
-                TextBox.draw("Look at your hunger in the\ntop left. You're starving!\n\nKill cows with the sword provided and craft\ncooked food at the furnace in the inventory.\nClick with the food selected to eat it.", g, Trident.getFrameWidth() / 2, 10, TextBox.CENTER);
-            }else if(GameData.tutorialTriggers[1]){
-                // got axe
-                g.setColor(Settings.assistColor);
-                g.setFont(new Font("Arial", Font.PLAIN, 20));
-                TextBox.draw("Welcome to Kronia!\n\nYou have been given an axe.\nClick to chop trees when the axe is selected.\nPress [TAB] to open the inventory to craft a pickaxe\nwhen close to the crafting table.\nScroll with the scroll wheel to select items", g, Trident.getFrameWidth() / 2, 10, TextBox.CENTER);
-            }
-        }
-
         g.setFont(new Font(GameData.getFont(), Font.PLAIN, 16));
         int txtWidth = g.getFontMetrics().stringWidth(notifText);
         g.setColor(new Color(0f, 0f, 0f, (float)Math.max(notifPos.x / 2, 0)));
@@ -533,6 +514,13 @@ public class HUD extends TridEntity {
         TextBox.draw(notifText, g, Trident.getFrameWidth() - ((notifType == NOTIF_BLANK) ? 0 : 20), -12 + (int)notifPos.y, TextBox.RIGHT);
         if(notifType != NOTIF_BLANK){
             notifImgs[notifType - 1].paintIcon(panel, g, Trident.getFrameWidth() - 16, -20 + (int)notifPos.y);
+        }
+
+        if(Trident.getCurrentScene().name.equals("newTut") && GameData.tutProgress == 17){
+            double percent = BTools.clamp(((double)BTools.flip(GameData.tutTimer, 5000) / 4000), 0, 1);
+
+            g.setColor(new Color(0f, 0f, 0f, (float)percent));
+            g.fillRect(0, 0, Trident.getFrameWidth(), Trident.getFrameHeight());
         }
     }
 

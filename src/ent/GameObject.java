@@ -32,6 +32,7 @@ import ent.game.SCP999;
 import ent.game.Slime;
 import ent.game.Torch;
 import ent.game.Tree;
+import ent.game.TutorialRock;
 import ent.game.TutorialTree;
 import ent.game.Workbench;
 import ent.game.boss.ApexSlime;
@@ -144,6 +145,9 @@ public class GameObject extends TridEntity {
     public GameObject(){
         super("gameObj", false, 1);
     }
+    public GameObject(String name, int numDat){
+        super(name, false, numDat);
+    }
 
     public TridEntity construct(Position pos, Dimension collision, int[] data){
         return placeObj(pos, data[0], new int[0]);
@@ -240,6 +244,8 @@ public class GameObject extends TridEntity {
             return new Mushroom(pos, hp);
         case MUSHROOMSLIME:
             return new MushroomSlime(pos, hp);
+        case TUTROCK:
+            return new TutorialRock(pos, hp);
         default:
             Trident.printConsole("<mkObj>: Unknown id: " + id);
             return new Tree(pos);
@@ -297,6 +303,8 @@ public class GameObject extends TridEntity {
             return new Mushroom(pos);
         case MUSHROOMSLIME:
             return new MushroomSlime(pos);
+        case TUTROCK:
+            return new TutorialRock(pos);
         default:
             Trident.printConsole("<placeObj>: Unknown id: " + id);
             return new Tree(pos);
@@ -332,5 +340,5 @@ public class GameObject extends TridEntity {
     // ID LIST
     public static final int DONTSAVE = -1;
     public static final int TREE = 0, ITEM = 1, WORKBENCH = 2, ROCK = 3, FURNACE = 4, COW = 5, SLIME = 6, LOGWALL = 7, TORCH = 8, COALORE = 9, SCP999 = 10, APEXSLIME = 11, BABYSLIME = 12, CAVEROCK = 13;
-    public static final int CAVESLIME = 14, IRONORE = 15, ANVIL = 16, COPPERORE = 17, MOLE = 18, TUTTREE = 19, CAMPFIRE = 20, CRATE = 21, FIRE = 22, BIGMOLE = 23, MUSHROOM = 24, MUSHROOMSLIME = 25;
+    public static final int CAVESLIME = 14, IRONORE = 15, ANVIL = 16, COPPERORE = 17, MOLE = 18, TUTTREE = 19, CAMPFIRE = 20, CRATE = 21, FIRE = 22, BIGMOLE = 23, MUSHROOM = 24, MUSHROOMSLIME = 25, TUTROCK = 26;
 }

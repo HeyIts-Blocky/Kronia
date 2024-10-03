@@ -37,7 +37,7 @@ public class TutorialTree extends GameObject {
         
     }
     public void dropItems(){
-        GameObject.dropNoDelay(Item.TUTWOOD, BTools.randInt(4, 14), position);
+        GameObject.dropNoDelay(Item.WOOD, 5, position);
     }
     public void tookDamage(int amount){
 

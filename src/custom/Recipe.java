@@ -125,10 +125,21 @@ public class Recipe {
 
 
     public static ArrayList<Recipe> getRecipes(){
+        if(Trident.getCurrentScene().name.equals("newTut")) return getTutRecipes();
         ArrayList<Recipe> list = new ArrayList<Recipe>();
         for(int i = 0; i < recipes.length; i++){
             if(recipes[i].canSeeRecipe()){
                 list.add(recipes[i]);
+            }
+        }
+        return list;
+    }
+
+    private static ArrayList<Recipe> getTutRecipes(){
+        ArrayList<Recipe> list = new ArrayList<Recipe>();
+        for(int i = 0; i < tutRecipes.length; i++){
+            if(tutRecipes[i].canSeeRecipe()){
+                list.add(tutRecipes[i]);
             }
         }
         return list;
@@ -187,5 +198,12 @@ public class Recipe {
         new Recipe(new Item[]{new Item(Item.WIRE, 3), new Item(Item.ANTENNA, 2), new Item(Item.IRONINGOT, 5)}, new Item(Item.MOLERADIO), GameObject.WORKBENCH),
         new Recipe(new Item[]{new Item(Item.WOOD, 5), new Item(Item.MUSHROOMCHUNK, 4), new Item(Item.RAWMEAT, 2)}, new Item(Item.MUSHROOMSKEWER), GameObject.CAMPFIRE),
         new Recipe(new Item[]{new Item(Item.IRONINGOT, 50), new Item(Item.WOOD, 10)}, new Item(Item.MACE), GameObject.ANVIL),
+    };
+
+    public static Recipe[] tutRecipes = {
+        new Recipe(new Item[]{new Item(Item.WOOD, 10)}, new Item(Item.WORKBENCH), NOWORKSTATION, Achievement.WORKBENCH),
+        new Recipe(new Item[]{new Item(Item.STONE, 20)}, new Item(Item.FURNACE), GameObject.WORKBENCH),
+        new Recipe(new Item[]{new Item(Item.RAWMEAT), new Item(Item.COAL)}, new Item(Item.COOKEDMEAT), GameObject.FURNACE, Achievement.MEAT),
+        new Recipe(new Item[]{new Item(Item.WOOD, 15)}, new Item(Item.W_SWORD), GameObject.WORKBENCH),
     };
 }

@@ -640,7 +640,7 @@ public class TitleScreen extends TridEntity {
 
             g.setColor(Color.white);
             g.setFont(new Font(GameData.getFont(), Font.PLAIN, 30));
-            TextBox.draw("Programming, Art, Design\n   Blocky\n\nMusic\n   Blocky\n\nTutorial Voice\n   Jack Catt\n\nBuilt with Trident Engine", g, 20, 100);
+            TextBox.draw("Programming, Art, Design\n   Blocky\n\nMusic\n   Blocky\n   Rascal\n\nTutorial Voice\n   Jack Catt\n\nBuilt with Trident Engine", g, 20, 100);
         }
         if(screen == 6){
             g.setColor(Color.white);

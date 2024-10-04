@@ -25,7 +25,7 @@ public class MusicManager {
     };
     private static Song[] bossSongs = {
         new Song("data/music/slimes court.wav", "Slime's Court - Blocky"), // Apex Slime
-        new Song("data/music/moleSong.wav", "molesong - rascal writes"), // Big Mole (The Supervisor)
+        new Song("data/music/moleSong.wav", "Talpidae - Rascal"), // Big Mole (The Supervisor)
     };
 
     public static double volume = 1;

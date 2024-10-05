@@ -310,7 +310,7 @@ public class WorldManager {
     }
 
     public static void saveWorld(){
-        if(Trident.getCurrentScene().name.equals("tutorial")) return;
+        if(Trident.getCurrentScene().name.equals("newTut")) return;
         try{
             File file = new File("data/worlds/" + worldName + ".bson");
             file.createNewFile();

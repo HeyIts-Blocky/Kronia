@@ -23,6 +23,9 @@ public class MusicManager {
         new Song("data/music/cavesong1.wav", "Caves and Crystals - Blocky"),
         new Song("data/music/duet in the depths.wav", "Duet in the Depths - Blocky"),
     };
+    private static Song[] deepCaveSongs = {
+        new Song("data/music/breath.wav", "Breath - Blocky"),
+    };
     private static Song[] bossSongs = {
         new Song("data/music/slimes court.wav", "Slime's Court - Blocky"), // Apex Slime
         new Song("data/music/moleSong.wav", "Talpidae - Rascal"), // Big Mole (The Supervisor)
@@ -66,10 +69,14 @@ public class MusicManager {
                             int selSong = BTools.randInt(0, songs.length);
                             currentSong = songs[selSong].play();
                             lastName = songs[selSong].name;
-                        }else if(Background.bg == Background.MINES || Background.bg == Background.DEEPMINES){
+                        }else if(Background.bg == Background.MINES){
                             int selSong = BTools.randInt(0, caveSongs.length);
                             currentSong = caveSongs[selSong].play();
                             lastName = caveSongs[selSong].name;
+                        }else if(Background.bg == Background.DEEPMINES){
+                            int selSong = BTools.randInt(0, deepCaveSongs.length);
+                            currentSong = deepCaveSongs[selSong].play();
+                            lastName = deepCaveSongs[selSong].name;
                         }
 
                         HUD.addNotif(lastName, HUD.NOTIF_MUSIC);

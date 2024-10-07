@@ -946,6 +946,11 @@ public class Update {
                     Trident.printConsole("Not in tutorial.");
                 }
                 return 0;
+            case "disableConsole":
+                Trident.consoleEnabled = false;
+                Trident.consoleOpen = false;
+                Settings.saveSettings();
+                return 0;
         }
         return 1; // return 1 if command is not recognized
     }
@@ -973,6 +978,7 @@ public class Update {
         "ramUsage",
         "cleanRam", 
         "tutProgress",
+        "disableConsole",
     };
 
     public static void printItems(int page){

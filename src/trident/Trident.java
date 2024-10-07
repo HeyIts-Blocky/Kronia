@@ -32,7 +32,7 @@ public class Trident {
     public static boolean intro = true;
     public static ImageIcon splash = null;
     public static boolean drawFrames = false;
-    public static boolean consoleEnabled = true;
+    public static boolean consoleEnabled = false;
     public static boolean consoleOpen = false;
     public static boolean consoleError = false;
     public static String lastCommand = "";

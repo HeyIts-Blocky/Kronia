@@ -312,6 +312,14 @@ public class WorldManager {
     public static void saveWorld(){
         if(Trident.getCurrentScene().name.equals("newTut")) return;
         try{
+            boolean hasFile = (new File("data/worlds/" + worldName + ".bson")).exists();
+            ArrayList<BSonObject> objects = null;
+            if(hasFile){
+                objects = BSonParser.readFile("data/worlds/" + worldName + ".bson");
+                BSonObject obj = BSonParser.getObject("version", objects);
+                if(obj == null) hasFile = false;
+            }
+
             File file = new File("data/worlds/" + worldName + ".bson");
             file.createNewFile();
             PrintWriter writer = new PrintWriter(file);
@@ -328,10 +336,9 @@ public class WorldManager {
             writer.println("int dimension " + Background.bg);
             writer.println("int difficulty " + difficulty);
             writer.println("{ surfaceEnt");
-            for(int i = 0; i < Trident.getEntities().size(); i++){
-                TridEntity e = Trident.getEntities().get(i);
-                Rectangle bounds = new Rectangle(-16, -16, 10032, 10032);
-                if(bounds.contains(e.position.toPoint())){ // check to make sure it's in the surface
+            if(Background.bg == Background.SURFACE){
+                for(int i = 0; i < Trident.getEntities().size(); i++){
+                    TridEntity e = Trident.getEntities().get(i);
                     if(e instanceof GameObject){
                         if(e instanceof Boss) continue;
                         GameObject go = (GameObject)e;
@@ -345,15 +352,20 @@ public class WorldManager {
                             writer.println("int " + go.data[j]);
                         }
                     }
+                }
+            }else if(hasFile){
+                BSonList list = (BSonList)BSonParser.getObject("surfaceEnt", objects);
+                for(BSonObject obj: list.list){
+                    writer.print(BSonObject.typeToString(obj.type).toLowerCase() + " ");
+                    if(obj.type == BSonObject.INT) writer.println(obj.getInt());
+                    if(obj.type == BSonObject.DOUBLE) writer.println(obj.getDouble());
                 }
             }
             writer.println("}");
             writer.println("{ minesEnt");
-            for(int i = 0; i < Trident.getEntities().size(); i++){
-                TridEntity e = Trident.getEntities().get(i);
-                Rectangle bounds = new Rectangle(-16, -16, 10032, 10032);
-                bounds.x += Background.OFFSET;
-                if(bounds.contains(e.position.toPoint())){ // check to make sure it's in the surface
+            if(Background.bg == Background.MINES){
+                for(int i = 0; i < Trident.getEntities().size(); i++){
+                    TridEntity e = Trident.getEntities().get(i);
                     if(e instanceof GameObject){
                         if(e instanceof Boss) continue;
                         GameObject go = (GameObject)e;
@@ -368,14 +380,19 @@ public class WorldManager {
                         }
                     }
                 }
+            }else if(hasFile){
+                BSonList list = (BSonList)BSonParser.getObject("minesEnt", objects);
+                for(BSonObject obj: list.list){
+                    writer.print(BSonObject.typeToString(obj.type).toLowerCase() + " ");
+                    if(obj.type == BSonObject.INT) writer.println(obj.getInt());
+                    if(obj.type == BSonObject.DOUBLE) writer.println(obj.getDouble());
+                }
             }
             writer.println("}");
             writer.println("{ deepMinesEnt");
-            for(int i = 0; i < Trident.getEntities().size(); i++){
-                TridEntity e = Trident.getEntities().get(i);
-                Rectangle bounds = new Rectangle(-16, -16, 10032, 10032);
-                bounds.y += Background.OFFSET;
-                if(bounds.contains(e.position.toPoint())){ // check to make sure it's in the surface
+            if(Background.bg == Background.DEEPMINES){
+                for(int i = 0; i < Trident.getEntities().size(); i++){
+                    TridEntity e = Trident.getEntities().get(i);
                     if(e instanceof GameObject){
                         if(e instanceof Boss) continue;
                         GameObject go = (GameObject)e;
@@ -389,6 +406,13 @@ public class WorldManager {
                             writer.println("int " + go.data[j]);
                         }
                     }
+                }
+            }else if(hasFile){
+                BSonList list = (BSonList)BSonParser.getObject("deepMinesEnt", objects);
+                for(BSonObject obj: list.list){
+                    writer.print(BSonObject.typeToString(obj.type).toLowerCase() + " ");
+                    if(obj.type == BSonObject.INT) writer.println(obj.getInt());
+                    if(obj.type == BSonObject.DOUBLE) writer.println(obj.getDouble());
                 }
             }
             writer.println("}");

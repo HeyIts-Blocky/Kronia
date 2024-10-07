@@ -184,7 +184,7 @@ public class Recipe {
         new Recipe(new Item[]{new Item(Item.I_ARROW, 20), new Item(Item.HARDJELLY)}, new Item(Item.HJ_ARROW, 20), GameObject.WORKBENCH),
         new Recipe(new Item[]{new Item(Item.TUTWOOD, 30)}, new Item(Item.I_PICK), GameObject.WORKBENCH),
         new Recipe(new Item[]{new Item(Item.WOOD, 10), new Item(Item.TORCH)}, new Item(Item.CAMPFIRE)),
-        new Recipe(new Item[]{new Item(Item.RAWMEAT), new Item(Item.WOOD)}, new Item(Item.HOTDOG), GameObject.CAMPFIRE),
+        new Recipe(new Item[]{new Item(Item.RAWMEAT), new Item(Item.WOOD)}, new Item(Item.HOTDOG), GameObject.CAMPFIRE, Achievement.HOTDOG),
         new Recipe(new Item[]{new Item(Item.WOOD, 20)}, new Item(Item.CRATE), GameObject.WORKBENCH),
         new Recipe(new Item[]{new Item(Item.JELLY, 5)}, new Item(Item.FLASK), GameObject.WORKBENCH),
         new Recipe(new Item[]{new Item(Item.FLASK), new Item(Item.COOKEDMEAT, 5), new Item(Item.JELLY, 10)}, new Item(Item.HP_FLASK), GameObject.WORKBENCH),

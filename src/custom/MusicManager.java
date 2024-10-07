@@ -25,6 +25,7 @@ public class MusicManager {
     };
     private static Song[] deepCaveSongs = {
         new Song("data/music/breath.wav", "Breath - Blocky"),
+        new Song("data/music/hazard.wav", "Hazard - Blocky"),
     };
     private static Song[] bossSongs = {
         new Song("data/music/slimes court.wav", "Slime's Court - Blocky"), // Apex Slime

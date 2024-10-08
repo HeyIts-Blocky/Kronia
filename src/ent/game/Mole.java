@@ -137,7 +137,7 @@ public class Mole extends GameObject {
     public void dropItems(){
         GameObject.dropNoDelay(Item.RAWMEAT, BTools.randInt(0, 3), position);
         GameObject.dropNoDelay(Item.STONE, BTools.randInt(3, 6), position);
-        int chance = BTools.randInt(0, 20);
+        int chance = BTools.randInt(0, 5);
         if(chance == 1){
             GameObject.dropNoDelay(Item.ANTENNA, 1, position);
         }

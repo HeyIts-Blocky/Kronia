@@ -22,6 +22,7 @@ import blib.input.KeyManager;
 import blib.util.BTools;
 import blib.util.Position;
 import blib.util.Server;
+import ent.HUD;
 import trident.ent.BoxColl;
 import trident.ent.BoxNoColl;
 import trident.ent.InvisColl;
@@ -117,6 +118,7 @@ public class MainPanel extends JPanel {
         public void onKeyPressed(int key){
             if(key == KeyEvent.VK_F12){
                 frameManager.saveScreenshot("data/screenshots");
+                HUD.addNotif("Took a screenshot", HUD.NOTIF_EXCMK);
             }
             if(key == KeyEvent.VK_F11){
                 Trident.fullscreen = !Trident.fullscreen;

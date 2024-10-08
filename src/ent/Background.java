@@ -80,20 +80,22 @@ public class Background extends TridEntity {
     }
 
     public static void changeBackground(byte b){
-        bg = b;
+        
         
         double x = Trident.getPlrPos().x;
         double y = Trident.getPlrPos().y;
         while(x > 10000) x -= OFFSET;
         while(y > 10000) y -= OFFSET;
 
-        if(bg == MINES) x += OFFSET;
-        if(bg == DEEPMINES) y += OFFSET;
-
-        Trident.setPlrPos(new Position(x, y));
+        if(b == MINES) x += OFFSET;
+        if(b == DEEPMINES) y += OFFSET;
 
         // load entities
         WorldManager.loadEntities(b);
+
+        bg = b;
+
+        Trident.setPlrPos(new Position(x, y));
 
         for(int i = 0; i < Trident.getEntities().size(); i++){
             TridEntity e = Trident.getEntities().get(i);

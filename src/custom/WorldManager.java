@@ -189,8 +189,10 @@ public class WorldManager {
     }
 
     private static void spawnEnt(){
-
-        if(Background.bg == Background.SURFACE){
+        spawnEnt(Background.bg);
+    }
+    private static void spawnEnt(int bg){
+        if(bg == Background.SURFACE){
             // Spawn Surface
             Position pos = new Position(BTools.randInt(10, 10000 - 10), BTools.randInt(10, 10000 - 10));
             int type = BTools.randInt(0, 5);
@@ -215,7 +217,7 @@ public class WorldManager {
             }
         }
         
-        if(Background.bg == Background.MINES){
+        if(bg == Background.MINES){
             // Spawn Mines
             Position pos = new Position(BTools.randInt(10, 10000 - 10), BTools.randInt(10, 10000 - 10));
             pos.x += Background.OFFSET;
@@ -231,7 +233,7 @@ public class WorldManager {
             }
         }
         
-        if(Background.bg == Background.DEEPMINES){
+        if(bg == Background.DEEPMINES){
             // Spawn Deep Mines
             Position pos = new Position(BTools.randInt(10, 10000 - 10), BTools.randInt(10, 10000 - 10));
             pos.y += Background.OFFSET;
@@ -246,7 +248,6 @@ public class WorldManager {
                 Trident.spawnEntity(new Mushroom(pos));
             }
         }
-        
     }
 
     public static void loadEntities(int dimension){
@@ -278,7 +279,10 @@ public class WorldManager {
             break;
         default:
             l = (BSonList)BSonParser.getObject("surfaceEnt", objects);
+            Trident.printError("UNKNOWN DIMENSION: " + dimension);
         }
+
+        Trident.printConsole("list name: " + l.name);
 
         for(int i = 0; i < l.list.size(); i++){
             int id = l.list.get(i).getInt();
@@ -301,10 +305,12 @@ public class WorldManager {
             Trident.spawnEntity(GameObject.mkObj(new Position(x, y), id, hp, data));
         }
 
+        Trident.printConsole("dimension " + dimension + " ent list size: " + l.list.size());
         if(l.list.size() == 0){
             // first time in dimension, probably
+            Trident.printConsole("Ent list for dimension " + dimension + " is empty. spawning entities.");
             for(int i = 0; i < DEFAULT_ENTITIES; i++){
-                spawnEnt();
+                spawnEnt(dimension);
             }
         }
     }

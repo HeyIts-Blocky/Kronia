@@ -1,0 +1,28 @@
+"filename", "language", "Java", "comment", "blank", "total"
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\custom\Achievement.java", "Java", 26, 0, 0, 26
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\custom\Dialog.java", "Java", 52, 0, 10, 62
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\custom\GameData.java", "Java", 3, 0, 0, 3
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\custom\Item.java", "Java", 10, 0, 0, 10
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\custom\MusicManager.java", "Java", 11, 0, 1, 12
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\custom\Recipe.java", "Java", 28, 0, 2, 30
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\custom\Settings.java", "Java", 15, 0, 1, 16
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\custom\WorldManager.java", "Java", 45, 0, 2, 47
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\Background.java", "Java", 1, 0, 0, 1
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\GameObject.java", "Java", 13, 0, 0, 13
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\HUD.java", "Java", 107, -3, 5, 109
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\TitleScreen.java", "Java", 133, 5, 8, 146
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\TutorialBlock.java", "Java", 22, 0, 2, 24
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\CaveSlime.java", "Java", 2, 0, 0, 2
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\Cow.java", "Java", 1, 0, 0, 1
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\Crate.java", "Java", 14, 0, 2, 16
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\MaceBall.java", "Java", 2, 0, 0, 2
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\Mushroom.java", "Java", 40, 2, 5, 47
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\MushroomSlime.java", "Java", 194, 10, 33, 237
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\Slime.java", "Java", 1, 0, 0, 1
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\TutorialRock.java", "Java", 40, 4, 12, 56
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\ent\game\boss\BigMole.java", "Java", 2, 0, 0, 2
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\trident\MainPanel.java", "Java", 1, 0, 1, 2
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\trident\Trident.java", "Java", 1, 0, 0, 1
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\update\Inputs.java", "Java", 37, 0, 2, 39
+"c:\Users\User\Documents\My Programs\Trident Engine\data\projects\Kronia\src\update\Update.java", "Java", 184, 2, 17, 203
+"Total", "-", 985, 20, 103, 1108

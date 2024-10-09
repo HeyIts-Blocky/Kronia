@@ -1,6 +1,6 @@
 int volume 75
 double sfx 1.0
-double music 0.9785714285714285
+double music 0.9642857142857143
 boolean richText false
 boolean camSmooth true
 boolean aimHelp false

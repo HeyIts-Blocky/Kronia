@@ -3,13 +3,16 @@ package update;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 
@@ -136,14 +139,75 @@ public class Update {
             }
             
             read.close();
+
+
+            // credits
+            targetUrl = new URL ("https://raw.githubusercontent.com/HeyIts-Blocky/kronianews/refs/heads/main/credits.txt"); 
+            
+            read = new BufferedReader(new InputStreamReader(targetUrl.openStream()));
+
+            ArrayList<String> creds = new ArrayList<String>();
+            input = read.readLine();
+            while(input != null){
+
+                creds.add(input);
+
+                input = read.readLine();
+            }
+            TitleScreen.betaTesters = new String[creds.size()];
+            for(int i = 0; i < creds.size(); i++){
+                TitleScreen.betaTesters[i] = creds.get(i);
+            }
+            read.close();
+
+            // save credits
+            File f = new File("data/credits.txt");
+            f.createNewFile();
+            PrintWriter writer = new PrintWriter(f);
+            for(String str : creds) writer.println(str);
+            writer.close();
             
         } catch (MalformedURLException ex) {
             Trident.printException("Something went wrong while connecting to Github!", ex);
             ex.printStackTrace();
+
+            // credits backup
+            try{
+                File file = new File("data/credits.txt");
+                if(file.exists()){
+                    Scanner reader = new Scanner(file);
+                    ArrayList<String> creds = new ArrayList<String>();
+                    while(reader.hasNext()){
+                        creds.add(reader.nextLine());
+                    }
+                    TitleScreen.betaTesters = new String[creds.size()];
+                    for(int i = 0; i < creds.size(); i++){
+                        TitleScreen.betaTesters[i] = creds.get(i);
+                    }
+                    reader.close();
+                }
+            }catch(Exception e){}
         }
         catch (IOException ex) {
             Trident.printException("Something went wrong while connecting to Github!", ex);
             ex.printStackTrace();
+
+            // credits backup
+            try{
+                File file = new File("data/credits.txt");
+                if(file.exists()){
+                    Scanner reader = new Scanner(file);
+                    ArrayList<String> creds = new ArrayList<String>();
+                    while(reader.hasNext()){
+                        creds.add(reader.nextLine());
+                    }
+                    TitleScreen.betaTesters = new String[creds.size()];
+                    for(int i = 0; i < creds.size(); i++){
+                        TitleScreen.betaTesters[i] = creds.get(i);
+                    }
+                    reader.close();
+                }
+            }catch(Exception e){}
         }
 
         Collections.reverse(TitleScreen.newsDates);

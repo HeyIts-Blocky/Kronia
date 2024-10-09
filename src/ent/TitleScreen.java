@@ -540,7 +540,7 @@ public class TitleScreen extends TridEntity {
     ImageIcon title = new ImageIcon("data/images/title.png");
     ImageIcon discord = new ImageIcon("data/images/discord.png");
     ImageIcon thankyou = new ImageIcon("data/images/thankyou.gif");
-    String[] betaTesters = {
+    public static String[] betaTesters = {
         "Mega",
         "Dusti",
         "Spud :)",

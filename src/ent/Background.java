@@ -106,6 +106,9 @@ public class Background extends TridEntity {
             }
             
         }
+
+        Trident.setPlrPos(new Position(x, y));
+        Trident.getPlr().setVelocity(new Position());
     }
 
     public static int[] getClampPos(){
